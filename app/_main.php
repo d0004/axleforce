@@ -10,6 +10,9 @@ include_once(APP_DIR . '/config/db.php');
 include_once(APP_DIR . '/config/params.php');
 include_once(APP_DIR . '/libs/functions.php');
 
+$dotenv = Dotenv\Dotenv::createImmutable(ROOT_DIR);
+$dotenv->load();
+
 // require_once(APP_DIR . '/vendor/autoload.php');
  
 session_set_cookie_params(PHP_INT_MAX);

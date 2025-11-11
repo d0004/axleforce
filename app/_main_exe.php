@@ -25,6 +25,9 @@ require_once(APP_DIR . '/SplClassLoader.php');
 $loader = new SplClassLoader(null, APP_DIR);
 $loader->register();
 
+$dotenv = Dotenv\Dotenv::createImmutable(ROOT_DIR);
+$dotenv->load();
+
 session_start();
 
 use \_class\Registry;
