@@ -1,0 +1,46 @@
+<!-- [full_form] -->
+<li class="payment-methods__item deliveryWrapper mb-2 <?php echo $FIRST ? 'payment-methods__item--active' : '' ?>">
+    <label class="payment-methods__item-header">
+        <span class="payment-methods__item-radio input-radio">
+            <span class="input-radio__body">
+                <input class="input-radio__input" name="checkout_delivery" type="radio" <?php echo $FIRST ? 'checked' : '' ?> value="{TYPE}" aria-invalid="false">
+                <span class="input-radio__circle"></span>
+            </span>
+        </span>
+        <span class="payment-methods__item-title"><lang id='DELIVERY_CIRCLE_L1'>Circle K</lang></span>
+    </label>
+    <div class="payment-methods__item-container" style="padding: 0 20px;">
+        <br>
+        <p><lang id='DELIVERY_CIRCLE_L2'>Price for delivery:</lang> <b>{CRCH}{PRICE_OMNIVA}</b></p>
+        <select class="form-control search-circke-select" id="circleSelectId" name="checkout_delivery_detail[{TYPE}][station]">
+            <option value=""></option>
+            {STATIONS}
+        </select>       
+        <br>
+        <br>
+    </div>
+</li>
+
+<script>
+    $(document).ready(function() {
+        $('.search-circke-select').select2({
+            placeholder: "<lang id='PRODUCTS_CHECKOUT_L24'>Shipping Address</lang>",
+            language: '{LANG}'
+        }).on("change", function (e) {
+            $(this).valid()
+        });
+    });
+</script>
+
+<!-- [pay_bill_view] -->
+
+<div class="address-card__name"><lang id='DELIVERY_CIRCLE_L1'>Circle K</lang></div>
+<div class="address-card__row">
+    <div class="address-card__row-title"><lang id='DELIVERY_CIRCLE_L3'>Circle K station name/address</lang></div>
+    <div class="address-card__row-content">{STATION_TITLE}</div>
+    <div class="address-card__row-content">{STATION_ADDRESS}</div>
+    <div class="address-card__row-content">{STATION_CITY}</div>
+</div>
+
+
+<!-- [-] -->

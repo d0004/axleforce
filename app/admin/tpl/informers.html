@@ -1,0 +1,137 @@
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+
+<div class="row">
+    <div class="col-sm-4">
+        <div class="card">
+            <h5 class="card-header">
+                <button type="button" class="btn btn-sm btn-success mr-2" onclick="addNew('lv')">Добавить</button>
+                Информеры LV
+            </h5>
+            <div class="card-body">
+                {INFORMERS_LV}
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card">
+            <h5 class="card-header">
+                <button type="button" class="btn btn-sm btn-success mr-2" onclick="addNew('ru')">Добавить</button>
+                Информеры RU
+            </h5>
+            <div class="card-body">
+                {INFORMERS_RU}
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card">
+            <h5 class="card-header">
+                <button type="button" class="btn btn-sm btn-success mr-2" onclick="addNew('en')">Добавить</button>
+                Информеры EN
+            </h5>
+            <div class="card-body">
+                {INFORMERS_EN}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function changeStatus(id) {
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin/change_informer_status") ?>',
+            data: {id},
+            type: 'POST',
+            success: function(data){
+                if(data.success){
+                    location.reload();   
+                } else {
+                    Swal.fire(
+                        'Ошибка',
+                        'Что-то пошло не так! (Код ошибки: ' + data.error + ')',
+                        'error'
+                    )
+                }
+            }
+        });
+    }
+
+    function save(form) {
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin/save_informer") ?>',
+            data: $(form).serialize(),
+            type: 'POST',
+            success: function(data){
+                if(data.success){
+                    location.reload();   
+                } else {
+                    Swal.fire(
+                        'Ошибка',
+                        'Что-то пошло не так! (Код ошибки: ' + data.error + ')',
+                        'error'
+                    )
+                }                
+            }
+        });
+    }
+
+    function addNew(lang) {
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin/add_new_informer") ?>',
+            data: {lang},
+            type: 'POST',
+            success: function(data){
+                if(data.success){
+                    location.reload();   
+                } else {
+                    Swal.fire(
+                        'Ошибка',
+                        'Что-то пошло не так! (Код ошибки: ' + data.error + ')',
+                        'error'
+                    )
+                }                
+            }
+        });
+    }
+</script>
+
+<!-- [informer_row] -->
+<form>
+    <input type="hidden" name="id" value="{ID}">    
+    <div class="card" style="border-left: <?php echo $STATUS ? '4px solid green' : '' ?>;">
+        <div class="card-body">
+            <select class="form-control" name="type" id="">
+                <option value="orange" <?php echo $TYPE == 'orange' ? 'selected' : '' ?>>Orange</option>
+                <option value="red" <?php echo $TYPE == 'red' ? 'selected' : '' ?>>Red</option>
+                <option value="green" <?php echo $TYPE == 'green' ? 'selected' : '' ?>>Green</option>
+            </select>
+            <hr>
+            <textarea name="message" id="editor{ID}">{MESSAGE}</textarea>
+            <hr>
+            <button type="button" class="btn btn-sm btn-primary" onclick="save($(this).closest('form'))">Сохранить</button>
+            <?php if($STATUS): ?>
+                <button type="button" class="btn btn-sm btn-danger" onclick="changeStatus('{ID}')">Выключить</button>
+            <?php else: ?>
+                <button type="button" class="btn btn-sm btn-success" onclick="changeStatus('{ID}')">Включить</button>
+            <?php endif; ?>
+        </div>
+    </div>
+</form>
+
+<script>
+    $('#editor{ID}').summernote({
+        height: 100,
+        toolbar: [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['view', ['fullscreen', 'codeview']],
+        ]
+    });
+</script>
+<!-- [-] -->

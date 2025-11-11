@@ -1,0 +1,150 @@
+<div class="block-header block-header--has-breadcrumb block-header--has-title">
+    <div class="container">
+        <div class="block-header__body">
+            <nav class="breadcrumb block-header__breadcrumb" aria-label="breadcrumb">
+                <ol class="breadcrumb__list">
+                    <li class="breadcrumb__spaceship-safe-area" role="presentation"></li>
+                    <li class="breadcrumb__item breadcrumb__item--parent breadcrumb__item--first">
+                        <a href="<?php echo $this->urlFor('index') ?>" class="breadcrumb__item-link"><lang id='PRODUCTS_CART_PAGE_L1'>Home</lang></a>
+                    </li>
+                    
+                    <li class="breadcrumb__item breadcrumb__item--current breadcrumb__item--last" aria-current="page">
+                        <span class="breadcrumb__item-link"><lang id='PRODUCTS_CART_PAGE_L2'>Shopping Cart</lang></span>
+                    </li>
+                    <li class="breadcrumb__title-safe-area" role="presentation"
+                        style="--block-header-title-width:231.422px;"></li>
+                </ol>
+            </nav>
+            <h1 class="block-header__title"><lang id='PRODUCTS_CART_PAGE_L2'>Shopping Cart</lang></h1>
+        </div>
+    </div>
+</div>
+
+<div class="block">
+    <div class="container">
+        <div class="cart">
+            <div class="cart__table cart-table">
+                <table class="cart-table__table">
+                    <thead class="cart-table__head">
+                        <tr class="cart-table__row">
+                            <th class="cart-table__column cart-table__column--image"><lang id='PRODUCTS_CART_PAGE_L3'>Image</lang></th>
+                            <th class="cart-table__column cart-table__column--product"><lang id='PRODUCTS_CART_PAGE_L4'>Product</lang></th>
+                            <th class="cart-table__column cart-table__column--price"><lang id='PRODUCTS_CART_PAGE_L5'>Price</lang></th>
+                            <th class="cart-table__column cart-table__column--quantity"><lang id='PRODUCTS_CART_PAGE_L6'>Quantity</lang></th>
+                            <th class="cart-table__column cart-table__column--total"><lang id='PRODUCTS_CART_PAGE_L7'>Total</lang></th>
+                            <th class="cart-table__column cart-table__column--remove"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="cart-table__body" id="cart_rows">
+                        <!-- {FULL_CART_PRODUCT_LINE} -->
+                    </tbody>
+                   
+                </table>
+            </div>
+            <div class="cart__totals" id="cart_total">
+                <!-- <div class="card">
+                    <div class="card-body card-body--padding--2">
+                        <h3 class="card-title"><lang id='PRODUCTS_CART_PAGE_L8'>Cart Totals</lang></h3>
+                        <table class="cart__totals-table">
+                            <thead>
+                                <tr>
+                                    <th><lang id='PRODUCTS_CART_PAGE_L9'>Subtotal</lang></th>
+                                    <td>{CRCH}{CART_SUBTOTAL}</td>
+                                </tr>
+                            </thead>
+                           
+                        </table>
+                        <?php if($CART_SUBTOTAL > 0): ?>
+                            <a class="btn btn-primary btn-xl btn-block" href="<?php echo $this->urlFor('products/checkout'); ?>">
+                                <lang id='PRODUCTS_CART_PAGE_L10'>Proceed to checkout</lang>
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="block-space block-space--layout--before-footer"></div>
+
+<script>
+    
+    loadCartPageInfo();
+
+    function loadCartPageInfo() {
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/products/load_cart_page_info") ?>',
+            data: {},
+            type: 'POST',
+            success: function (data) {
+                if (data.success) {
+                    $('#cart_rows').html(data.htmlTable);
+                    $('#cart_total').html(data.htmlTotal);
+                    $('.input-number').customNumber();
+                }
+            }
+        });
+    }
+
+</script>
+
+<!-- [ajax_table_rows] -->
+{AJAX_TABLE_ROWS}
+
+<!-- [full_cart_product_line] -->
+
+<tr class="cart-table__row">
+    <td class="cart-table__column cart-table__column--image">
+        <div class="image image--type--product">
+            <a href="<?php echo $this->urlFor('products/single_product', ['slug' => $NEW_SKU]) ?>" class="image__body">
+                <img class="image__tag" src="{CART_IMAGE_LINK}" alt="">
+            </a>
+        </div>
+    </td>
+    <td class="cart-table__column cart-table__column--product">
+        <a href="<?php echo $this->urlFor('products/single_product', ['slug' => $NEW_SKU]) ?>" class="cart-table__product-name">{TITLE}</a>
+    </td>
+    <td class="cart-table__column cart-table__column--price" data-title="<lang id='PRODUCTS_CART_PAGE_L5'>Price</lang>">{CRCH}{PRICE}</td>
+    <td class="cart-table__column cart-table__column--quantity" data-title="<lang id='PRODUCTS_CART_PAGE_L6'>Quantity</lang>">
+        <div class="cart-table__quantity input-number">
+            <input class="form-control input-number__input" type="number" min="1" value="{QTY}"
+                onchange="changeCartQty('{ITEM_ID}', $(this).val())">
+            <div class="input-number__add"></div>
+            <div class="input-number__sub"></div>
+        </div>
+    </td>
+    <td class="cart-table__column cart-table__column--total" data-title="<lang id='PRODUCTS_CART_PAGE_L7'>Total</lang>">{CRCH}{TOTAL_PRICE}</td>
+    <td class="cart-table__column cart-table__column--remove">
+        <button onclick="deleteFromCart('{ITEM_ID}');" type="button"
+            class="cart-table__remove btn btn-sm btn-icon btn-muted">
+            <svg width="12" height="12">
+                <path d="M10.8,10.8L10.8,10.8c-0.4,0.4-1,0.4-1.4,0L6,7.4l-3.4,3.4c-0.4,0.4-1,0.4-1.4,0l0,0c-0.4-0.4-0.4-1,0-1.4L4.6,6L1.2,2.6
+c-0.4-0.4-0.4-1,0-1.4l0,0c0.4-0.4,1-0.4,1.4,0L6,4.6l3.4-3.4c0.4-0.4,1-0.4,1.4,0l0,0c0.4,0.4,0.4,1,0,1.4L7.4,6l3.4,3.4
+C11.2,9.8,11.2,10.4,10.8,10.8z" />
+            </svg>
+        </button>
+    </td>
+</tr>
+
+<!-- [ajax_card_total] -->
+
+<div class="card">
+    <div class="card-body card-body--padding--2">
+        <h3 class="card-title"><lang id='PRODUCTS_CART_PAGE_L11'>Cart Totals</lang></h3>
+        <table class="cart__totals-table">
+            <thead>
+                <tr>
+                    <th><lang id='PRODUCTS_CART_PAGE_L12'>Subtotal</lang></th>
+                    <td>{CRCH}{CART_SUBTOTAL}</td>
+                </tr>
+            </thead>
+        </table>
+        <?php if($CART_SUBTOTAL > 0): ?>
+            <a class="btn btn-primary btn-xl btn-block" href="<?php echo $this->urlFor('products/checkout'); ?>">
+                <lang id='PRODUCTS_CART_PAGE_L13'>Proceed to checkout</lang>
+            </a>
+        <?php endif; ?>
+    </div>
+</div>
+
+<!-- [-] -->

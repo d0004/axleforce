@@ -1,0 +1,28 @@
+<div class="suggestions__group">
+    <div class="suggestions__group-title"><lang id='PRODUCTS_SEARCH_HEADER_L1'>Products</lang></div>
+    <div class="suggestions__group-content">
+        {SEARCH_RESULT_PRODUCT}
+    </div>
+</div>
+
+<!-- [search_result_product] -->
+
+<a class="suggestions__item suggestions__product" href="<?php echo $this->urlFor('products/single_product', ['slug' => $NEW_SKU]) ?>">
+    <div class="suggestions__product-image">
+        <img src="{SEARCH_ITEM_IMAGE}" alt="">
+    </div>
+    <div class="suggestions__product-info">
+        <div class="suggestions__product-name">{TITLE}</div>
+    </div>
+    <div class="suggestions__product-price">{CRCH}{SEARCH_PRODUCT_PRICE}</div>
+</a>
+
+<!-- [search_result_category] -->
+
+<a class="suggestions__item suggestions__category" href="<?php echo $this->urlFor('category/index', ['slug' => $URL_SLUG]) ?>">{TITLE}</a>
+
+<!-- [nothing_found] -->
+
+<div class="suggestions__item suggestions__product"><lang id='PRODUCTS_SEARCH_HEADER_L3'>Nothing found.</lang></div>
+
+<!-- [-] -->

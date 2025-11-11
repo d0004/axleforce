@@ -1,0 +1,94 @@
+<div>
+    <table class="table table-sm table-bordered">
+        <thead>
+            <th>Bill ID</th>
+            <th>UID</th>
+            <th>Order ID</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Create date</th>
+            <th>Expire date</th>
+            <th></th>
+        </thead>
+        <tbody>
+            {BILL_ROW}        
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function restoreOrder(billId) {
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin/restore_order") ?>',
+            type: 'POST',
+            data: { billId },
+            beforeSend: function() {
+                preloader.on();
+            },
+            success: function(data){
+                preloader.off();
+                if(data.success){
+                    swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Заказ востановлен успешно'
+                    }).then(() => {
+                        location.reload();
+                    });
+                } else {
+                    swal.fire('Error (Code: ' + data.error + ')').then(() => location.reload());
+                }
+            }
+        });
+    }
+    
+    function confirmOrder(billId) {
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin/confirm_order") ?>',
+            type: 'POST',
+            data: { billId },
+            beforeSend: function() {
+                preloader.on();
+            },
+            success: function(data){
+                preloader.off();
+                if(data.success){
+                    swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Заказ не будет отменен по истечению 3 дней'
+                    }).then(() => {
+                        location.reload();
+                    });
+                } else {
+                    swal.fire('Error (Code: ' + data.error + ')').then(() => location.reload());
+                }
+            }
+        });
+    }
+</script>
+
+<!-- [bill_row] -->
+<tr style="<?php echo $STATUS == 9 ? 'background: #ff000036' : '' ?>">
+    <td>{BILL_ID}</td>
+    <td>{UID}</td>
+    <td>{ORDER_ID}</td>
+    <td>{AMOUNT}</td>
+    <td>{STATUS}</td>
+    <td>{CREATE_DATE}</td>
+    <td>{EXPIRE_DATE}</td>
+    <td>
+        <?php if($STATUS == 9): ?>
+            <button type="button" class="btn btn-sm btn-danger" onclick="restoreOrder('{BILL_ID}')">Восстановить + 3 дня</button>
+        <?php endif; ?>
+        <?php if($STATUS == 0): ?>
+            <?php if(!$FLAG): ?>
+                <button type="button" class="btn btn-sm btn-success" onclick="confirmOrder('{BILL_ID}')">Подтвердить заказ</button>
+            <?php endif; ?>
+        <?php endif; ?>
+        <?php if($FLAG): ?>
+            <span class="badge badge-warning">Подтвержденный заказ</span>
+        <?php endif; ?>
+    </td>
+</tr>
+<!-- [-] -->

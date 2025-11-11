@@ -1,0 +1,188 @@
+
+<div class="block-space block-space--layout--spaceship-ledge-height"></div>
+<div class="block order-success">
+    <div class="container">
+        <div class="order-success__body">
+            <div class="order-success__header">
+                <div class="order-success__icon">
+                    <svg width="100" height="100">
+                        <path d="M50,100C22.4,100,0,77.6,0,50S22.4,0,50,0s50,22.4,50,50S77.6,100,50,100z M50,2C23.5,2,2,23.5,2,50
+s21.5,48,48,48s48-21.5,48-48S76.5,2,50,2z M44.2,71L22.3,49.1l1.4-1.4l21.2,21.2l34.4-34.4l1.4,1.4L45.6,71
+C45.2,71.4,44.6,71.4,44.2,71z"></path>
+                    </svg>
+                </div>
+                <h1 class="order-success__title"><lang id='PAYMENT_PAY_BILL_L1'>Thank you</lang></h1>
+                <div class="order-success__subtitle"><lang id='PAYMENT_PAY_BILL_L2'>Your order has been created</lang></div>                    
+            </div>
+
+            <div class="card order-success__meta">
+                <ul class="order-success__meta-list">
+                    <li class="order-success__meta-item">
+                        <span class="order-success__meta-title"><lang id='PAYMENT_PAY_BILL_L3'>Order number:</lang></span>
+                        <span class="order-success__meta-value">TMW-{BILL_ID}</span>
+                    </li>
+                    <li class="order-success__meta-item">
+                        <span class="order-success__meta-title"><lang id='PAYMENT_PAY_BILL_L4'>Created At:</lang></span>
+                        <span class="order-success__meta-value">{BILL_CREATE_DATE}</span>
+                    </li>
+                    <li class="order-success__meta-item">
+                        <span class="order-success__meta-title"><lang id='PAYMENT_PAY_BILL_L5'>Total:</lang></span>
+                        <span class="order-success__meta-value">{BILL_TOTAL_AMOUNT} {CRCH}</span>
+                    </li>
+                </ul>
+                <br>
+                <div class="paymentExpireInformer">
+                    <div><lang id="PAYMENT_EXPIRE_INFORMER_L1">Please make your payment untill</lang> <b>{EXPIRE_DATE}</b></div>
+                    <div><lang id="PAYMENT_EXPIRE_INFORMER_L2">If we will not receive your payment before this date, order will be automatically canceled</lang></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="order-list">
+                    <table>
+                        <thead class="order-list__header">
+                            <tr>
+                                <th class="order-list__column-label" colspan="2"><lang id='PAYMENT_PAY_BILL_L6'>Product</lang></th>
+                                <th class="order-list__column-quantity"><lang id='PAYMENT_PAY_BILL_L7'>Quantity</lang></th>
+                                <th class="order-list__column-total"><lang id='PAYMENT_PAY_BILL_L8'>Total</lang></th>
+                            </tr>
+                        </thead>
+                        <tbody class="order-list__products">
+                            {PRODUCT_ROW}
+                        </tbody>
+                        <tbody class="order-list__subtotals">
+                            <tr>
+                                <th class="order-list__column-label" colspan="3"><lang id='PAYMENT_PAY_BILL_L9'>Subtotal</lang></th>
+                                <td class="order-list__column-total">{CRCH} {ORDER_AMOUNT}</td>
+                            </tr>
+                            <tr>
+                                <th class="order-list__column-label" colspan="3"><lang id='PAYMENT_PAY_BILL_L10'>Shipping</lang></th>
+                                <td class="order-list__column-total">{CRCH} {ORDER_DELIVERY_PRICE}</td>
+                            </tr>
+                            <tr>
+                                <th class="order-list__column-label" colspan="3"><lang id='PAYMENT_PAY_BILL_L11'>Tax</lang></th>
+                                <td class="order-list__column-total">{CRCH} {ORDER_TAX}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot class="order-list__footer">
+                            <tr>
+                                <th class="order-list__column-label" colspan="3"><lang id='PAYMENT_PAY_BILL_L12'>Total</lang></th>
+                                <td class="order-list__column-total">{CRCH} {BILL_TOTAL_AMOUNT}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px">
+                {PAYMENT_FORM}
+            </div>
+
+            <div class="order-success__addresses">
+                <div class="order-success__address card address-card">
+                    <div class="address-card__badge tag-badge tag-badge--theme">
+                        <lang id='PAYMENT_PAY_BILL_L13'>Billing Details</lang>
+                    </div>
+                    <div class="address-card__body">
+                        <div class="address-card__name">{ORDER_NAME} {ORDER_SURNAME}</div>
+                        
+                        <?php if($ORDER_COMPANY_VAT): ?>
+                            <div class="address-card__row">
+                                <div class="address-card__row-title"><lang id='PAYMENT_PAY_BILL_L14'>Company VAT</lang></div>
+                                <div class="address-card__row-content">{ORDER_COMPANY_VAT}</div>
+                            </div>
+                        <?php endif; ?>
+                        <?php if($ORDER_COMPANY_NAME): ?>
+                            <div class="address-card__row">
+                                <div class="address-card__row-title"><lang id='PAYMENT_PAY_BILL_L15'>Company Name</lang></div>
+                                <div class="address-card__row-content">{ORDER_COMPANY_NAME}</div>
+                            </div>
+                        <?php endif; ?>
+                        <?php if($ORDER_COMPANY_ADDRESS): ?>
+                            <div class="address-card__row">
+                                <div class="address-card__row-title"><lang id='PAYMENT_PAY_BILL_L16'>Company Address</lang></div>
+                                <div class="address-card__row-content">{ORDER_COMPANY_ADDRESS}</div>
+                            </div>
+                        <?php endif; ?>
+                        <?php if($ORDER_ADDRESS): ?>
+                            <div class="address-card__row">
+                                <div class="address-card__row-title"><lang id='PAYMENT_PAY_BILL_L160'>Address</lang></div>
+                                <div class="address-card__row-content">{ORDER_ADDRESS}</div>
+                            </div>
+                        <?php endif; ?>
+                        <div class="address-card__row">
+                            <div class="address-card__row-title"><lang id='PAYMENT_PAY_BILL_L17'>Phone Number</lang></div>
+                            <div class="address-card__row-content">{ORDER_PHONE}</div>
+                        </div>
+                        <div class="address-card__row">
+                            <div class="address-card__row-title"><lang id='PAYMENT_PAY_BILL_L18'>Email Address</lang></div>
+                            <div class="address-card__row-content">{ORDER_EMAIL}</div>
+                        </div>
+                        
+                        <?php if($ORDER_NOTES): ?>
+                            <div class="address-card__row">
+                                <div class="address-card__row-title"><lang id='PAYMENT_PAY_BILL_L19'>Notes</lang></div>
+                                <div class="address-card__row-content">{ORDER_NOTES}</div>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="order-success__addresses">
+                <div class="order-success__address card address-card">
+                    <div class="address-card__badge tag-badge tag-badge--theme">
+                        <lang id='PAYMENT_PAY_BILL_L20'>Shipping information</lang>
+                    </div>
+                    <div class="address-card__body">
+                        {DELIVERY_HTML}
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<div class="block-space block-space--layout--before-footer"></div>
+
+<script>
+    function changePaymentMethod (billId, method) {
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/products/change_payment_method") ?>',
+            type: 'POST',
+            dataType: 'JSON',
+            data: {billId, method},
+            beforeSend: function() {
+                preloader.on();
+            },
+            success: function(data){
+                if(data.success){
+                    location.reload();
+                } else {
+                    preloader.off();
+                    Swal.fire(
+                        'Error',
+                        'Error (Code: ' + data.error + ')',
+                        'error'
+                    )
+                }
+            }
+        })
+    }
+</script>
+
+<!-- [product_row] -->
+<tr>
+    
+    <td class="order-list__column-product" colspan="2">
+        <a href="<?php echo $this->urlFor('products/single_product', ['slug' => $NEW_SKU]) ?>" target="_blank">{TITLE}</a>
+    </td>
+    <td class="order-list__column-quantity" data-title="<lang id='PAYMENT_PAY_BILL_L7'>Quantity</lang>:">
+        {QTY}
+    </td>
+    <td class="order-list__column-total">
+        {CRCH} {TOTAL_AMOUNT}
+    </td>
+</tr>
+<!-- [-] -->

@@ -1,0 +1,149 @@
+<link rel="stylesheet" href="/assets/libs/apexCharts/apexcharts.css">
+<script src="/assets/libs/apexCharts/apexcharts.min.js"></script>
+
+<div class="row mb-4">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Статистика</h5>
+                <hr>
+                <div class="row mb-4">
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Топ 10 просматриваемых товаров</h5>
+                                <hr>
+                                {POPULAR_PRODUCT_ROW}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">10 последних просмотров товаров</h5>
+                                <hr>
+                                {LAST_PRODUCT_ROW}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Топ 10 просматриваемых товаров</h5>
+                                <hr>
+                                <div id="chart1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Создание счетов за месяц и их оплата</h5>
+                                <hr>
+                                <div id="chart2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var chart1json = '{CHART_1_JSON}';
+    chart1json = JSON.parse(chart1json);
+    
+    var options1 = {
+        series: chart1json.data,
+        chart: {
+            height: 350,
+            type: 'area'
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        xaxis: {
+            type: 'datetime',
+            categories: chart1json.dates
+        },
+        tooltip: {
+            x: {
+                format: 'dd/MM/yy HH:mm'
+            },
+        },
+    };
+
+    var chart1 = new ApexCharts(document.querySelector("#chart1"), options1);
+    chart1.render();
+
+
+
+    var chart2json = '{CHART_2_JSON}';
+    chart2json = JSON.parse(chart2json);
+    
+    var options2 = {
+        series: chart2json.data,
+        chart: {
+            height: 350,
+            type: 'area'
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        xaxis: {
+            type: 'datetime',
+            categories: chart2json.dates
+        },
+        tooltip: {
+            x: {
+                format: 'dd/MM/yy HH:mm'
+            },
+        },
+    };
+
+    var chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
+    chart2.render();
+</script>
+
+<!-- [popular_product_row] -->
+<div style="display: flex; justify-content: space-between;">
+    <div style="flex: 4">{NEW_SKU}</div>
+    <div style="flex: 1">{COU}</div>
+    <div style="flex: 2; text-align: right;">
+        <div>{LAST_VIEW_DATE}</div>
+        <div class="text-muted" style="font-size: 12px;">{TIME_FROM_LAST_VIEW}</div>
+    </div>
+</div>
+
+<!-- [last_product_row] -->
+<div style="display: flex; justify-content: space-between;">
+    <div style="flex: 4">{NEW_SKU}</div>
+    <div style="flex: 2">
+        <?php if($UID): ?>
+            <form action="<?php echo $this->urlFor('login_register/admin_go') ?>" method="POST">
+                <input type="hidden" name="uid" value="{UID}">
+                <input type="hidden" name="route" value="{CURRENT_ROUTE}">
+                <span style="cursor: pointer;" onclick="$(this).closest('form').submit()">
+                    <a href="javascript:;"><span style="font-size: 13px;">{FNAME} {LNAME}</span></a>
+                </span>
+            </form>
+        <?php else: ?>
+            {UID}
+        <?php endif; ?>
+
+    </div>
+    <div style="flex: 2; text-align: right;">
+        <div>{LAST_VIEW_DATE}</div>
+        <div class="text-muted" style="font-size: 12px;">{TIME_FROM_LAST_VIEW}</div>
+    </div>
+</div>
+<!-- [-] -->

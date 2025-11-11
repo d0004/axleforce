@@ -1,0 +1,112 @@
+{CATEGORY_PAGE_CONTENT}
+
+<!-- [category_page_content] -->
+
+<div class="block-header block-header--has-breadcrumb block-header--has-title">
+    <div class="container">
+        <div class="block-header__body">
+            <nav class="breadcrumb block-header__breadcrumb" aria-label="breadcrumb">
+                <ol class="breadcrumb__list">
+                    <li class="breadcrumb__spaceship-safe-area" role="presentation"></li>
+                    <li class="breadcrumb__item breadcrumb__item--parent breadcrumb__item--first">
+                        <a href="<?php echo $this->urlFor('index') ?>" class="breadcrumb__item-link">
+                            <lang id='CATEGORY_INDEX_L1'>Home</lang>
+                        </a>
+                    </li>
+                    <li class="breadcrumb__item breadcrumb__item--current breadcrumb__item--last" aria-current="page">
+                        <span class="breadcrumb__item-link">{TITLE}</span>
+                    </li>
+                    <li class="breadcrumb__title-safe-area" role="presentation"
+                        style="--block-header-title-width:242.75px;"></li>
+                </ol>
+            </nav>
+            <h1 class="block-header__title">{TITLE}</h1>
+        </div>
+    </div>
+</div>
+
+<div class="block block-split block-split--has-sidebar">
+    <div class="container">
+        <div class="block-split__row row no-gutters">
+            <div class="block-split__item block-split__item-sidebar col-auto">
+                {SIDE_CATEGORY_MENU}          
+            </div>
+            <div class="block-split__item block-split__item-content col-auto">
+                <div class="block">
+                    <div class="categories-list categories-list--layout--columns-3-sidebar">
+                        <ul class="categories-list__body">
+                            {PAGE_CONTENT}
+                        </ul>
+                    </div>
+                </div>
+                
+                <?php if($LATEST_VIEWED): ?>
+                    <br><br>
+                    <div class="block-space block-space--layout--divider-nl"></div>
+                    {LATEST_VIEWED}
+                <?php endif; ?>
+
+                <!-- <?php if($FEATURED_SLIDER): ?>                
+                    <div class="block-space block-space--layout--divider-nl"></div>
+                    {FEATURED_SLIDER}
+                <?php endif; ?> -->
+                
+
+                <div class="block-space block-space--layout--divider-nl"></div>
+
+            </div>
+        </div>
+        <div class="block-space block-space--layout--before-footer"></div>
+    </div>
+</div>
+
+<!-- [side_category_menu] -->
+<div class="card widget widget-categories-list">
+    <div class="widget-categories-list__body" data-collapse="" data-collapse-opened-class="widget-categories-list--open">
+        <ul class="widget-categories-list__root">
+            {CATEGORY_BLOCK}
+        </ul>
+    </div>
+</div>
+
+<!-- [category_block_no_child] -->
+<li class="widget-categories-list__root-item" data-collapse-item="">
+    <a href="<?php echo $this->urlFor('category/index', ['slug' => $LEVEL_1_CAT_URL]) ?>" class="widget-categories-list__root-link <?php echo $LEVEL_1_IS_CURRENT_CATEGORY ? 'widget-link-current' : '' ?>">{LEVEL_1_CAT_TITLE}</a>
+</li>
+
+<!-- [category_block_has_child] -->
+<li class="widget-categories-list__root-item widget-categories-list__root-item--has-children" data-collapse-item="">
+    <a href="<?php echo $this->urlFor('category/index', ['slug' => $LEVEL_1_CAT_URL]) ?>" class="widget-categories-list__root-link <?php echo $LEVEL_1_IS_CURRENT_CATEGORY ? 'widget-link-current' : '' ?>">{LEVEL_1_CAT_TITLE}</a>
+    <ul class="widget-categories-list__child">
+        {CATEGORY_BLOCK_HAS_CHILD_ROW}
+    </ul>
+</li>
+
+<!-- [category_block_has_child_row] -->
+<li class="widget-categories-list__child-item">
+    <a href="<?php echo $this->urlFor('category/index', ['slug' => $LEVEL_2_CAT_URL]) ?>" class="widget-categories-list__child-link <?php echo $LEVEL_2_IS_CURRENT_CATEGORY ? 'widget-link-current' : '' ?>">{LEVEL_2_CAT_TITLE}</a>
+    <ul class="widget-categories-list__child">
+        {CATEGORY_BLOCK_HAS_CHILD_ROW_L3}
+    </ul>
+</li>
+<!-- [category_block_has_child_row_l3] -->
+<li class="widget-categories-list__child-item">
+    <a href="<?php echo $this->urlFor('category/index', ['slug' => $LEVEL_3_CAT_URL]) ?>" class="widget-categories-list__child-link widget-categories-list__child-link-level3 <?php echo $LEVEL_3_IS_CURRENT_CATEGORY ? 'widget-link-current' : '' ?>">{LEVEL_3_CAT_TITLE}</a>    
+</li>
+
+<!-- [child_category_block] -->
+
+<li class="categories-list__item">
+    <a href="<?php echo $this->urlFor('category/index', ['slug' => $URL_SLUG]) ?>">
+        <div class="image image--type--category">
+            <div class="image__body">
+                <img class="image__tag" src="{CATEGORY_IMAGE}" alt="">
+            </div>
+        </div>
+        <div class="categories-list__item-name">{TITLE}</div>
+    </a>
+    <!-- <div class="categories-list__item-products">131 Products</div> -->
+</li>
+<li class="categories-list__divider"></li>
+
+<!-- [-] -->

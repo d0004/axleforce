@@ -1,0 +1,179 @@
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">Массовое редактирование цен</h5>
+        <form class="form-inline" onsubmit="changePrice(this)">
+            <input type="hidden" name="categoryId" value="{CATEGORY_ID}">
+            <div class="form-group mr-2">
+                <input type="number" name="percent" required class="form-control" placeholder="Процент изменения">
+            </div>
+            <div class="form-group mr-2">
+                <input type="checkbox" id="saleFlag" name="saleFlag" class="form-control">
+                <label for="saleFlag" class="ml-2">Поставить флаг скидки</label>
+            </div>
+            <div class="form-group mr-2">
+                <button type="submit" class="btn btn-success">Сохранить</button>
+            </div>
+            <div class="form-group mr-2">
+                <button type="button" class="btn btn-danger" onclick="resetPrices('{CATEGORY_ID}', false)">Сбросить</button>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-danger" onclick="resetPrices('{CATEGORY_ID}', true)">Сбросить и убрать флаг</button>
+            </div>
+        </form>  
+    </div>
+</div>
+
+<script>
+    function changePrice(form) {
+        event.preventDefault();
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin_products/change_price") ?>',
+            data: $(form).serialize(),
+            type: 'POST',
+            success: function(data){
+                if(data.success){
+                    location.reload();
+                } else {
+                    Swal.fire(
+                        'Ошибка',
+                        'Что-то пошло не так! (Код ошибки: ' + data.error + ')',
+                        'error'
+                    )
+                }
+            }
+        });
+    }
+
+    function resetPrices (categoryId, removeFlag) {
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin_products/reset_price") ?>',
+            data: {categoryId, removeFlag},
+            type: 'POST',
+            success: function(data){
+                if(data.success){
+                    location.reload();
+                } else {
+                    Swal.fire(
+                        'Ошибка',
+                        'Что-то пошло не так! (Код ошибки: ' + data.error + ')',
+                        'error'
+                    )
+                }
+            }
+        });
+    }
+</script>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Продукты категории: {CATEGORY_TITLE}</h5>
+        <button type="button" onclick="addNewProduct('{CATEGORY_ID}')" class="btn btn-success btn-sm">Добавить новый товар</button>
+        <br><br>
+        <table class="table table-bordered table-sm">
+            <tbody>
+                <tr style="font-weight: bold">
+                    <td>ID</td>
+                    <td>SKU</td>
+                    <td>Языки</td>
+                    <td>Флаги</td>
+                    <td>Цена</td>
+                    <td>Цена скид.</td>
+                    <td>Остаток</td>
+                    <td></td>
+                </tr>
+                {PRODUCT_ROWS}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function changeProductStatus(itemId, status) {
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin_products/change_product_status") ?>',
+            data: {itemId, status},
+            type: 'POST',
+            success: function(data){
+                if(data.success){
+                    location.reload()
+                } else {
+                    Swal.fire(
+                        'Ошибка',
+                        'Что-то пошло не так! (Код ошибки: ' + data.error + ')',
+                        'error'
+                    )
+                }
+            }
+        });
+    }
+
+    function addNewProduct(categoryId) {
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin_products/add_new_product") ?>',
+            data: {categoryId},
+            type: 'POST',
+            success: function(data){
+                if(data.success){
+                    window.location.href = data.url;
+                } else {
+                    Swal.fire(
+                        'Ошибка',
+                        'Что-то пошло не так! (Код ошибки: ' + data.error + ')',
+                        'error'
+                    )
+                }
+            }
+        });
+    }
+</script>
+
+<!-- [product_rows] -->
+<tr >
+    <td style="<?php echo $STATUS ? 'background: #E9FFE7;' : 'background: #FFE3E3;' ?>">{ITEM_ID}</td>
+    <td style="<?php echo $STATUS ? 'background: #E9FFE7;' : 'background: #FFE3E3;' ?>">{SKU}</td>
+    <td>{PRODUCT_LANGS}</td>
+    <td>
+        <?php if($HOT): ?>
+            <span class="badge bg-success  text-light">Hot</span>
+        <?php endif; ?>
+        <?php if($FEATURED): ?>
+            <span class="badge bg-success text-light">Featured</span>
+        <?php endif; ?>
+        <?php if($NEW): ?>
+            <span class="badge bg-success text-light">New</span>
+        <?php endif; ?>
+        <?php if($SALE): ?>
+            <span class="badge bg-success text-light">Sale</span>
+        <?php endif; ?>
+    </td>
+    <td>
+        {STANDART_PRICE} ({STANDART_PRICE_WITH_VAT})
+        <!-- <?php if(($DISCOUNT_PRICE > 0) && ($DISCOUNT_PRICE < $STANDART_PRICE)) :?>
+            <s>{STANDART_PRICE}</s> <span style="color: red;">{DISCOUNT_PRICE}</span>
+        <?php else: ?>
+            <?php if($DISCOUNT_PRICE > $STANDART_PRICE): ?>
+                <span style="color: red;">{DISCOUNT_PRICE}</span>
+            <?php else: ?>
+                {STANDART_PRICE}
+            <?php endif; ?>
+        <?php endif; ?> -->
+    </td>
+    <td>
+        <?php if(($DISCOUNT_PRICE > 0 || $DISCOUNT_PRICE_WITH_VAT > 0) && ($DISCOUNT_PRICE < $STANDART_PRICE)): ?>
+            <span style="color: red;"><b>{DISCOUNT_PRICE} ({DISCOUNT_PRICE_WITH_VAT})</b></span>
+        <?php else: ?>
+            {DISCOUNT_PRICE} ({DISCOUNT_PRICE_WITH_VAT})
+        <?php endif; ?>
+    </td>
+    <td style="<?php echo $STOCK <= 0 ? 'background: #FFE3E3;' : '' ?>">{STOCK}</td>
+    <td>
+        <a href="<?php echo $this->urlFor('admin_products/edit_product', ['itemId' => $ITEM_ID]) ?>" class="btn btn-primary btn-sm">Редактировать</a>
+
+        <?php if($STATUS == 2): ?>
+            <button type="button" onclick="changeProductStatus('{ITEM_ID}', 0)" class="btn btn-danger btn-sm">Отключить</button>
+        <?php else: ?>
+            <button type="button" onclick="changeProductStatus('{ITEM_ID}', 2)" class="btn btn-success btn-sm">Включить</button>
+        <?php endif; ?>
+    </td>
+</tr>
+<!-- [-] -->

@@ -1,0 +1,64 @@
+<div class="card" style="padding: 20px">
+    <lang id='PAYMENT_BANK_TRANSFER_L1'>Оплата банковским перечислением</lang>
+    <br><br>
+    <div class="bankDetailWrap d-none d-sm-block">
+        <div class="bankDetailRow">
+            <div class="bankDetailItem"><span><lang id="PAYMENT_BANK_TRANSFER_L1_1">Receiver</lang></span></div>
+            <div class="bankDetailItem bankDetailItem-right"><span>SIA AxleForce</span></div>
+        </div>
+        <div class="bankDetailRow">
+            <div class="bankDetailItem"><span><lang id="PAYMENT_BANK_TRANSFER_L1_2">IBAN</lang></span></div>
+            <div class="bankDetailItem bankDetailItem-right"><span>LT32 3250 0180 4188 7846</span></div>
+        </div>
+        <div class="bankDetailRow">
+            <div class="bankDetailItem"><span><lang id="PAYMENT_BANK_TRANSFER_L1_3">SWIFT/BIC</lang></span></div>
+            <div class="bankDetailItem bankDetailItem-right"><span>REVOLT21</span></div>
+        </div>
+        <div class="bankDetailRow">
+            <div class="bankDetailItem"><span><lang id="PAYMENT_BANK_TRANSFER_L1_4">Amount</lang></span></div>
+            <div class="bankDetailItem bankDetailItem-right"><span class="bold">{AMOUNT}{CRCH}</span></div>
+        </div>
+        <div class="bankDetailRow">
+            <div class="bankDetailItem"><span><lang id="PAYMENT_BANK_TRANSFER_L1_5">Reference</lang></span></div>
+            <div class="bankDetailItem bankDetailItem-right"><span class="bold">AFW-{BILL_ID}</span></div>
+        </div>
+        <br>
+        <div style="text-align: center;">
+            <b><lang id="PAYMENT_BANK_TRANSFER_L1_6">Veicot maksājumu, lūdzam norādīt rēķina numuru!</lang></b>
+        </div>
+    </div>  
+    <div class="bankDetailWrap d-block d-sm-none">
+        <div>
+            <lang id="PAYMENT_BANK_TRANSFER_L1_1">Receiver</lang><br>
+            SIA Truckmaster
+        </div>
+        <hr>
+        <div>
+            <lang id="PAYMENT_BANK_TRANSFER_L1_2">IBAN</lang><br>
+            LV52 PARX 0019 9562 7000 1
+        </div>
+        <hr>
+        <div>
+            <lang id="PAYMENT_BANK_TRANSFER_L1_3">SWIFT/BIC</lang><br>
+            PARXLV22
+        </div>
+        <hr>
+        <div>
+            <lang id="PAYMENT_BANK_TRANSFER_L1_4">Amount</lang><br>
+            <b>{AMOUNT}{CRCH}</b>
+        </div>
+        <hr>
+        <div>
+            <lang id="PAYMENT_BANK_TRANSFER_L1_5">Reference</lang><br>
+            <b>AFW-{BILL_ID}</b>
+        </div>
+        <hr>
+        <b><lang id="PAYMENT_BANK_TRANSFER_L1_6">Veicot maksājumu, lūdzam norādīt rēķina numuru!</lang></b>
+    </div>  
+    <br>
+
+    <a href="<?php echo $this->urlFor('payment/get_proforma_pdf', ['billId' => $BILL_ID]) ?>" target="_blank" class="btn btn-primary btn-xl btn-block"><lang id='PAYMENT_ONLIINE_BANK_PAYMENT_L2'>Proforma invoice</lang></a>
+    
+    <br>
+    <a href="javascript:;" onclick="changePaymentMethod('{BILL_ID}', 'revolut')"><lang id='PRODUCTS_CHECKOUT_L36'>Pay via online Bank</lang></a>
+</div>

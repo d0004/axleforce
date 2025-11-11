@@ -1,0 +1,129 @@
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <h5 class="card-header">Товары для которых есть картинки (папки)</h5>
+            <div class="card-body">
+                <table class="table table-sm table-bordered" id="sku_table">
+                    <tbody>
+                        {PRODUCT_ROW}
+                    </tbody>
+                </table>
+                <div>
+                    <button type="button" onclick="uploadAll(this)" class="btn btn-sm btn-success">Загрузить все</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <h5 class="card-header">Товары для которых есть картинки (файлы) ({FILE_COUNT} | {ITEM_COUNT})</h5>
+            <div class="card-body">
+                <table class="table table-sm table-bordered" id="file_table">
+                    <tbody>
+                        {FILE_ROW}
+                    </tbody>
+                </table>
+                <div>
+                    <button type="button" onclick="uploadAllFiles(this)" class="btn btn-sm btn-success">Загрузить все</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function uploadAll(button) {
+        $(button).attr('disabled', true);
+        data = [];
+        $("#sku_table tr").each(function() {
+            data.push($(this).attr('data-sku'))
+        })
+
+        uploadBySku(data);
+    }
+
+    function uploadBySku(dataAll) {
+        if (dataAll.length > 0) {
+            let sku = dataAll.pop();
+            
+            $.ajax({
+                url: '<?php echo $this->urlFor("ajax/admin/upload_image_by_sku") ?>',
+                data: {sku},
+                type: 'POST',
+                beforeSend: function(){
+                    $("tr[data-sku='" + sku + "']").css("background", "#FFE57F");
+                },
+                success: function(data){
+                    if(data.success){
+                        $("tr[data-sku='" + sku + "']").css("background", "#C5ECC8");
+                    } else {
+                        $("tr[data-sku='" + sku + "']").css("background", "#FF9D9D");
+                    }
+                    uploadBySku(dataAll);
+                },
+                error: function() {
+                    $("tr[data-sku='" + sku + "']").css("background", "#FF9D9D");
+                    uploadBySku(dataAll);
+                }
+            });   
+        }
+    }
+
+
+
+    function uploadAllFiles(button) {
+        $(button).attr('disabled', true);
+        data = [];
+        $("#file_table tr").each(function() {
+            data.push({file: $(this).attr('data-file'), itemId: $(this).attr('data-item')})
+        })
+
+        uploadByFile(data);
+    }
+
+    function uploadByFile(dataAll) {
+
+        // console.log(dataAll);
+        // return false;
+
+        if (dataAll.length > 0) {
+            let sku = dataAll.pop();
+            
+            $.ajax({
+                url: '<?php echo $this->urlFor("ajax/admin/upload_image_by_file") ?>',
+                data: {file: sku.file, itemId: sku.itemId},
+                type: 'POST',
+                beforeSend: function(){
+                    $("tr[data-file='" + sku.file + "']").css("background", "#FFE57F");
+                },
+                success: function(data){
+                    if(data.success){
+                        $("tr[data-file='" + sku.file + "']").css("background", "#C5ECC8");
+                    } else {
+                        $("tr[data-file='" + sku.file + "']").css("background", "#FF9D9D");
+                    }
+                    uploadByFile(dataAll);
+                },
+                error: function() {
+                    $("tr[data-file='" + sku.file + "']").css("background", "#FF9D9D");
+                    uploadByFile(dataAll);
+                }
+            });   
+        }
+    }
+
+</script>
+
+<!-- [product_row] -->
+
+<tr data-sku="{SKU}">
+    <td>{SKU}</td>
+</tr>
+
+<!-- [file_row] -->
+
+<tr data-file="{FILE}" data-item="{ITEM_ID}">
+    <td>{SKU}</td>
+</tr>
+
+<!-- [-] -->

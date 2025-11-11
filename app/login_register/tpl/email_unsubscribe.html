@@ -1,0 +1,41 @@
+<div class="">
+    <div class="block-space block-space--layout--spaceship-ledge-height"></div>
+    <div class="block">
+        <div class="container">
+            <div class="not-found">
+                <div class="not-found__404">
+                    <lang id="UNSUBSCRIBE_L1">Are you sure?</lang>
+                </div>
+                <div class="not-found__content">
+                    <h1 class="not-found__title"><lang id="UNSUBSCRIBE_L2">You want to unsubscribe from all our emails?</lang></h1>
+                    <p class="not-found__text">
+                        <lang id="UNSUBSCRIBE_L3">You will not be able to receive letters about the change of order status and other important letters from us</lang>                    
+                    </p>
+                    <a class="btn btn-primary btn-sm" href="<?php echo $this->urlFor('index'); ?>"><lang id="UNSUBSCRIBE_L4">No, go home</lang></a>
+                    <a class="btn btn-secondary btn-sm" href="<?php echo $this->urlFor('login_register/unsubscribe_ok', ['email' => $EMAIL]); ?>"><lang id="UNSUBSCRIBE_L5">Unsubscribe</lang></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="block-space block-space--layout--before-footer"></div>
+</div>
+
+<!-- [email_unsubscribe_ok] -->
+<div class="">
+    <div class="block-space block-space--layout--spaceship-ledge-height"></div>
+    <div class="block">
+        <div class="container">
+            <div class="not-found">
+                <div class="not-found__404">
+                    <lang id="UNSUBSCRIBE_L6">Success :(</lang>
+                </div>
+                <div class="not-found__content">
+                    <h1 class="not-found__title"><lang id="UNSUBSCRIBE_L7">You successfully unsubscribed from our email</lang></h1>                    
+                    <a class="btn btn-secondary btn-sm" href="<?php echo $this->urlFor('index'); ?>"><lang id="PRODUCTS_NOT_FOUND_L3">Home page</lang></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="block-space block-space--layout--before-footer"></div>
+</div>
+<!-- [-] -->

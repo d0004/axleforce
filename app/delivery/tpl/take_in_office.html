@@ -1,0 +1,68 @@
+<!-- [full_form] -->
+<li class="payment-methods__item <?php echo $FIRST ? 'payment-methods__item--active' : '' ?>">
+    <label class="payment-methods__item-header">
+        <span class="payment-methods__item-radio input-radio">
+            <span class="input-radio__body">
+                <input class="input-radio__input" name="checkout_delivery" type="radio" <?php echo $FIRST ? 'checked' : '' ?> value="{TYPE}" aria-invalid="false">
+                <span class="input-radio__circle"></span>
+            </span>
+        </span>
+        <span class="payment-methods__item-title"><lang id='DELIVERY_TAKE_IN_OFFICE_L1'>Take in office</lang></span>
+    </label>
+    <div class="payment-methods__item-container" style="padding: 0 20px;">
+        <br>
+        <p><lang id='DELIVERY_TAKE_IN_OFFICE_L2'>Цена за доставку: </lang> <b>{CRCH}{PRICE_TAKE_IN_OFFICE}</b></p>   
+        <p>
+            <lang id='DELIVERY_TAKE_IN_OFFICE_L3'>Посылку заберу сам в офисе по адресу ....................</lang><br>
+            <lang id='DELIVERY_TAKE_IN_OFFICE_L4'>В рабочие дни с 9.00 до 17.00</lang>
+        </p>
+        <br>
+    </div>
+
+    {NOT_SHIPPABLE}
+</li>
+
+<!-- [pay_bill_view] -->
+
+<div class="address-card__name"><lang id='DELIVERY_TAKE_IN_OFFICE_L1'>Take in office</lang></div>
+<div class="address-card__row">
+    <div class="address-card__row-content">
+        <lang id='DELIVERY_TAKE_IN_OFFICE_L3'>Посылку заберу сам в офисе по адресу ....................</lang><br>
+        <lang id='DELIVERY_TAKE_IN_OFFICE_L4'>В рабочие дни с 9.00 до 17.00</lang>
+    </div>
+</div>
+
+<!-- [not_shippable] -->
+<div style="padding: 0 20px 20px">
+    <div>
+        <b><lang id='DELIVERY_NOT_SHIPPABLE_1'>Preces, kuras var saņemt tikai uz vietas.</lang></b>
+    </div>
+    <br>
+
+    <table class="cart-table__table">
+        <thead class="cart-table__head">
+            <th class="cart-table__column cart-table__column--image"></th>
+            <th class="cart-table__column cart-table__column--product">
+                <lang id='PRODUCTS_CHECKOUT_L8'>Product</lang>
+            </th>
+            <th class="cart-table__column cart-table__column--product">
+                <lang id='PRODUCTS_CHECKOUT_L10'>Quantity</lang>
+            </th>
+        </thead>
+        <tbod class="cart-table__body">
+            {NOT_SHIPPABLE_ROW}
+        </tbody>
+    </table>
+    
+</div>
+
+<!-- [not_shippable_row] -->
+<tr>
+    <td class="cart-table__column cart-table__column--image">
+        <img src="{NOT_SHIPPABLE_PRODUCT_IMAGE}" alt="">
+    </td>
+    <td class="cart-table__column cart-table__column--product">{NOT_SHIPPABLE_PRODUCT_NEW_SKU}</td>
+    <td class="cart-table__column cart-table__column--product">{NOT_SHIPPABLE_PRODUCT_QTY}</td>
+</tr>
+
+<!-- [-] -->

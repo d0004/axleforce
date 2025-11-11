@@ -1,0 +1,124 @@
+<div class="card">
+    <div class="card-header">
+        <a href="<?php echo $this->urlFor('admin_products/attributes'); ?>" class="btn btn-sm btn-danger">Назад</a>
+    </div>
+    <div class="card-body">
+
+        <div class="row">
+            {TRANS_ROW}
+        </div>
+
+        <br>
+        <div>
+            <button type="button" class="btn btn-sm btn-success" onclick="addNewValue()">Добавить новое значение</button>
+        </div>
+        <br>
+
+        <div class="row">
+            {ATTR_VALUES}
+        </div>
+    </div>
+</div>
+
+<script>
+    function save(form) {
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin_products/save_attribute_translation") ?>',
+            data: $(form).serialize(),
+            type: 'POST',
+            success: function (data) {
+                if (data.success) {
+                    location.reload()
+                } else {
+                    Swal.fire(
+                        'Ошибка',
+                        'Что-то пошло не так! (Код ошибки: ' + data.error + ')',
+                        'error'
+                    )
+                }
+            }
+        });
+    }
+
+    function addNewValue() {
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin_products/add_new_attribute_value") ?>',
+            data: {attrId: {ATTRIBUTE_ID}},
+            type: 'POST',
+            success: function(data){
+                if(data.success){
+                   location.reload();
+                } else {
+                    Swal.fire(
+                        'Ошибка',
+                        'Что-то пошло не так! (Код ошибки: ' + data.error + ')',
+                        'error'
+                    )
+                }
+            }
+        });
+    }
+    
+    function saveValue(form) {
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin_products/save_attribute_value") ?>',
+            data: $(form).serialize(),
+            type: 'POST',
+            success: function(data){
+                if(data.success){
+                   location.reload();
+                } else {
+                    Swal.fire(
+                        'Ошибка',
+                        'Что-то пошло не так! (Код ошибки: ' + data.error + ')',
+                        'error'
+                    )
+                }
+            }
+        });
+    }
+</script>
+
+<!-- [trans_row] -->
+<div class="col-sm-4">
+    <div class="card">
+        <div class="card-header">
+            {LANGUAGE}
+        </div>
+        <div class="card-body">
+            <form>
+                <input type="hidden" name="lang" value="{LANGUAGE}">
+                <input type="hidden" name="attrId" value="{ATTRIBUTE_ID}">
+                <div class="form-group">
+                    <label for="name">Название атрибута</label>
+                    <input type="text" class="form-control" id="name" placeholder="Название атрибута" name="attrName" value="{ATTR_NAME}">
+                </div>
+                <div>
+                    <button type="button" class="btn btn-sm btn-success" onclick="save($(this).closest('form'))">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- [attr_values] -->
+<div class="col-sm-4 mb-3">
+    <div class="card">
+        <div class="card-body">
+            <form>
+                <input type="hidden" name="valId" value="{VAL_ID}">
+                <input type="hidden" name="attrId" value="{ATTRIBUTE_ID}">
+                
+                <div class="form-group">
+                    <input type="text" class="form-control" id="value" placeholder="Значение" name="value" value="{VALUE}">
+                </div>
+
+                <div>
+                    <button type="button" class="btn btn-sm btn-success" onclick="saveValue($(this).closest('form'))">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- [-] -->

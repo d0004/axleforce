@@ -1,0 +1,598 @@
+<div class="block-header block-header--has-breadcrumb block-header--has-title">
+    <div class="container">
+        <div class="block-header__body">
+            <nav class="breadcrumb block-header__breadcrumb" aria-label="breadcrumb">
+                <ol class="breadcrumb__list">
+                    <li class="breadcrumb__spaceship-safe-area" role="presentation"></li>
+                    <li class="breadcrumb__item breadcrumb__item--parent breadcrumb__item--first">
+                        <a href="<?php echo $this->urlFor('index') ?>" class="breadcrumb__item-link"><lang id='PRODUCTS_CHECKOUT_L1'>Home</lang></a>
+                    </li>
+                    
+                    <li class="breadcrumb__item breadcrumb__item--current breadcrumb__item--last" aria-current="page">
+                        <span class="breadcrumb__item-link"><lang id='PRODUCTS_CHECKOUT_L2'>Checkout</lang></span>
+                    </li>
+                    <li class="breadcrumb__title-safe-area" role="presentation"></li>
+                </ol>
+            </nav>
+            <h1 class="block-header__title"><lang id='PRODUCTS_CHECKOUT_L2'>Checkout</lang></h1>
+        </div>
+    </div>
+</div>
+
+<div class="checkout block">
+    <div class="container container--max--xl">
+
+        <?php if(!$ALL_IN_STOCK): ?>
+        <div style="margin-bottom: 20px; border-left: 4px solid #27643b">
+            <div class="card" style="padding: 20px">
+                <p>
+                    <lang id='PRODUCTS_CHECKOUT_L3'>Некоторые продукты отсутствуют на складе в необходимом вам количестве. </lang><br>
+                    <lang id='PRODUCTS_CHECKOUT_L4'>Поменяйте количество товаров в корзине, чтобы оно соответствовало доступному и получите все товары разом или же
+                    вы можете продолжить заказ с такой корзиной и получить товары двумя партиями: </lang><br>
+                    <lang id='PRODUCTS_CHECKOUT_L5'>1. Сначала все продукты что есть в наличии</lang><br>
+                    <lang id='PRODUCTS_CHECKOUT_L6'>2. Остальные товары, которых сейчас нет на складе</lang>
+
+
+                </p>
+        
+                <div class="cart__table cart-table">
+                    <table class="cart-table__table">
+                        <thead class="cart-table__head">
+                            <tr class="cart-table__row">
+                                <th class="cart-table__column cart-table__column--image"></th>
+                                <th class="cart-table__column cart-table__column--product"><lang id='PRODUCTS_CHECKOUT_L8'>Product</lang></th>
+                                <th class="cart-table__column cart-table__column--price"><lang id='PRODUCTS_CHECKOUT_L9'>Price</lang></th>
+                                <th class="cart-table__column cart-table__column--quantity"><lang id='PRODUCTS_CHECKOUT_L10'>Quantity</lang></th>
+                                <th class="cart-table__column cart-table__column--quantity"><lang id='PRODUCTS_CHECKOUT_L11'>Available</lang></th>
+                                <th class="cart-table__column cart-table__column--total"><lang id='PRODUCTS_CHECKOUT_L12'>Total</lang></th>
+                                <th class="cart-table__column cart-table__column--total"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="cart-table__body" id="cart_rows">
+                            {NOT_IN_STOCK_PRODUCT}
+                        </tbody>
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+
+        <form id="checkoutForm">
+            <div class="row">
+                <div class="col-12 col-lg-6 col-xl-7">
+                    <div class="card mb-lg-0">
+                        <div class="card-body card-body--padding--2">
+                            <h3 class="card-title"><lang id='PRODUCTS_CHECKOUT_L13'>Billing Details</lang></h3>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="name"><lang id='PRODUCTS_CHECKOUT_L14'>First Name</lang></label>
+                                    <input type="text" class="form-control" id="name" placeholder="<lang id='PRODUCTS_CHECKOUT_L14'>First Name</lang>" name="name" value="{NAME}">
+                                    <em class="invalid-feedback"></em>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="surname"><lang id='PRODUCTS_CHECKOUT_L15'>Last Name</lang></label>
+                                    <input type="text" class="form-control" id="surname" placeholder="<lang id='PRODUCTS_CHECKOUT_L15'>Last Name</lang>" name="surname" value="{SURNAME}">
+                                    <em class="invalid-feedback"></em>
+                                </div>
+                            </div>
+
+                            <?php if($IS_LEGAL): ?>
+                                <div class="form-group">
+                                    <label for="company"><lang id='PRODUCTS_CHECKOUT_L16'>Company VAT number</lang></label>
+                                    <input type="text" class="form-control" id="companyVat" placeholder="<lang id='PRODUCTS_CHECKOUT_L16'>Company VAT Number</lang>" value="{VAT_NUMBER}" <?php echo $VAT_NUMBER ? 'readonly' : '' ?>>
+                                    <em class="invalid-feedback"></em>
+                                </div>
+                                <div class="form-group">
+                                    <label for="company"><lang id='PRODUCTS_CHECKOUT_L18'>Company Name</lang></label>
+                                    <input type="text" class="form-control" id="company" placeholder="<lang id='PRODUCTS_CHECKOUT_L18'>Company Name</lang>" value="{COMPANY_NAME}" <?php echo $COMPANY_NAME ? 'readonly' : '' ?>>
+                                    <em class="invalid-feedback"></em>
+                                </div>
+                                <div class="form-group">
+                                    <!-- <span class="text-muted">(<lang id='PRODUCTS_CHECKOUT_L17'>Optional</lang>)</span> -->
+                                    <label for="address"><lang id='PRODUCTS_CHECKOUT_L19'>Company Address</lang></label>
+                                    <input type="text" class="form-control" id="address" placeholder="<lang id='PRODUCTS_CHECKOUT_L19'>Company Address</lang>" value="{COMPANY_ADDRESS}" <?php echo $COMPANY_ADDRESS ? 'readonly' : '' ?>>
+                                    <em class="invalid-feedback"></em>
+                                </div>
+                            <?php else: ?>
+                                <div class="form-group">
+                                    <label for="address"><lang id='PRODUCTS_CHECKOUT_L190'>Address</lang></label>
+                                    <input type="text" class="form-control" id="address" name="address" placeholder="<lang id='PRODUCTS_CHECKOUT_L190'>Address</lang>" value="{ADDRESS}">
+                                    <em class="invalid-feedback"></em>
+                                </div>
+                            <?php endif; ?>
+                            <div class="form-group">
+                                <label for="country"><lang id='PRODUCTS_CHECKOUT_L20'>Country</lang></label>
+                                <select id="country" class="form-control" name="country">
+                                    {COUNTRY_LIST}
+                                </select>
+                                <em class="invalid-feedback"></em>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="checkout-email"><lang id='PRODUCTS_CHECKOUT_L21'>Email address</lang></label>
+                                    <input type="email" class="form-control" id="checkout-email" placeholder="<lang id='PRODUCTS_CHECKOUT_L21'>Email address</lang>" name="email" value="{EMAIL}">
+                                    <em class="invalid-feedback"></em>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="checkout-phone"><lang id='PRODUCTS_CHECKOUT_L22'>Phone</lang></label>
+                                    <input type="text" class="form-control" id="checkout-phone" placeholder="<lang id='PRODUCTS_CHECKOUT_L22'>Phone</lang>" name="phone" value="{PHONE}">
+                                    <em class="invalid-feedback"></em>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="checkout-comment"><lang id='PRODUCTS_CHECKOUT_L23'>Order notes</lang> <span
+                                        class="text-muted">(<lang id='PRODUCTS_CHECKOUT_L17'>Optional</lang>)</span></label>
+                                <textarea id="checkout-comment" class="form-control" rows="4" name="notes"></textarea>
+                            </div>
+                            
+                        </div>
+
+                        <div class="card-body card-body--padding--2">
+                            <h3 class="card-title"><lang id='PRODUCTS_CHECKOUT_L24'>Shipping Address</lang></h3>
+
+                            <div class="form-group">
+                                <label for="shippingCountry"><lang id='PRODUCTS_CHECKOUT_L25'>Country</lang></label>
+                                <select id="shippingCountry" class="form-control" name="shippingCountry">
+                                    {COUNTRY_LIST}
+                                </select>
+                                <em class="invalid-feedback"></em>
+                            </div>
+
+                            <div class="checkout__payment-methods payment-methods">
+                                <ul class="payment-methods__list" id="deliveryOptions"></ul>
+                            </div>
+
+                        </div>
+
+                        
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 col-xl-5 mt-4 mt-lg-0">
+                    <div class="card mb-0">
+                        <div class="card-body card-body--padding--2">
+                            <h3 class="card-title"><lang id='PRODUCTS_CHECKOUT_L26'>Your Order</lang></h3>
+                            <table class="checkout__totals">
+                                <thead class="checkout__totals-header">
+                                    <tr>
+                                        <th><lang id='PRODUCTS_CHECKOUT_L27'>Product</lang></th>
+                                        <th><lang id='PRODUCTS_CHECKOUT_L28'>Total</lang></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="checkout__totals-products">
+                                    {CHECKOUT_PRODUCT_LINE}
+                                </tbody>
+                                <tbody class="checkout__totals-subtotals">
+                                    <tr>
+                                        <th><lang id='PRODUCTS_CHECKOUT_L29'>Subtotal</lang></th>
+                                        <td>{CRCH}{CART_SUBTOTAL}</td>
+                                    </tr>
+                                    <tr>
+                                        <th><lang id='PRODUCTS_CHECKOUT_L30'>Shipping</lang></th>
+                                        <td>{CRCH}<span id="shippingPrice">{SHIPPING_PRICE}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <th><lang id='PRODUCTS_CHECKOUT_L31'>Tax</lang></th>
+                                        <td>{CRCH}<span id="taxAmount">{TAX_AMOUNT}</span></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot class="checkout__totals-footer">
+                                    <tr>
+                                        <th><lang id='PRODUCTS_CHECKOUT_L32'>Total</lang></th>
+                                        <td>{CRCH}<span id="cartTotal">{CART_TOTAL}</span></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <div class="checkout__payment-methods payment-methods">
+                                <ul class="payment-methods__list">
+
+                                    <li class="payment-methods__item payment-methods__item--active">
+                                        <label class="payment-methods__item-header">
+                                            <span class="payment-methods__item-radio input-radio">
+                                                <span class="input-radio__body">
+                                                    <input class="input-radio__input" name="checkout_payment_method"
+                                                        type="radio" checked value="revolut">
+                                                    <span class="input-radio__circle"></span>
+                                                </span>
+                                            </span>
+                                            <span class="payment-methods__item-title"><lang id='PRODUCTS_CHECKOUT_L35'>Online Bank</lang></span>
+                                        </label>
+                                        <div class="payment-methods__item-container">
+                                            <div class="payment-methods__item-details text-muted">
+                                                <lang id='PRODUCTS_CHECKOUT_L36'>Pay via online Bank</lang>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li class="payment-methods__item">
+                                        <label class="payment-methods__item-header">
+                                            <span class="payment-methods__item-radio input-radio">
+                                                <span class="input-radio__body">
+                                                    <input class="input-radio__input" name="checkout_payment_method"
+                                                        type="radio" value="bank_transfer">
+                                                    <span class="input-radio__circle"></span>
+                                                </span>
+                                            </span>
+                                            <span class="payment-methods__item-title"><lang id='PRODUCTS_CHECKOUT_L33'>Direct bank transfer</lang></span>
+                                        </label>
+                                        <div class="payment-methods__item-container">
+                                            <div class="payment-methods__item-details text-muted">
+                                                <lang id='PRODUCTS_CHECKOUT_L34'>Make your payment directly into our bank account. Please use your Order
+                                                ID
+                                                as the payment
+                                                reference. Your order will not be shipped until the funds have cleared
+                                                in
+                                                our account.</lang>
+                                            </div>
+                                        </div>
+                                    </li> 
+                                    
+                                </ul>
+                            </div>
+                            <div class="checkout__agree form-group">
+                                <div class="form-check termsWrap">
+                                    <span class="input-check form-check-input">
+                                        <span class="input-check__body">
+                                            <input class="input-check__input" type="checkbox" id="checkout-terms" name="terms">
+                                            <span class="input-check__box"></span>
+                                            <span class="input-check__icon"><svg width="9px" height="7px">
+                                                    <path
+                                                        d="M9,1.395L3.46,7L0,3.5L1.383,2.095L3.46,4.2L7.617,0L9,1.395Z" />
+                                                </svg>
+                                            </span>
+                                        </span>
+                                    </span>
+                                    <label class="form-check-label" for="checkout-terms">
+                                        <lang id='PRODUCTS_CHECKOUT_L37'>I have read and agree to the website purchase</lang> <a target="_blank" href="<?php echo $this->urlFor('home/purchase_terms') ?>"><lang id='PRODUCTS_CHECKOUT_L38'>terms and conditions</lang></a>
+                                    </label>
+                                    <em class="invalid-feedback"></em>
+                                </div>
+                            </div>
+                            <button type="submit" id="checkoutBtn" disabled class="btn btn-primary btn-xl btn-block"><lang id='PRODUCTS_CHECKOUT_L39'>Place Order</lang></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="block-space block-space--layout--before-footer"></div>
+
+
+<script>
+
+    var loadError = false;
+
+    function loadCartPageInfo() {
+        location.reload();
+    }
+
+    $(function(){
+
+        dataLayer.push({ ecommerce: null });
+        dataLayer.push({
+            event: "begin_checkout",
+            ecommerce: {
+                items: {GTM_ITEMS}
+            }
+        });
+
+        $("#checkoutForm").validate({
+            "submitHandler": function (form) {
+                preloader.on();
+                $.ajax({
+                    url: '<?php echo $this->urlFor("ajax/products/create_order") ?>',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: $('#checkoutForm').serialize(),
+                    beforeSend: function() {
+                        // preloader.on();
+                    },
+                    success: function(data){
+                        preloader.off();
+                        if(data.success){
+                            location.href = data.paymentUrl;
+                        } else {
+                            Swal.fire(
+                                'Error',
+                                'System error (Code: ' + data.error + ')',
+                                'error'
+                            )
+                        }
+                    }
+                })
+            },
+            rules: {
+                name: {
+                    required: true,
+                },
+                surname: {
+                    required: true,
+                },
+                country: {
+                    required: true,
+                },
+                city: {
+                    required: true,
+                },
+                state: {
+                    required: true,
+                },
+                zip: {
+                    required: true,
+                },
+                email: {
+                    required: true,
+                    email: true,
+                },
+                phone: {
+                    required: true,
+                },
+                terms: {
+                    required: true,
+                },         
+                       
+                address: {
+                    required: function(element) {
+                        var isTrueSet = ('{$IS_LEGAL}' === 'true');
+                        return !isTrueSet;
+                    }
+                },
+                "checkout_delivery_detail[omniva][pacomate]": {
+                    required: function(element) {
+                        return $("input[name='checkout_delivery']:checked").val() === 'omniva';
+                    }
+                },
+                "checkout_delivery_detail[circlek][station]": {
+                    required: function(element) {
+                        return $("input[name='checkout_delivery']:checked").val() === 'circlek';
+                    }
+                },
+
+                "checkout_delivery_detail[lvpasts][city]": {
+                    required: function(element) {
+                        return $("input[name='checkout_delivery']:checked").val() === 'lvpasts';
+                    }
+                },
+                "checkout_delivery_detail[lvpasts][street]": {
+                    required: function(element) {
+                        return $("input[name='checkout_delivery']:checked").val() === 'lvpasts';
+                    }
+                },
+                "checkout_delivery_detail[lvpasts][house]": {
+                    required: function(element) {
+                        return $("input[name='checkout_delivery']:checked").val() === 'lvpasts';
+                    }
+                },
+                "checkout_delivery_detail[lvpasts][zip]": {
+                    required: function(element) {
+                        return $("input[name='checkout_delivery']:checked").val() === 'lvpasts';
+                    }
+                },
+            },
+            
+            onfocusout: function(element) {
+                this.element(element);
+            },
+
+            highlight: function (element, errorClass, validClass) {
+                var elem = $(element);                
+                if (elem.hasClass("select2-hidden-accessible")) {                    
+                    $("#select2-" + elem.attr("id") + "-container").parent().addClass(errorClass); 
+                } else {
+                    elem.addClass(errorClass);
+                }
+            },    
+            unhighlight: function (element, errorClass, validClass) {
+                var elem = $(element);
+                console.log(elem);
+                if (elem.hasClass("select2-hidden-accessible")) {
+                    console.log("#select2-" + elem.attr("id") + "-container");
+                    $("#select2-" + elem.attr("id") + "-container").parent().removeClass(errorClass);
+                } else {
+                    elem.removeClass(errorClass);
+                }
+            },
+            errorPlacement: function(error, element) {
+                var elem = $(element);
+                if (elem.hasClass("select2-hidden-accessible")) {
+                    element = $("#select2-" + elem.attr("id") + "-container").parent(); 
+                    error.insertAfter(element);
+                } else {
+                    // error.insertAfter(element);
+                    error.appendTo(element.parent().find("em"));
+                    if(element.closest('.termsWrap').length){
+                        error.appendTo(element.closest('.termsWrap').find("em"));
+                    }
+                }
+            },
+
+            // "errorPlacement": function (error, element) {
+            //     error.appendTo(element.parent().find("em"));
+            //     if(element.closest('.termsWrap').length){
+            //         error.appendTo(element.closest('.termsWrap').find("em"));
+            //     }
+            // },            
+            errorClass: 'is-invalid',
+            validClass: '',
+        });
+
+
+        // loadDeliveryOptions();
+        initPage();    
+    });
+
+    function initPage(){
+        preloader.on();
+
+        loadDeliveryOptions()
+            .then(() => {
+                if($('#shippingCountry').val()){
+                    calculateDelivery($('#shippingCountry').val(), '{CART_SUBTOTAL}').then(({deliveryPrice}) => {
+                        calculateVat($('#shippingCountry').val(), +'{CART_SUBTOTAL}' + deliveryPrice).then(() => {
+                            calculateTotal();
+                        })
+                    })
+                } else {
+                    Swal.fire(
+                        'Error',
+                        'System error (Code: 3112)',
+                        'error'
+                    )
+                    preloader.off();
+                }
+            })
+    }
+
+    async function loadDeliveryOptions() {
+        await $.ajax({
+            url: '<?php echo $this->urlFor("ajax/products/load_delivery_options") ?>',
+            data: {country: $("#shippingCountry").val()},
+            type: 'POST',
+            success: function(data){
+                if(data.success){
+                    $('#deliveryOptions').html(data.html);
+                    return true;
+                } else {
+                    loadError = true;
+                    // Swal.fire(
+                    //     'Error',
+                    //     'System error (Code: ' + data.error + ')',
+                    //     'error'
+                    // )
+                    $('#checkoutBtn').attr('disabled', true);
+                }
+            }
+        });
+
+        return false;
+    }
+
+
+    function calculateVat(country, amount) {
+        return new Promise(function(resolve, reject) {
+            $.ajax({
+                url: '<?php echo $this->urlFor("ajax/products/calculate_vat") ?>',
+                data: {country, amount},
+                type: 'POST',
+                success: function(data){
+                    if(data.success){
+                        $('#taxAmount').html(data.tax);
+                        resolve({taxAmount: data.tax});
+                    } else {
+                        loadError = true;
+                        $('#checkoutBtn').attr('disabled', true);
+                        reject();
+                    }
+                }
+            });
+        });
+    }
+    
+    function calculateDelivery(country, amount) {
+        return new Promise(function(resolve, reject) {
+            $.ajax({
+                url: '<?php echo $this->urlFor("ajax/products/calculate_delivery") ?>',
+                data: {country, amount, deliveryType: $("input[name='checkout_delivery']:checked").val()},
+                type: 'POST',
+                success: function(data){                
+                    if(data.success){
+                        $('#shippingPrice').html(data.price);
+                        resolve({deliveryPrice: data.price});
+                    } else {
+                        loadError = true;
+                        $('#checkoutBtn').attr('disabled', true);
+                        reject();
+                    }
+                }
+            });
+        });
+    }
+
+    function calculateTotal() {
+        var total = '{CART_SUBTOTAL}';
+        total = parseFloat(total) + parseFloat($('#taxAmount').html());
+        total = parseFloat(total) + parseFloat($('#shippingPrice').html());
+        $('#cartTotal').html(total.toFixed(2));
+
+        if(!loadError){
+            $('#checkoutBtn').attr('disabled', false);
+        }
+
+        preloader.off();        
+    }
+
+
+
+    $(function() {
+        $(document).on('change', '#shippingCountry', function() {
+            loadError = false;
+            initPage();
+        });
+
+        $(document).on('change', "input[name='checkout_delivery']", function(){
+
+            preloader.on();
+
+            calculateDelivery($('#shippingCountry').val(), '{CART_SUBTOTAL}').then(({deliveryPrice}) => {
+                calculateVat($('#shippingCountry').val(), +'{CART_SUBTOTAL}' + deliveryPrice).then(() => {
+                    calculateTotal();
+                })
+            })
+
+            // calculateDelivery($('#shippingCountry').val(), '{CART_SUBTOTAL}')
+            // .then(() => {
+            //     calculateTotal();
+            // })
+        })
+
+
+    })
+
+</script>
+
+<!-- [checkout_product_line] -->
+<tr>
+    <td>{TITLE} x {QTY}</td>
+    <td>{CRCH}{TOTAL_PRICE}</td>
+</tr>
+
+<!-- [not_in_stock_product] -->
+
+<tr class="cart-table__row">
+        <td class="cart-table__column cart-table__column--image">
+            <div class="image image--type--product">
+                <a href="<?php echo $this->urlFor('products/single_product', ['slug' => $NEW_SKU]) ?>" class="image__body">
+                    <img class="image__tag" src="{IMAGE_LINK}" alt="">
+                </a>
+            </div>
+        </td>
+        <td class="cart-table__column cart-table__column--product">
+            <a href="<?php echo $this->urlFor('products/single_product', ['slug' => $NEW_SKU]) ?>" class="cart-table__product-name">{TITLE}</a>
+        </td>
+        <td class="cart-table__column cart-table__column--price" data-title="Price">{CRCH}{PRICE_WITH_VAT}</td>
+        <td class="cart-table__column cart-table__column--quantity" data-title="Quantity">
+            <div class="cart-table__quantity input-number">
+                <input class="form-control input-number__input" type="number" min="1" value="{QTY}"
+                    onchange="changeCartQty('{ITEM_ID}', $(this).val())">
+                <div class="input-number__add"></div>
+                <div class="input-number__sub"></div>
+            </div>
+        </td>
+        <td class="cart-table__column cart-table__column--price" data-title="Available">{AVAILABLE}</td>
+        <td class="cart-table__column cart-table__column--total" data-title="Total">{CRCH}{TOTAL_PRICE_WITH_VAT}</td>
+        <td class="cart-table__column cart-table__column--remove">
+            <button onclick="deleteFromCart('{ITEM_ID}');" type="button"
+                class="cart-table__remove btn btn-sm btn-icon btn-muted">
+                <svg width="12" height="12">
+                    <path d="M10.8,10.8L10.8,10.8c-0.4,0.4-1,0.4-1.4,0L6,7.4l-3.4,3.4c-0.4,0.4-1,0.4-1.4,0l0,0c-0.4-0.4-0.4-1,0-1.4L4.6,6L1.2,2.6
+    c-0.4-0.4-0.4-1,0-1.4l0,0c0.4-0.4,1-0.4,1.4,0L6,4.6l3.4-3.4c0.4-0.4,1-0.4,1.4,0l0,0c0.4,0.4,0.4,1,0,1.4L7.4,6l3.4,3.4
+    C11.2,9.8,11.2,10.4,10.8,10.8z" />
+                </svg>
+            </button>
+        </td>
+    </tr>
+
+<!-- [-] -->

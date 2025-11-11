@@ -1,0 +1,92 @@
+
+    <div class="block-space block-space--layout--after-header"></div>
+    <div class="block">
+        <div class="container container--max--xl">
+            <div class="row">
+                <div class="col-12 col-lg-3 d-flex">
+                    {PROFILE_MENU}
+                </div>
+                <div class="col-12 col-lg-9 mt-4 mt-lg-0">
+                    <div class="dashboard">
+                        <div class="dashboard__profile card profile-card">
+                            <div class="card-body profile-card__body">
+                                <div class="profile-card__avatar">
+                                    <img src="/assets/images/man_256.png" alt="">
+                                </div>
+                                <div class="profile-card__name">{USER_FNAME} {USER_LNAME}</div>
+                                <div class="profile-card__email">{USER_EMAIL}</div>
+                                <div class="profile-card__edit">
+                                    <a href="<?php echo $this->urlFor('profile/edit_profile'); ?>" class="btn btn-secondary btn-sm"><lang id='PROFILE_INDEX_L1'>Edit Profile</lang></a>
+                                </div>
+                            </div>
+                        </div>
+                        <?php if($HAS_ADDRESS): ?>
+                            <div class="dashboard__address card address-card address-card--featured">
+                                <?php if($IS_DEFAULT): ?>
+                                    <div class="address-card__badge tag-badge tag-badge--theme"><lang id='PROFILE_INDEX_L2'>Default</lang></div>
+                                <?php endif; ?>
+                                <div class="address-card__body">
+                                    <div class="address-card__name">{NAME} {SURNAME}</div>
+                                    <div class="address-card__row">
+                                        {ADDRESS}<br>
+                                        {ADDRESS2}
+                                    </div>
+                                    <div class="address-card__row">
+                                        <div class="address-card__row-title"><lang id='PROFILE_INDEX_L3'>Phone Number</lang></div>
+                                        <div class="address-card__row-content">{PHONE}</div>
+                                    </div>
+                                    <div class="address-card__row">
+                                        <div class="address-card__row-title"><lang id='PROFILE_INDEX_L4'>Email Address</lang></div>
+                                        <div class="address-card__row-content">{EMAIL}</div>
+                                    </div>
+                                    <div class="address-card__footer">
+                                        <a href="<?php echo $this->urlFor('profile/address_edit', ['recId' => $REC_ID]); ?>"><lang id='PROFILE_INDEX_L5'>Edit Address</lang></a>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="dashboard__orders card">
+                            <div class="card-header">
+                                <h5><lang id='PROFILE_INDEX_L6'>Recent Orders</lang></h5>
+                            </div>
+                            <div class="card-divider"></div>
+                            <div class="card-table">
+                                <div class="table-responsive-sm">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th><lang id='PROFILE_INDEX_L7'>Order</lang></th>
+                                                <th><lang id='PROFILE_INDEX_L8'>Date</lang></th>
+                                                <th><lang id='PROFILE_INDEX_L9'>Total</lang></th>
+                                                <th><lang id='PROFILE_INDEX_L10'>Status</lang></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {ORDER_ROW}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="block-space block-space--layout--before-footer"></div>
+
+
+<!-- [order_row] -->
+<tr>
+    <td>
+        <a href="javascript:;">#{ORDER_ID}</a>
+    </td>
+    <td>{CREATE_DATE}</td>
+    <td>{AMOUNT}{CRCH} for {ITEM_COUNT} item(s)</td>
+    <td>{ORDER_STATUS}</td>
+    <td>
+        <a class="btn btn-primary btn-sm" href="<?php echo $this->urlFor('profile/order_history', ['orderId' => $ORDER_ID]); ?>"><lang id='PROFILE_INDEX_L12'>View</lang></a>
+    </td>
+</tr>
+<!-- [-] -->

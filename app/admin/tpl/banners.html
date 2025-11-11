@@ -1,0 +1,52 @@
+<button class="btn btn-sm btn-primary" onclick="createNewBanner()">Добавить новый баннер</button>
+<br>
+<br>
+<table class="table table-bordered table-sm">
+    <thead>
+        <tr>
+            <th>Banner ID</th>
+            <th>Lang</th>
+            <th>Related product</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {BANNER_ROW}
+    </tbody>
+</table>
+
+<script>
+
+    function createNewBanner() {
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin/create_new_banner") ?>',
+            data: {},
+            type: 'POST',
+            success: function(data) {
+                if(data.success){
+                    location.reload();
+                }
+            }
+        });
+    }
+
+</script>
+
+<!-- [banner_row] -->
+<tr>
+    <td>{BANNER_ID}</td>
+    <td>{LANG}</td>
+    <td>{ITEM_ID}</td>
+    <td>
+        <?php if($IS_ACTIVE): ?>
+            <span class="badge badge-success">Активный</span>
+        <?php else: ?>
+            <span class="badge badge-danger">Не активный</span>
+        <?php endif; ?>
+    </td>
+    <td>
+        <a href="<?php echo $this->urlFor('admin/banner_edit', ['bannerId' => $BANNER_ID]) ?>" class="btn btn-sm btn-primary">Редактировать</a>
+    </td>
+</tr>
+<!-- [-] -->

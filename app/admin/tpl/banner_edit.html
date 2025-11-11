@@ -1,0 +1,104 @@
+<style>
+    select.form-control {
+        width: auto; /* или увеличьте до нужного размера */
+        min-width: 300px;
+    }
+
+    option {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
+
+<div class="card">
+    <div class="card-header">Редактировать баннер <b>#{BANNER_ID}</b></div>
+    <div class="card-body">
+        <form onsubmit="saveBanner(this)">
+
+            <input type="hidden" name="bannerId" value="{BANNER_ID}">
+
+            <div class="form-group mt-2">
+                <div class="form-check">
+                    <input class="form-check-input" name="active" type="checkbox" id="isactive" <?php echo $IS_ACTIVE ? 'checked' : '' ?>>
+                    <label class="form-check-label" for="isactive">
+                        Активный баннер
+                    </label>
+                  </div>
+            </div>
+            <div class="form-group mt-2">
+                <label for="">Подзаголовок</label>
+                <input type="text" name="subtitle" class="form-control" placeholder="Подзаголовок" value="{BANNER_SUBTITLE}">
+            </div>
+            <!-- <div class="form-group mt-2">
+                <label for="">Язык сайта</label>
+                <select name="lang" class="form-control">
+                    {LANG_OPTIONS}
+                </select>
+            </div> -->
+            <div class="form-group mt-2">
+                <label for="exampleFormControlSelect1">Язык сайта</label>
+                <select class="form-control" name="lang">
+                    {LANG_OPTIONS}
+                </select>
+            </div>
+
+            <div class="form-group mt-2">
+                <label for="">Заголовок</label>
+                <input type="text" name="title" class="form-control" placeholder="Заголовок" value="{BANNER_TITLE}">
+            </div>
+            <div class="form-group mt-2">
+                <label for="">Контент</label>
+                <input type="text" name="content" class="form-control" placeholder="Контент" value="{BANNER_CONTENT}">
+            </div>
+            <div class="form-group mt-2">
+                <label for="">Текст кнопки</label>
+                <input type="text" name="buttonText" class="form-control" placeholder="Текст кнопки" value="{BANNER_BUTTON_TEXT}">
+            </div>
+            <div class="form-group mt-2">
+                <label for="">Ссылка кнопки</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">{APP_DOMAIN}</div>
+                    </div>
+                    <input type="text" name="buttonLink" class="form-control" id="inlineFormInputGroupUsername" placeholder="Ссылка кнопки" value="{BANNER_BUTTON_LINK}">
+                </div>
+                <!-- <input type="text" name="title" class="form-control" placeholder="Ссылка кнопки"> -->
+            </div>
+            <div class="form-group mt-2">
+                <label for="">ID связанного товара</label>
+                <input type="text" name="itemId" class="form-control" placeholder="ID связанного товара" value="{ITEM_ID}">
+            </div>
+
+            <div class="form-group mt-2">
+                <button type="submit" class="btn btn-sm btn-primary">Сохранить</button>
+                <a href="<?php echo $this->urlFor('admin/banners') ?>" class="btn btn-sm btn-danger">Назад</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+
+    function saveBanner(form) {
+        event.preventDefault();
+
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin/save_banner") ?>',
+            data: $(form).serialize(),
+            type: 'POST',
+            success: function(data) {
+                if(data.success){
+                    location.reload();
+                } else {
+                    Swal.fire(
+                        'Ошибка',
+                        'Что-то пошло не так! (Код ошибки: ' + data.error + ')',
+                        'error'
+                    )
+                }
+            }
+        });
+    }
+
+</script>

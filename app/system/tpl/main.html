@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    
+    <title>{META_TITLE}</title>
+    <meta name="description" content="{META_DESCRIPTION}">
+    <meta name="keywords" content="{META_KEYWORDS}">
+
+    <script>
+        dataLayer = [];
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MN9W38VD');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Google Tag Manager -->
+    <!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PR94PC7');</script> -->
+    <!-- End Google Tag Manager -->
+
+    {STYLES}
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    
+    <link rel="stylesheet" href="/assets/css/style.mobile-header-variant-one.css" media="screen and (max-width: 1200px)">
+    <link rel="stylesheet" href="/assets/css/style.header-spaceship-variant-one.css" media="screen and (min-width: 1199px)">
+
+    {HEADER_SCRIPTS}
+
+    <?php if(!$HIDE_COOKIE_BLOCK): ?>
+
+        <script src="/assets/libs/cookie/cookie.js"></script>
+        <script>
+            window.addEventListener('load', function () {
+
+                var cookieconsent = initCookieConsent();
+
+                cookieconsent.run({
+                    page_scripts: true,
+                    current_lang: 'lv',
+                    theme_css: '/assets/libs/cookie/cookie.css',
+                    languages: {
+                        lv: {
+                            consent_modal: {
+                                title: '<lang id="COOKIE_L1">I use cookies</lang>',
+                                description: '<lang id="COOKIE_L2">Your cookie consent message here</lang>',
+                                primary_btn: {
+                                    text: '<lang id="COOKIE_L3">Accept</lang>',
+                                    role: 'accept_all'
+                                },
+                                secondary_btn: {
+                                    text: '<lang id="COOKIE_L4">Preferences</lang>',
+                                    role: 'settings'
+                                },
+                            },
+                            settings_modal: {
+                                title: '<lang id="COOKIE_L5">Cookie settings</lang>',
+                                save_settings_btn: '<lang id="COOKIE_L6">Save settings</lang>',
+                                accept_all_btn: '<lang id="COOKIE_L3">Accept</lang>',
+                                reject_all_btn: '<lang id="COOKIE_L8">Reject all</lang>',
+                                close_btn_label: '<lang id="COOKIE_L8">Close</lang>',
+                                blocks: [
+                                    {
+                                        title: '<lang id="COOKIE_L1">I use cookies</lang>',
+                                        description: '<lang id="COOKIE_L2">Your cookie consent message here</lang>'
+                                    }, {
+                                        title: '<lang id="COOKIE_L12">Strictly necessary cookies</lang>',
+                                        description: '<lang id="COOKIE_L13">Necessary cookies for the website to function properly</lang>',
+                                        toggle: {
+                                            value: 'necessary',
+                                            enabled: true,
+                                            readonly: true
+                                        }
+                                    }, {
+                                        title: '<lang id="COOKIE_L14">Analytics cookies</lang>',
+                                        description: '<lang id="COOKIE_L15">Cookies like Google Analytics for collecting analytics data</lang>',
+                                        toggle: {
+                                            value: 'analytics',
+                                            enabled: false,
+                                            readonly: false
+                                        }
+                                    },
+                                ]
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+    <?php endif; ?>
+
+</head>
+<body>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MN9W38VD"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Google Tag Manager (noscript) -->
+    <!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PR94PC7"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
+    <!-- End Google Tag Manager (noscript) -->
+    
+    {ADMIN_MENU}
+    {INFORMER}
+    <div class="site">
+        {NAVBAR}
+        <div class="site__body">
+            {CONTENT}  
+        </div>
+        
+        <footer class="site__footer">
+            <div class="site-footer">
+                <div class="decor site-footer__decor decor--type--bottom">
+                    <div class="decor__body">
+                        <div class="decor__start"></div>
+                        <div class="decor__end"></div>
+                        <div class="decor__center"></div>
+                    </div>
+                </div>
+                <div class="site-footer__widgets">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 col-xl-4">
+                                <div class="site-footer__widget footer-contacts">
+                                    <h5 class="footer-contacts__title"><lang id='SYSTEM_MAIN_L1'>Contact Us</lang></h5>
+                                    <div class="footer-contacts__text">
+                                        <lang id='SYSTEM_MAIN_L2'>Lorem ipsum dolor sit amet, consectetur adipiscing
+                                        elit. Integer in feugiat lorem.</lang>
+                                    </div>
+                                    <address class="footer-contacts__contacts">
+                                        <dl>
+                                            <dt><lang id='SYSTEM_MAIN_L3'>Phone Number</lang></dt>
+                                            <dd><a href="tel:<lang id='SYSTEM_MAIN_L4'>+371 25685778</lang>"><lang id='SYSTEM_MAIN_L4'>+371 25685778</lang></a></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt><lang id='SYSTEM_MAIN_L5'>Email Address</lang></dt>
+                                            <dd><a href="mailto:<lang id='SYSTEM_MAIN_L6'>ask@truckmaster.lv</lang>"><lang id='SYSTEM_MAIN_L6'>ask@truckmaster.lv</lang></a></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt><lang id='SYSTEM_MAIN_L7'>Our Location</lang></dt>
+                                            <dd><lang id='SYSTEM_MAIN_L8'>Spilves iela 8b, LV-1055</lang></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt><lang id='SYSTEM_MAIN_L9'>Working Hours</lang></dt>
+                                            <dd><lang id='SYSTEM_MAIN_L10'>Pir.-Piek. 10:00 - 18:00</lang></dd>
+                                            <dd><lang id='SYSTEM_MAIN_L11'>Sestdien. 10:00 - 16:00</lang></dd>
+                                        </dl>
+                                    </address>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-3 col-xl-2">
+                                <div class="site-footer__widget footer-links">
+                                    <h5 class="footer-links__title"><lang id='SYSTEM_MAIN_L12'>Information</lang></h5>
+                                    <ul class="footer-links__list">
+                                        
+                                        <li class="footer-links__item"><a href="<?php echo $this->urlFor('home/privacy_policy') ?>" class="footer-links__link"><lang id='SYSTEM_MAIN_L13'>Privacy Policy</lang></a></li>
+                                        <li class="footer-links__item"><a href="<?php echo $this->urlFor('home/purchase_terms') ?>" class="footer-links__link"><lang id='SYSTEM_MAIN_L14'>Purchase Policy</lang></a></li>
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-3 col-xl-2">
+                              
+                            </div>
+                            <div class="col-12 col-md-6 col-xl-4">
+                                <div class="site-footer__widget footer-newsletter">
+                                    <h5 class="footer-newsletter__title"><lang id='SYSTEM_MAIN_L15'>Newsletter</lang></h5>
+                                    <div class="footer-newsletter__text">
+                                        <lang id='SYSTEM_MAIN_L16'>Enter your email address below to subscribe to our newsletter and keep up to date with discounts and special offers.</lang>
+                                    </div>
+                                    <form id="subscribeForm" class="footer-newsletter__form">
+                                        <label class="sr-only" for="footer-newsletter-address"><lang id='SYSTEM_MAIN_L17'>Email Address</lang></label>
+                                        <input type="text" name="email" class="footer-newsletter__form-input" id="footer-newsletter-address" placeholder="<lang id='SYSTEM_MAIN_L17'>Email Address</lang>">
+                                        <button type="submit" class="footer-newsletter__form-button"><lang id='SYSTEM_MAIN_L18'>Subscribe</lang></button>
+                                    </form>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="site-footer__bottom">
+                    <div class="container">
+                        <div class="site-footer__bottom-row">
+                            <div class="site-footer__copyright">
+                                Copyright © 2020 - <?php echo date("Y") ?> All Rights Reserved 
+                            </div>
+                            <div class="developedBy">Developed by <a href="https://itgroup.lv">itgroup.lv</a></div>
+                            <!-- <div><a href="https://itgroup.lv" target="_blank">Mājas lapu izstrāde | itgroup.lv</a></div> -->
+                            <div>
+                                <a href="https://www.salidzini.lv/">
+                                    <img style="width: 110px;" border="0" alt="Salidzini.lv logotips" title="Labākā cena interneta veikalos - Mobilie telefoni, Samsung, iPhone, Cena" src="https://static.salidzini.lv/images/logo_button.gif"/>
+                                </a>
+                                <a href="https://www.kurpirkt.lv" title="Kurpirkt.lv - visi Latvijas interneta veikali un cenas">
+                                    <img style="border: none; width: 110px;" alt="Kurpirkt.lv - visi Latvijas interneta veikali un cenas" src="//www.kurpirkt.lv/media/kurpirkt120.gif" width=120 height=40>
+                                </a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        {FOOTER}
+
+        <a href="<?php echo $this->urlFor('contacts') ?>">
+            <div class="contactUsIconWrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-chat-square-text" viewBox="0 0 16 16">
+                    <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-2.5a2 2 0 0 0-1.6.8L8 14.333 6.1 11.8a2 2 0 0 0-1.6-.8H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                    <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+                </svg>
+                <div class="contactUsIconText">
+                    <lang id='HOME_CONTACTS_L3'>Contact Us</lang>
+                </div>
+            </div>            
+        </a>
+    </div>
+
+    <?php if($CONFIRM_REQUIRED): ?>
+        <script>
+            $(function() {
+                Swal.fire({
+                    html: '<lang id="EMAIL_CONFIRM_REQUIRED_1">Вам необходимо подтвердить вашу почту. <br>Для подтверждения перейдите по ссылке в письме.<br><br>Ваша почта:</lang> <b>{EMAIL_ADDRESS}</b>',
+                    icon: 'warning',
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '<lang id="EMAIL_CONFIRM_REQUIRED_2">Отправить повторно</lang>',
+                    denyButtonText: '<lang id="EMAIL_CONFIRM_REQUIRED_3">Закрыть</lang>',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '<?php echo $this->urlFor("ajax/login_register/resend_validation_code") ?>',
+                            data: {},
+                            type: 'POST',
+                            beforeSend: function() {
+                                preloader.on();
+                            },
+                            success: function(data){
+                                preloader.off();
+                                if(data.success){
+                                    Swal.fire({
+                                        icon: 'success',
+                                        text: '<lang id="EMAIL_CONFIRM_REQUIRED_4">Код отправлен успешно</lang>'
+                                    }) 
+                                }
+                            }
+                        })
+                    }
+                })
+            })
+        </script>
+    <?php endif; ?>
+
+    <div class="preloaderFullScreen">
+        <div class="loader">
+            <svg class="car" width="102" height="40" xmlns="http://www.w3.org/2000/svg">
+                <g transform="translate(2 1)" stroke="#002742" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+                    <path class="car__body" d="M47.293 2.375C52.927.792 54.017.805 54.017.805c2.613-.445 6.838-.337 9.42.237l8.381 1.863c2.59.576 6.164 2.606 7.98 4.531l6.348 6.732 6.245 1.877c3.098.508 5.609 3.431 5.609 6.507v4.206c0 .29-2.536 4.189-5.687 4.189H36.808c-2.655 0-4.34-2.1-3.688-4.67 0 0 3.71-19.944 14.173-23.902zM36.5 15.5h54.01" stroke-width="3"/>
+                    <ellipse class="car__wheel--left" stroke-width="3.2" fill="none" cx="83.493" cy="30.25" rx="6.922" ry="6.808"/>
+                    <ellipse class="car__wheel--right" stroke-width="3.2" fill="none" cx="46.511" cy="30.25" rx="6.922" ry="6.808"/>
+                    <path class="car__line car__line--top" d="M22.5 16.5H2.475" stroke-width="3"/>
+                    <path class="car__line car__line--middle" d="M20.5 23.5H.4755" stroke-width="3"/>
+                    <path class="car__line car__line--bottom" d="M25.5 9.5h-19" stroke-width="3"/>
+                </g>
+            </svg>            
+        </div>
+    </div>
+
+    {FOOTER_SCRIPTS}
+
+    <script>
+
+        window.preloader = {};
+        window.preloader.on = function(){
+            $('.preloaderFullScreen').css('display', 'block');
+        }
+        window.preloader.off = function(){
+            $('.preloaderFullScreen').css('display', 'none');
+        }
+
+        jQuery.extend(jQuery.validator.messages, {
+            required: "<lang id='SYSTEM_MAIN_L19'>This field is required.</lang>",
+            remote: "<lang id='SYSTEM_MAIN_L20'>Please fix this field.</lang>",
+            email: "<lang id='SYSTEM_MAIN_L21'>Please enter a valid email address.</lang>",
+            url: "<lang id='SYSTEM_MAIN_L22'>Please enter a valid URL.</lang>",
+            date: "<lang id='SYSTEM_MAIN_L23'>Please enter a valid date.</lang>",
+            dateISO: "<lang id='SYSTEM_MAIN_L24'>Please enter a valid date (ISO).</lang>",
+            number: "<lang id='SYSTEM_MAIN_L25'>Please enter a valid number.</lang>",
+            digits: "<lang id='SYSTEM_MAIN_L26'>Please enter only digits.</lang>",
+            creditcard: "<lang id='SYSTEM_MAIN_L27'>Please enter a valid credit card number.</lang>",
+            equalTo: "<lang id='SYSTEM_MAIN_L28'>Please enter the same value again.</lang>",
+            accept: "<lang id='SYSTEM_MAIN_L29'>Please enter a value with a valid extension.</lang>",
+            maxlength: jQuery.validator.format("<lang id='SYSTEM_MAIN_L30'>Please enter no more than {0} characters.</lang>"),
+            minlength: jQuery.validator.format("<lang id='SYSTEM_MAIN_L31'>Please enter at least {0} characters.</lang>"),
+            rangelength: jQuery.validator.format("<lang id='SYSTEM_MAIN_L32'>Please enter a value between {0} and {1} characters long.</lang>"),
+            range: jQuery.validator.format("<lang id='SYSTEM_MAIN_L33'>Please enter a value between {0} and {1}.</lang>"),
+            max: jQuery.validator.format("<lang id='SYSTEM_MAIN_L34'>Please enter a value less than or equal to {0}.</lang>"),
+            min: jQuery.validator.format("<lang id='SYSTEM_MAIN_L35'>Please enter a value greater than or equal to {0}.</lang>"),
+        });
+
+        $.validator.addMethod(
+            "vatRegex", 
+            function(value, element, regexp) {
+                var re = new RegExp(regexp);
+                return this.optional(element) || re.test(value);
+            },
+            "<lang id='SYSTEM_MAIN_VAT_ERROR_FORMAT'>Incorrect vat number format. Correct format example LV41203063885</lang>"
+        );
+
+    </script>
+
+    <script>
+
+        function userLoginHeader() {
+            event.preventDefault();
+            var data = $('#login_form_header').serialize();
+            loginAjax(data);
+        }
+
+        function userLogin() {
+            var data = $('#login_form').serialize();
+            loginAjax(data, '<?php echo $this->urlFor("index"); ?>');
+        }
+
+        function loginAjax(data, afterLoginUrl = '') {
+            preloader.on();
+            $('.errorInput').removeClass('errorInput');
+            $('.errorText').html('');
+            $.ajax({
+                url: '<?php echo $this->urlFor("ajax/login/login") ?>',
+                data: data,
+                type: 'POST',
+                success: function(data){
+                    preloader.off();
+                    if(data.success){
+                        if (typeof window.loginCallback === "function") {
+                            window.loginCallback();   
+                        } else {
+                            if(afterLoginUrl){
+                                window.location.href = afterLoginUrl;
+                            } else {
+                                location.reload();
+                            }
+                        }
+                    } else {
+                        switch (data.error) {
+                            default:
+                                $('#login').addClass('errorInput');
+                                $('#password').addClass('errorInput');
+                                $('#login_input').addClass('errorInput');
+                                $('#password_input').addClass('errorInput');
+                                $('.errorText').html('<lang id='SYSTEM_MAIN_L36'>Incorrect email/login or password.</lang>');
+                                break;
+                        }
+                    }
+                }
+            })
+        }
+    
+
+        function addToCart(itemId, qty, options = {}) {
+            $.ajax({
+                url: '<?php echo $this->urlFor("ajax/products/add_to_cart") ?>',
+                data: {itemId: itemId, qty: qty, options: options},
+                type: 'POST',
+                beforeSend: function() {
+                    getItemJson({[itemId]: qty}).then((data) => {
+                        dataLayer.push({ ecommerce: null });
+                        dataLayer.push({
+                            event: "add_to_cart",
+                            ecommerce: {
+                                items: data
+                            }
+                        });
+                    }).catch((e) => {
+                        console.log(e)
+                    })
+                },
+                success: function(data){
+                    if(data.success){
+                        getSmallCart();
+                        getSmallCartDropdown();
+                    }
+                }
+            });
+        }
+        
+        function getItemJson(itemIds = []){
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    url: '<?php echo $this->urlFor("ajax/products/get_item_json") ?>',
+                    data: { itemIds },
+                    type: 'POST',
+                    success: function(data) {
+                        if(data.success){
+                            return resolve(data.data);
+                        }
+
+                        return reject(data.error);
+                    },
+                    error: function (error) {
+                        return reject(error)
+                    },
+                });
+            });
+        }
+
+        function changeCartQty(itemId, qty) {
+            addToCart(itemId, qty);
+            setTimeout(function () {
+                if(typeof loadCartPageInfo === "function"){
+                    loadCartPageInfo();
+                } else {
+                    location.reload();
+                }
+            }, 100);
+        }
+
+        function deleteFromCart(itemId) {
+            removeFromCart(itemId);
+            // setTimeout(function () {
+            //     if(typeof loadCartPageInfo === "function"){
+            //         loadCartPageInfo();
+            //     } else {
+            //         location.reload();
+            //     }
+            // }, 100);
+        }
+
+        function getSmallCart() {
+            $.ajax({
+                url: '<?php echo $this->urlFor("ajax/products/get_small_cart") ?>',
+                data: {},
+                type: 'POST',
+                success: function(data){
+                    if(data.success){
+                        $('#smallCart').html(data.html);
+                        $('.mobileCartCount').html(data.itemCount);
+                    }
+                }
+            });
+        }
+        
+        function getSmallCartDropdown() {
+            $.ajax({
+                url: '<?php echo $this->urlFor("ajax/products/get_small_cart_dropdown") ?>',
+                data: {},
+                type: 'POST',
+                success: function(data){
+                    if(data.success){
+                        $('#smallCartDropdown').html(data.html);
+                    }
+                }
+            });
+        }
+
+        function removeFromCart(itemId) {
+            $.ajax({
+                url: '<?php echo $this->urlFor("ajax/products/remove_from_cart") ?>',
+                data: {itemId: itemId},
+                type: 'POST',
+                beforeSend: function() {
+                    getItemJson({[itemId]: 0}).then((data) => {
+                        dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+                        dataLayer.push({
+                            event: "remove_from_cart",
+                            ecommerce: {
+                                items: data
+                            }
+                        });
+                    }).catch((e) => {
+                        console.log(e)
+                    })
+                },
+                success: function(data){
+                    if(data.success){
+                        getSmallCart();
+                        getSmallCartDropdown();
+                        if(typeof loadCartPageInfo === "function"){
+                            loadCartPageInfo();
+                        }
+                    }
+                }
+            });
+        }
+
+         /*
+        // Quickview
+        */
+        const quickview = {
+            cancelPreviousModal: function() {},
+            clickHandler: function() {
+                const modal = $('#quickview-modal');
+                const button = $(this);
+                const itemId = $(button).attr('data-itemid');
+                const doubleClick = button.is('.product-card__action--loading');
+
+                quickview.cancelPreviousModal();
+
+                if (doubleClick) {
+                    return;
+                }
+
+                button.addClass('product-card__action--loading');
+
+                let xhr = null;
+                // timeout ONLY_FOR_DEMO!
+                const timeout = setTimeout(function() {
+                    xhr = $.ajax({
+                        url: '<?php echo $this->urlFor("ajax/products/product_quick_view") ?>',
+                        method: 'POST',
+                        data: {itemId: itemId},
+                        success: function(data) {
+                            if(data.success){
+                                quickview.cancelPreviousModal = function() {};
+                                button.removeClass('product-card__action--loading');
+
+                                modal.html(data.html);
+                                modal.find('.quickview__close').on('click', function() {
+                                    modal.modal('hide');
+                                });
+                                modal.modal('show');
+                            }
+                        }
+                    });
+                }, 1);
+
+                quickview.cancelPreviousModal = function() {
+                    button.removeClass('product-card__action--loading');
+
+                    if (xhr) {
+                        xhr.abort();
+                    }
+
+                    // timeout ONLY_FOR_DEMO!
+                    clearTimeout(timeout);
+                };
+            }
+        };
+
+
+        $(document).on('input', '.search__input', function(){
+            if($(this).val().length >= 3){
+                $.ajax({
+                    url: '<?php echo $this->urlFor("ajax/products/search") ?>',
+                    data: {query: $(this).val()},
+                    type: 'POST',
+                    success: function(data){
+                        if(data.success){
+                            $('#searchResult').html(data.html);
+                        }
+                    }
+                });
+            }
+        })
+
+        function updateURLParameter(url, param, paramVal){
+            var newAdditionalURL = "";
+            var tempArray = url.split("?");
+            var baseURL = tempArray[0];
+            var additionalURL = tempArray[1];
+            var temp = "";
+            if (additionalURL) {
+                tempArray = additionalURL.split("&");
+                for (var i=0; i<tempArray.length; i++){
+                    if(tempArray[i].split('=')[0] != param){
+                        newAdditionalURL += temp + tempArray[i];
+                        temp = "&";
+                    }
+                }
+            }
+
+            var rows_txt = temp + "" + param + "=" + paramVal;
+            if(paramVal){
+                return baseURL + "?" + newAdditionalURL + rows_txt;
+            } else {
+                if(newAdditionalURL){
+                    return baseURL + "?" + newAdditionalURL;
+                } else {
+                    return baseURL;
+                }
+            }
+        }
+        
+        function search(query) {
+            window.location.href = "<?php echo $this->urlFor('home/search') ?>" + query;
+        }
+
+        function searchDesktop() {
+            event.preventDefault();
+            if($("#searchInput").val().length >= 3){
+                search($("#searchInput").val());
+            }
+        }
+        
+        function searchMobile() {
+            event.preventDefault();
+            if($("#mobileSearchInput").val().length >= 3){
+                search($("#mobileSearchInput").val());
+            }
+        }
+
+        $("#subscribeForm").validate({
+            submitHandler: function(form) {
+                $.ajax({
+                    url: '<?php echo $this->urlFor("ajax/home/subscribe") ?>',
+                    data: $("#subscribeForm").serialize(),
+                    type: 'POST',
+                    beforeSend: function(data){
+                        preloader.on();
+                    },
+                    success: function(data){
+                        preloader.off();
+                        if(data.success){
+                            swal.fire({icon: 'success', text: '<lang id="SUBSCRIBE_SUCCESS">Thanks for subscribed successfully</lang>'});
+                            $("#subscribeForm")[0].reset();
+                        } else {
+                            swal.fire('Error (Code: ' + data.error + ')');
+                        }
+                    }
+                });
+            },
+            rules: {
+                email: {
+                    required: true,
+                    email: true,
+                    maxlength: 255,
+                },
+            },
+        });
+
+        $(function() {
+            lazyLoadImages();
+
+            function lazyLoadImages() {
+                $('.lazyload').each(function() {
+                    var imageElement = this;
+                    var img = new Image();    
+                    img.src = $(imageElement).data('src');
+                    img.alt = $(imageElement).data('alt');
+                    img.onload = function() {
+                        $(imageElement).parent().html(this);
+                    };
+                });
+            }
+        })
+
+    </script>
+
+    {HTML_SCRIPTS}
+
+    <div id="quickview-modal" class="modal fade" tabindex="-1" role="dialog" style="display: none; padding-right: 17px;" aria-modal="true"></div>
+</div>
+
+</body>
+</html>
+
+
+<!-- [style] -->
+<link rel="stylesheet" href="{STYLE_LINK}">
+<!-- [script] -->
+<script src="{SCRIPT_LINK}"></script>
+<!-- [-] -->

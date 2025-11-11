@@ -1,0 +1,163 @@
+<br>
+<div class="card">
+    <div class="card-header">
+        Редактировать категорию #{CATEGORY_ID}
+    </div>
+    <div class="card-body">
+        <div>{LANGUAGE_BUTTONS}</div>
+        <br>
+        <div id="resultDiv"></div>
+        <br>
+
+        <br>
+        <div class="card">
+            <div class="card-header">
+                Фотография категории
+            </div>
+            <div class="card-body">
+
+                <form class="form-inline mb-3" id="fileUploadForm">
+                    <input type="hidden" name="categoryId" value="{CATEGORY_ID}">
+                    <div class="input-group mr-sm-2">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="fileUpload" name="file" required>
+                            <label class="custom-file-label" for="fileUpload">Choose file...</label>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="uploadFile()">Загрузить фото</button>
+                </form>
+
+                <div class="row">
+                    {PRODUCT_IMAGES}
+                </div>
+            </div>
+        </div>
+        <br>
+        <a href="<?php echo $this->urlFor('admin_products/index'); ?>" class="btn btn-primary">Назад</a>
+    </div>
+</div>
+
+<script>
+
+    openCategoryInfo('{CATEGORY_ID}', 'lv');
+
+    function openCategoryInfo(categoryId, lang) {
+        $('#resultDiv').html('');
+
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin_products/get_category_by_lang") ?>',
+            data: { categoryId: categoryId, lang: lang },
+            type: 'POST',
+            success: function (data) {
+                if (data.success) {
+                    $('#resultDiv').html(data.html);
+                }
+            }
+        })
+    }
+
+    function uploadFile() {
+        var formData = new FormData($("#fileUploadForm")[0]);
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin_products/upload_category_image") ?>',
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            enctype: 'multipart/form-data',
+            processData: false,
+            success: function (data) {
+                if(data.success){
+                    location.reload();
+                } else {
+                    Swal.fire(
+                        'Ошибка',
+                        'Что-то пошло не так! (Код ошибки: ' + data.error + ')',
+                        'error'
+                    )
+                }
+            }
+        });
+    }
+</script>
+
+<!-- [product_images] -->
+<div class="col-sm-3 mb-3 imageCard">
+    <div class="card">
+        <div class="card-body">
+            <div class="mb-2">{SIZE_EXIST}</div>
+            <img src="{IMAGE_LINK}" alt="" style="max-width: 100%; max-height: 100%;">
+        </div>
+    </div>
+</div>
+
+<!-- [size_exist] -->
+<span class="badge bg-success text-light">{SIZE}</span>
+
+<!-- [category_info] -->
+
+<form id="categoryForm">
+    <input type="hidden" name="categoryId" value="{CATEGORY_ID}">
+    <input type="hidden" name="lang" value="{LANGUAGE}">
+
+    <div class="form-group mx-sm-3 mb-2">
+        <label>Язык</label>
+        <input type="text" class="form-control" disabled value="{LANGUAGE}">
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+        <label>Название категории</label>
+        <input type="text" name="title" class="form-control" value="{TITLE}">
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+        <label>Ссылка категории</label>
+        <input type="text" name="slug" class="form-control" value="{SLUG}">
+    </div>
+    <br>
+    <div class="form-group mx-sm-3 mb-2">
+        <button type="button" class="btn btn-success mb-2" onclick="saveCategory()">Сохранить</button>
+    </div>
+</form>
+
+<script>
+    function saveCategory() {
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin_products/save_category") ?>',
+            data: $('#categoryForm').serialize(),
+            type: 'POST',
+            success: function(data){
+                if(data.success){
+                    openCategoryInfo('{CATEGORY_ID}', '{LANGUAGE}');
+                    Swal.fire(
+                        'Отлично',
+                        'Ваши изменения сохранены!',
+                        'success'
+                    )
+                } else {
+                    switch (data.error) {
+                        case 2:
+                            Swal.fire(
+                                'Ой, обратите внимание',
+                                'Нет никаких изменений!',
+                                'warning'
+                            )
+                            break;
+                    
+                        default:
+                            Swal.fire(
+                                'Ошибка',
+                                'Что-то пошло не так! (Код ошибки: ' + data.error + ')',
+                                'error'
+                            )
+                            break;
+                    }
+                }
+            }
+        })
+    }
+</script>
+
+<!-- [language_button] -->
+<button type="button" class="btn btn-primary"
+    onclick="openCategoryInfo('{CATEGORY_ID}', '{LANG_CODE}')">{LANG_TITLE}</button>
+<!-- [-] -->

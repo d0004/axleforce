@@ -1,0 +1,59 @@
+<div class="card">
+    <div class="card-header">
+        Список атрибутов
+    </div>
+    <div class="card-body">
+       
+        <div>
+            <button type="button" class="btn btn-sm btn-success" onclick="addNew()">Добавить новый</button>
+        </div>
+        <br>
+
+        <table class="table table-bordered table-sm">
+            <thead>
+                <th>ID</th>
+                <th>Атрибут</th>
+                <th>Переводы</th>
+                <th></th>
+            </thead>
+            <tbody>
+                {ATTRIBUTE_ROW}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function addNew() {
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin_products/add_new_attribute") ?>',
+            data: {},
+            type: 'POST',
+            success: function(data){
+                if(data.success){
+                   location.reload() 
+                } else {
+                    Swal.fire(
+                        'Ошибка',
+                        'Что-то пошло не так! (Код ошибки: ' + data.error + ')',
+                        'error'
+                    )
+                }
+            }
+        });
+    }
+</script>
+
+<!-- [attribute_row] -->
+<tr>
+    <td>{ATTR_ID}</td>
+    <td>{ATTR_NAME}</td>
+    <td>{TRANSLATION}</td>
+    <td>
+        <a href="<?php echo $this->urlFor('admin_products/attributes_edit', ['attrId' => $ATTR_ID]) ?>" class="btn btn-sm btn-success">Подробнее</a>
+    </td>
+</tr>
+
+<!-- [translation] -->
+<span class="badge badge-success text-light">{LANGUAGE}</span>
+<!-- [-] -->

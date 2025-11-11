@@ -1,0 +1,446 @@
+<script src="https://www.google.com/recaptcha/api.js?render=6LfPTgMsAAAAAHwnFLyTCAE5vfGxCUGbhc7DWujZ"></script>
+
+<div class="">
+    <div class="block-space block-space--layout--after-header"></div>
+    <div class="block">
+        <div class="container container--max--lg">
+            <div class="row">
+                <div class="col-md-6 d-flex">
+                    <div class="card flex-grow-1 mb-md-0 mr-0 mr-lg-3 ml-0 ml-lg-4">
+                        <div class="card-body card-body--padding--2">
+                            <h3 class="card-title"><lang id='HOME_LOGIN_L1'>Login</lang></h3>
+                            <form id="login_form">
+                                <div class="form-group">
+                                    <label for="signin-email"><lang id='HOME_LOGIN_L2'>Email address</lang></label>
+                                    <input id="login_input" type="email" name="login" class="form-control"
+                                        placeholder="customer@example.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="signin-password"><lang id='HOME_LOGIN_L3'>Password</lang></label>
+                                    <input id="password_input" type="password" name="password" class="form-control"
+                                        placeholder="<lang id='HOME_LOGIN_L3'>Password</lang>">
+                                    
+                                    <small class="form-text text-muted">
+                                        <a href="<?php echo $this->urlFor('login_register/forgot_pass'); ?>"><lang id='HOME_LOGIN_L4'>Forgot password?</lang></a>
+                                    </small>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <span class="input-check form-check-input">
+                                            <span class="input-check__body">
+                                                <input class="input-check__input" type="checkbox" id="signin-remember">
+                                                <span class="input-check__box"></span>
+                                                <span class="input-check__icon"><svg width="9px" height="7px">
+                                                        <path
+                                                            d="M9,1.395L3.46,7L0,3.5L1.383,2.095L3.46,4.2L7.617,0L9,1.395Z">
+                                                        </path>
+                                                    </svg>
+                                                </span>
+                                            </span>
+                                        </span>
+                                        <label class="form-check-label" for="signin-remember"><lang id='HOME_LOGIN_L5'>Remember Me</lang></label>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-0">
+                                    <button type="submit"
+                                        class="btn btn-primary mt-3"><lang id='HOME_LOGIN_L6'>Login</lang></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex mt-4 mt-md-0">
+                    <div class="card flex-grow-1 mb-0 ml-0 ml-lg-3 mr-0 mr-lg-4">
+                        <div class="card-body card-body--padding--2">
+                            <h3 class="card-title"><lang id='HOME_LOGIN_L7'>Register</lang></h3>
+
+                            <div class="form-group mt-3" style="display: flex;align-items: center;justify-content: space-around;">
+                                <div class="form-check">
+                                    <span class="input-check form-check-input">
+                                        <span class="input-check__body">
+                                            <input class="input-check__input" type="radio" name="personType" value="1"
+                                                checked id="phisical">
+                                            <span class="input-check__box"></span>
+                                            <span class="input-check__icon"><svg width="9px" height="7px">
+                                                    <path
+                                                        d="M9,1.395L3.46,7L0,3.5L1.383,2.095L3.46,4.2L7.617,0L9,1.395Z">
+                                                    </path>
+                                                </svg>
+                                            </span>
+                                        </span>
+                                    </span>
+                                    <label class="form-check-label" for="phisical"><lang id='HOME_LOGIN_L8'>Phisical person</lang></label>
+                                </div>
+                                <div class="form-check">
+                                    <span class="input-check form-check-input">
+                                        <span class="input-check__body">
+                                            <input class="input-check__input" type="radio" name="personType" value="2"
+                                                id="legal">
+                                            <span class="input-check__box"></span>
+                                            <span class="input-check__icon"><svg width="9px" height="7px">
+                                                    <path
+                                                        d="M9,1.395L3.46,7L0,3.5L1.383,2.095L3.46,4.2L7.617,0L9,1.395Z">
+                                                    </path>
+                                                </svg>
+                                            </span>
+                                        </span>
+                                    </span>
+                                    <label class="form-check-label" for="legal"><lang id='HOME_LOGIN_L9'>Legal person</lang></label>
+                                </div>
+                            </div>
+
+                            <script>
+                                $('input[name="personType"]').on('change', function () {
+                                    if ($(this).val() == 1) {
+                                        $('#phisical-person').css('display', 'block');
+                                        $('#legal-person').css('display', 'none');
+                                    } else {
+                                        $('#phisical-person').css('display', 'none');
+                                        $('#legal-person').css('display', 'block');
+                                    }
+                                })
+                            </script>
+
+                            <div id="phisical-person">
+                                <form id="register_form">
+                                    <div class="form-group">
+                                        <label for="signup-fname"><lang id='HOME_LOGIN_L10'>First name</lang></label>
+                                        <input id="signup-fname" type="text" name="fname" class="form-control"
+                                            placeholder="<lang id='HOME_LOGIN_L10'>First name</lang>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="signup-lname"><lang id='HOME_LOGIN_L11'>Last name</lang></label>
+                                        <input id="signup-lname" type="text" name="lname" class="form-control"
+                                            placeholder="<lang id='HOME_LOGIN_L11'>Last name</lang>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="signup-email"><lang id='HOME_LOGIN_L12'>Email address</lang></label>
+                                        <input id="signup-email" type="email" name="email" class="form-control emailFp"
+                                            placeholder="customer@example.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="signup-password"><lang id='HOME_LOGIN_L13'>Password</lang></label>
+                                        <input id="signup-password" type="password" name="password" class="form-control passwordFp"
+                                            placeholder="<lang id='HOME_LOGIN_L13'>Password</lang>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="signup-confirm"><lang id='HOME_LOGIN_L14'>Repeat password</lang></label>
+                                        <input id="signup-confirm" type="password" name="password_again"
+                                            class="form-control" placeholder="<lang id='HOME_LOGIN_L14'>Repeat password</lang>">
+                                    </div>
+                                    <div class="form-group mb-0">
+                                        <button type="submit"
+                                            class="btn btn-primary mt-3"><lang id='HOME_LOGIN_L15'>Register</lang></button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div style="display: none" id="legal-person">
+                                <form id="register_form_legal">
+                                    <div class="form-group">
+                                        <label for="signup-fnameLp"><lang id='HOME_LOGIN_L10'>First name</lang></label>
+                                        <input id="signup-fnameLp" type="text" name="fname" class="form-control"
+                                            placeholder="<lang id='HOME_LOGIN_L10'>First name</lang>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="signup-lnameLp"><lang id='HOME_LOGIN_L11'>Last name</lang></label>
+                                        <input id="signup-lnameLp" type="text" name="lname" class="form-control"
+                                            placeholder="<lang id='HOME_LOGIN_L11'>Last name</lang>">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="vatNumber"><lang id='HOME_LOGIN_L16'>VAT number</lang></label>
+                                        <input id="vatNumber" type="text" name="vatNumber" class="form-control"
+                                            placeholder="LV41203063885">
+                                        
+                                        
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="companyName"><lang id='HOME_LOGIN_L17'>Company name</lang></label>
+                                        <input id="companyName" type="text" name="companyName" class="form-control"
+                                            placeholder="<lang id='HOME_LOGIN_L17'>Company name</lang>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="companyAddress"><lang id='HOME_LOGIN_L18'>Company address</lang></label>
+                                        <input id="companyAddress" type="text" name="companyAddress" class="form-control"
+                                            placeholder="<lang id='HOME_LOGIN_L18'>Company address</lang>">
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="signup-emailLp"><lang id='HOME_LOGIN_L12'>Email address</lang></label>
+                                        <input id="signup-emailLp" type="email" name="email" class="form-control emailLp"
+                                            placeholder="customer@example.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="signup-passwordLp"><lang id='HOME_LOGIN_L13'>Password</lang></label>
+                                        <input id="signup-passwordLp" type="password" name="password" class="form-control passwordLp"
+                                            placeholder="<lang id='HOME_LOGIN_L13'>Password</lang>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="signup-confirmLp"><lang id='HOME_LOGIN_L14'>Repeat password</lang></label>
+                                        <input id="signup-confirmLp" type="password" name="password_again"
+                                            class="form-control" placeholder="<lang id='HOME_LOGIN_L14'>Repeat password</lang>">
+                                    </div>
+                                    <div class="form-group mb-0">
+                                        <button type="submit"
+                                            class="btn btn-primary mt-3"><lang id='HOME_LOGIN_L15'>Register</lang></button>
+                                    </div>
+                                </form>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="block-space block-space--layout--before-footer"></div>
+</div>
+
+
+<script>
+
+$("#login_form").validate({
+    submitHandler: function(form) {
+        userLogin();
+    },
+    rules: {
+        login: {
+            required: true,
+        },
+        password: {
+            minlength: 8,
+            password: true,
+            required: true,
+        },
+    },
+});
+
+$("#register_form").validate({
+    submitHandler: function(form) {
+        
+        grecaptcha.ready(function() {
+            grecaptcha.execute('6LfPTgMsAAAAAHwnFLyTCAE5vfGxCUGbhc7DWujZ', {action: 'submit'}).then(function(token) {
+                // append token to form
+                $('<input>').attr({
+                    type: 'hidden',
+                    name: 'g-recaptcha-response',
+                    value: token
+                }).appendTo('#register_form');
+
+                // then submit via AJAX
+                $.ajax({
+                    url: '<?php echo $this->urlFor("ajax/register/register") ?>',
+                    data: $('#register_form').serialize(),
+                    type: 'POST',
+                    dataType: 'json',
+                    beforeSend: function () {
+                        preloader.on();
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            window.location.href = '<?php echo $this->urlFor("index"); ?>';
+                        } else {
+                            preloader.off();
+                            Swal.fire({
+                                text: `Error (Code: ${data.error})`,
+                            })
+                        }
+                    }
+                })
+                // $.ajax({
+                //     url: '<?php echo $this->urlFor("ajax/home/contact_us") ?>',
+                //     type: 'POST',
+                //     data: $("#contactForm").serialize(),
+                //     beforeSend: function() {
+                //         preloader.on();
+                //     },
+                //     success: function(data){
+                //         preloader.off();
+                //         if(data.success){
+                //             swal.fire({icon: 'success', text: '<lang id="CONTACTS_THANKS_FOR_MESSAGE">Thanks for your message! We will answer as soon as it possible</lang>'});
+                //             $("#contactForm")[0].reset();
+                //         } else {
+                //             swal.fire('Error (Code: ' + data.error + ')');
+                //         }
+                //     }
+                // });
+            });
+        });
+    },
+    rules: {
+        fname: {
+            required: true,
+        },
+        lname: {
+            required: true,
+        },
+        email: {
+            email: true,
+            required: true,
+            remote: {
+                url: '<?php echo $this->urlFor("ajax/home/check_email") ?>',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    'email': function () { return $('.emailFp').val(); }
+                }
+            }
+        },
+        password: {
+            minlength: 8,
+            password: true,
+            required: true,
+        },
+        password_again: {
+            minlength: 8,
+            password: true,
+            required: true,
+            equalTo: '.passwordFp'
+        },
+    },
+    messages: {
+        email: {
+            remote: "<lang id='HOME_LOGIN_L19'>Email already exists.</lang>"
+        }
+    }
+});
+
+$("#register_form_legal").validate({
+    submitHandler: function(form) {
+
+        grecaptcha.ready(function() {
+            grecaptcha.execute('6LfPTgMsAAAAAHwnFLyTCAE5vfGxCUGbhc7DWujZ', {action: 'submit'}).then(function(token) {
+                // append token to form
+                $('<input>').attr({
+                    type: 'hidden',
+                    name: 'g-recaptcha-response',
+                    value: token
+                }).appendTo('#register_form_legal');
+
+                $.ajax({
+                    url: '<?php echo $this->urlFor("ajax/register/register_legal") ?>',
+                    data: $('#register_form_legal').serialize(),
+                    type: 'POST',
+                    dataType: 'json',
+                    beforeSend: function () {
+                        preloader.on();
+                    },
+                    success: function (data) {                
+                        if (data.success) {
+                            window.location.href = '<?php echo $this->urlFor("index"); ?>';
+                        } else {
+                            preloader.off();
+                            Swal.fire({
+                                text: `Error (Code: ${data.error})`,
+                            })
+                        }
+                    }
+                })
+            });
+        });
+    },
+    onkeyup: false,
+    rules: {
+        fname: {
+            required: true,
+        },
+        lname: {
+            required: true,
+        },
+        vatNumber: {
+            required: true,
+            vatRegex: "^[a-zA-Z]{2}[0-9A-Za-z]+$",
+            remote: {
+                url: '<?php echo $this->urlFor("ajax/home/chack_vat_number") ?>',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    'vatNumber': function () { return $('#vatNumber').val(); }
+                },
+                dataFilter: function(data) {
+                    data = $.parseJSON(data);
+                    if(data.success){
+                        if(data.data.valid){
+                            setDataForVat(data.data);
+                            return true;
+                        }
+                    } else {
+                        if(data.error == '2-3' || data.error == '2-4'){
+                            Swal.fire({
+                                html: "<lang id='VAT_ERROR_L1'>Если у вас не получается зарегистрироваться, как юридическое лицо, свяжитесь с нами через нашу контактную форму</lang><br><br>" + data.errorMessgae,
+                                icon: 'warning',
+                                showDenyButton: true,
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: "<lang id='VAT_ERROR_L2'>Связаться с нами</lang>",
+                                denyButtonText: "<lang id='VAT_ERROR_L3'>Отменить</lang>"
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.href = '<?php echo $this->urlFor("contacts")?>';
+                                }
+                            })
+                        }
+                    }
+                    setDataForVat('');
+                    return false;
+                }
+            }
+        },
+        companyName: {
+            required: true,
+        },
+        companyAddress: {
+            required: true,
+        },
+        email: {
+            email: true,
+            required: true,
+            remote: {
+                url: '<?php echo $this->urlFor("ajax/home/check_email") ?>',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    'email': function () { return $('.emailLp').val(); }
+                }
+            }
+        },
+        password: {
+            minlength: 8,
+            password: true,
+            required: true,
+        },
+        password_again: {
+            minlength: 8,
+            password: true,
+            required: true,
+            equalTo: '.passwordLp'
+        },
+    },
+    messages: {
+        email: {
+            remote: "<lang id='HOME_LOGIN_L19'>Email already exists.</lang>"
+        }
+    }
+});
+
+function setDataForVat(data){
+    if(data.name){
+        $('#companyName').val(data.name);
+        $('#companyName').attr("readonly", true);
+    } else {
+        $('#companyName').val('');
+        $('#companyName').removeAttr('readonly');
+    }
+    if(data.address){
+        $('#companyAddress').val(data.address);
+        $('#companyAddress').attr("readonly", true);
+    } else {
+        $('#companyAddress').val('');
+        $('#companyAddress').removeAttr('readonly');
+    }
+}
+
+</script>

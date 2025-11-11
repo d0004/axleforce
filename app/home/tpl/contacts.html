@@ -1,0 +1,148 @@
+<script src="https://www.google.com/recaptcha/api.js?render=6LfPTgMsAAAAAHwnFLyTCAE5vfGxCUGbhc7DWujZ"></script>
+
+<div class="block-map block">
+    <div class="block-map__body">
+        <iframe
+            src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8698.342021580107!2d24.05867930439027!3d56.97303230339367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46eecff56255d707%3A0x1583bf4ae91a5365!2sSpilves%20iela%208B%2C%20Kurzemes%20rajons%2C%20R%C4%ABga%2C%20LV-1055!5e0!3m2!1sru!2slv!4v1620985169402!5m2!1sru!2slv'
+            frameborder='0' scrolling='no' marginheight='0' marginwidth='0'></iframe>
+    </div>
+</div>
+<div class="block-header block-header--has-breadcrumb block-header--has-title">
+    <div class="container">
+        <div class="block-header__body">
+            <nav class="breadcrumb block-header__breadcrumb" aria-label="breadcrumb">
+                <ol class="breadcrumb__list">
+                    <li class="breadcrumb__spaceship-safe-area" role="presentation"></li>
+                    <li class="breadcrumb__item breadcrumb__item--parent breadcrumb__item--first">
+                        <a href="<?php echo $this->urlFor('index') ?>" class="breadcrumb__item-link"><lang id='HOME_CONTACTS_L1'>Home</lang></a>
+                    </li>
+                    
+                    <li class="breadcrumb__item breadcrumb__item--current breadcrumb__item--last" aria-current="page">
+                        <span class="breadcrumb__item-link"><lang id='HOME_CONTACTS_L2'>Contacts</lang></span>
+                    </li>
+                    <li class="breadcrumb__title-safe-area" role="presentation"></li>
+                </ol>
+            </nav>
+            <h1 class="block-header__title"><lang id='HOME_CONTACTS_L3'>Contact Us</lang></h1>
+        </div>
+    </div>
+</div>
+<div class="block">
+    <div class="container container--max--lg">
+        <div class="card">
+            <div class="card-body card-body--padding--2">
+                <div class="row">
+                    <div class="col-12 col-lg-6 pb-4 pb-lg-0">
+                        <div class="mr-1">
+                            <h4 class="contact-us__header card-title"><lang id='HOME_CONTACTS_L4'>Our Address</lang></h4>
+                            <div class="contact-us__address">
+                                <p>
+                                    <lang id='HOME_CONTACTS_L4_1'>Line 1</lang><br>
+                                    <lang id='HOME_CONTACTS_L4_2'>Line 2</lang>
+                                </p>
+                                <p>
+                                    <lang id='HOME_CONTACTS_L5'>Spilves iela 8b, LV-1055</lang><br>
+                                    <lang id='HOME_CONTACTS_L6'>Email: ask@axleforce.lv</lang><br>
+                                    <lang id='HOME_CONTACTS_L7'>Phone Number: +371 25685778</lang>
+                                </p>
+                                <p>
+                                    <strong><lang id='HOME_CONTACTS_L8'>Opening Hours</lang></strong><br>
+                                    <lang id='HOME_CONTACTS_L9'>Pir.-Piek. 10:00 - 18:00</lang><br>
+                                    <lang id='HOME_CONTACTS_L10'>Sestdien. 10:00 - 16:00</lang>
+                                </p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="ml-1">
+                            <h4 class="contact-us__header card-title"><lang id='HOME_CONTACTS_L11'>Leave us a Message</lang></h4>
+                            <form id="contactForm">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="form-name"><lang id='HOME_CONTACTS_L12'>Your Name</lang></label>
+                                        <input type="text" id="form-name" autocomplete="off" name="name" class="form-control" placeholder="<lang id='HOME_CONTACTS_L12'>Your Name</lang>">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="form-email"><lang id='HOME_CONTACTS_L13'>Email</lang></label>
+                                        <input type="email" id="form-email" autocomplete="off" name="email" class="form-control"
+                                            placeholder="<lang id='HOME_CONTACTS_L13'>Email</lang>">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="form-subject"><lang id='HOME_CONTACTS_L14'>Subject</lang></label>
+                                    <input type="text" id="form-subject" autocomplete="off" name="subject" class="form-control" placeholder="<lang id='HOME_CONTACTS_L14'>Subject</lang>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="form-message"><lang id='HOME_CONTACTS_L15'>Message</lang></label>
+                                    <textarea id="form-message" autocomplete="off" name="message" class="form-control" rows="4"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">
+                                    <lang id='HOME_CONTACTS_L16'>Send Message</lang>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="block-space block-space--layout--before-footer"></div>
+
+<script>
+
+    $("#contactForm").validate({
+        submitHandler: function(form) {
+            grecaptcha.ready(function() {
+                grecaptcha.execute('6LfPTgMsAAAAAHwnFLyTCAE5vfGxCUGbhc7DWujZ', {action: 'submit'}).then(function(token) {
+                    // append token to form
+                    $('<input>').attr({
+                        type: 'hidden',
+                        name: 'g-recaptcha-response',
+                        value: token
+                    }).appendTo('#contactForm');
+
+                    // then submit via AJAX
+                    $.ajax({
+                        url: '<?php echo $this->urlFor("ajax/home/contact_us") ?>',
+                        type: 'POST',
+                        data: $("#contactForm").serialize(),
+                        beforeSend: function() {
+                            preloader.on();
+                        },
+                        success: function(data){
+                            preloader.off();
+                            if(data.success){
+                                swal.fire({icon: 'success', text: '<lang id="CONTACTS_THANKS_FOR_MESSAGE">Thanks for your message! We will answer as soon as it possible</lang>'});
+                                $("#contactForm")[0].reset();
+                            } else {
+                                swal.fire('Error (Code: ' + data.error + ')');
+                            }
+                        }
+                    });
+                });
+            });
+        },
+        rules: {
+            name: {
+                required: true,
+                maxlength: 255,
+            },
+            email: {
+                required: true,
+                email: true,
+                maxlength: 255,
+            },
+            subject: {
+                required: true,
+                maxlength: 255,
+            },
+            message: {
+                required: true,
+                maxlength: 10000
+            },
+        },
+    });
+
+</script>

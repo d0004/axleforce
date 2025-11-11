@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="block-header block-header--has-breadcrumb block-header--has-title">
+        <div class="container">
+            <div class="block-header__body">
+                <nav class="breadcrumb block-header__breadcrumb" aria-label="breadcrumb">
+                    <ol class="breadcrumb__list">
+                        <li class="breadcrumb__spaceship-safe-area" role="presentation"></li>
+                        <li class="breadcrumb__item breadcrumb__item--parent breadcrumb__item--first">
+                            <a href="<?php echo $this->urlFor('index') ?>" class="breadcrumb__item-link"><lang id='HOME_SEARCH_L1'>Home</lang></a>
+                        </li>
+                        
+                        <li class="breadcrumb__item breadcrumb__item--current breadcrumb__item--last"
+                            aria-current="page">
+                            <span class="breadcrumb__item-link"><lang id='HOME_SEARCH_L2'>Search</lang></span>
+                        </li>
+                        <li class="breadcrumb__title-safe-area" role="presentation"
+                            style="--block-header-title-width:396.321px;"></li>
+                    </ol>
+                </nav>
+                <h1 class="block-header__title"><lang id='HOME_SEARCH_L3'>Поиск</lang> "{SEARCH_QUERY}"</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="block">
+        <div class="categories-list categories-list--layout--columns-4-sidebar">
+            <ul class="categories-list__body">
+                {SEARCH_CATEGORY}
+            </ul>
+        </div>
+    </div>
+    <br><br>
+    
+    <div class="products-view__list products-list products-list--grid--6" data-layout="grid" data-with-features="false">
+
+        <div class="products-list__content">
+
+            {PRODUCT_CARDS}
+
+        </div>
+    </div>
+</div>
+
+<div class="block-space block-space--layout--before-footer"></div>
+
+<!-- [product_wrap] -->
+<div class="products-list__item">
+    {PRODUCT_CARD}
+</div>
+
+<!-- [search_category] -->
+
+<li class="categories-list__item">
+    <a href="<?php echo $this->urlFor('category/index', ['slug' => $URL_SLUG]) ?>">
+        <div class="image image--type--category">
+            <div class="image__body">
+                <img class="image__tag" src="{CATEGORY_IMAGE}" alt="">
+            </div>
+        </div>
+        <div class="categories-list__item-name">{TITLE}</div>
+    </a>
+    <!-- <div class="categories-list__item-products">131 Products</div> -->
+</li>
+<li class="categories-list__divider"></li>
+<!-- [-] -->

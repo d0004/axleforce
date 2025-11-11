@@ -1,0 +1,7 @@
+<script>
+    
+    $.validator.addMethod("password", function(value, element) {
+        return this.optional(element) || /^[a-z0-9\-!@#\$%\^\&*]+$/i.test(value);
+    }, "<lang id='SCRIPTS_L1'>Password must contain only letters, numbers, or dashes.</lang>");
+    
+</script>

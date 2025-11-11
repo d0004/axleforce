@@ -1,0 +1,90 @@
+<!-- [full_form] -->
+<li class="mb-2 deliveryWrapper payment-methods__item <?php echo $FIRST ? 'payment-methods__item--active' : '' ?>">
+    <label class="payment-methods__item-header">
+        <span class="payment-methods__item-radio input-radio">
+            <span class="input-radio__body">
+                <input class="input-radio__input" name="checkout_delivery" type="radio" <?php echo $FIRST ? 'checked' : '' ?> value="{TYPE}" aria-invalid="false">
+                <span class="input-radio__circle"></span>
+            </span>
+        </span>
+        <span class="payment-methods__item-title"><lang id='DELIVERY_LVP_L1'>Latvijas pasts</lang></span>
+    </label>
+    <div class="payment-methods__item-container" style="padding: 0 20px;">
+        <br>
+        <p><lang id='DELIVERY_OMNIVA_L2'>Price for delivery:</lang> <b>{CRCH}{PRICE_OMNIVA}</b></p>
+        <!-- <select class="form-control search-omniva-select" id="omnivaSelectId" name="checkout_delivery_detail[{TYPE}][pacomate]">
+            <option value=""></option>
+            {PACOMATE}
+        </select> -->
+
+        <div class="form-group">
+            <label for="company">City</label>
+            <input type="text" class="form-control" id="city" placeholder="City" name="checkout_delivery_detail[lvpasts][city]" value="" aria-invalid="false">
+            <em class="invalid-feedback"></em>
+        </div>
+        <div class="form-group">
+            <label for="street">Street</label>
+            <input type="text" class="form-control" id="street" placeholder="Street" name="checkout_delivery_detail[lvpasts][street]" value="" aria-invalid="false">
+            <em class="invalid-feedback"></em>
+        </div>
+        <div class="form-group">
+            <label for="house">House number</label>
+            <input type="text" class="form-control" id="house" placeholder="House number" name="checkout_delivery_detail[lvpasts][house]" value="" aria-invalid="false">
+            <em class="invalid-feedback"></em>
+        </div>
+        <div class="form-group">
+            <label for="apartment">Apartment number</label>
+            <input type="text" class="form-control" id="apartment" placeholder="Apartment number" name="checkout_delivery_detail[lvpasts][apartment]" value="" aria-invalid="false">
+            <em class="invalid-feedback"></em>
+        </div>
+        <div class="form-group">
+            <label for="zip">ZIP</label>
+            <input type="text" class="form-control" id="zip" placeholder="ZIP" name="checkout_delivery_detail[lvpasts][zip]" value="" aria-invalid="false">
+            <em class="invalid-feedback"></em>
+        </div>
+
+        <br>
+        <br>
+    </div>
+</li>
+
+<script>
+    // $(document).ready(function() {
+    //     $('.search-omniva-select').select2({
+    //         placeholder: "<lang id='PRODUCTS_CHECKOUT_L24'>Shipping Address</lang>",
+    //         language: '{LANG}',
+    //     }).on("change", function (e) {
+    //         $(this).valid()
+    //     });
+    // });
+</script>
+
+<!-- [pay_bill_view] -->
+
+<div class="address-card__name"><lang id='DELIVERY_LVP_TITLE'>Latvijas pasts</lang></div>
+<div class="address-card__row">
+    <div class="address-card__row-title"><lang id='DELIVERY_LVP_COUNTRY'>Country</lang></div>
+    <div class="address-card__row-content">{LVP_COUNTRY}</div>
+</div>
+<div class="address-card__row">
+    <div class="address-card__row-title"><lang id='DELIVERY_LVP_CITY'>City</lang></div>
+    <div class="address-card__row-content">{LVP_CITY}</div>
+</div>
+<div class="address-card__row">
+    <div class="address-card__row-title"><lang id='DELIVERY_LVP_STREET'>Street</lang></div>
+    <div class="address-card__row-content">{LVP_STREET}</div>
+</div>
+<div class="address-card__row">
+    <div class="address-card__row-title"><lang id='DELIVERY_LVP_HOUSE'>House number</lang></div>
+    <div class="address-card__row-content">{LVP_HOUSE}</div>
+</div>
+<div class="address-card__row">
+    <div class="address-card__row-title"><lang id='DELIVERY_LVP_APARTMENT'>Apartment number</lang></div>
+    <div class="address-card__row-content">{LVP_APARTMENT}</div>
+</div>
+<div class="address-card__row">
+    <div class="address-card__row-title"><lang id='DELIVERY_LVP_ZIP'>ZIP Code</lang></div>
+    <div class="address-card__row-content">{LVP_ZIP}</div>
+</div>
+
+<!-- [-] -->

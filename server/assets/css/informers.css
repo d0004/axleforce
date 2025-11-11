@@ -1,0 +1,28 @@
+.informer{
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    padding: 20px;
+}
+
+.informer p{
+    margin: 0;
+    padding: 0;
+}
+
+.informer-orange{
+    background: #ff9d58;
+    color: #fff;
+}
+
+.informer-red{
+    background: #bd0101;
+    color: #fff;
+}
+
+.informer-green{
+    background: #54bb00;
+    color: #fff;
+}

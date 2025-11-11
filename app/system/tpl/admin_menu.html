@@ -1,0 +1,15 @@
+<div class="adminMenu">
+    <div class="adminMenuElement">
+        <a href="<?php echo $this->urlFor('admin/index'); ?>">Админ панель</a>
+    </div>
+    <?php if($ADMIN_MENU_CATEGORY_ID): ?>
+        <div class="adminMenuElement">
+            <a href="<?php echo $this->urlFor('admin_products/category_products', ['categoryId' => $ADMIN_MENU_CATEGORY_ID]); ?>" target="_blank">Товары в данной категории</a>
+        </div>
+    <?php endif; ?>
+    <?php if($ADMIN_MENU_ITEM_ID): ?>
+        <div class="adminMenuElement">
+            <a href="<?php echo $this->urlFor('admin_products/edit_product', ['itemId' => $ADMIN_MENU_ITEM_ID]); ?>" target="_blank">Редактировать товар</a>
+        </div>
+    <?php endif; ?>
+</div>

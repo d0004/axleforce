@@ -1,0 +1,88 @@
+<div class="block-space block-space--layout--divider-xl"></div>
+
+<div class="block">
+    <div class="container container--max--xl">
+        <div class="faq__section">
+            {PAGE_CONTENT}            
+        </div>
+    </div>
+</div>
+
+
+<div class="block-space block-space--layout--divider-nl"></div>
+    
+{FEATURED_SLIDER}
+
+<div class="block-space block-space--layout--divider-nl"></div>
+
+<!-- [success_payment] -->
+
+<div class="block order-success">
+    <div class="container">
+        <div class="order-success__body">
+            <div class="order-success__header" style="padding: 0 0 30px 0;">
+                <div class="order-success__icon">
+                    <svg width="100" height="100">
+                        <path d="M50,100C22.4,100,0,77.6,0,50S22.4,0,50,0s50,22.4,50,50S77.6,100,50,100z M50,2C23.5,2,2,23.5,2,50
+s21.5,48,48,48s48-21.5,48-48S76.5,2,50,2z M44.2,71L22.3,49.1l1.4-1.4l21.2,21.2l34.4-34.4l1.4,1.4L45.6,71
+C45.2,71.4,44.6,71.4,44.2,71z"></path>
+                    </svg>
+                </div>
+                <h1 class="order-success__title"><lang id='PAYMENT_PAY_BILL_L1'>Thank you</lang></h1>
+                <div class="order-success__subtitle"><lang id='STRIPE_SUCCESS_L1'>Заказ оплачен успешно</lang></div>                    
+            </div>
+            <div class="card order-success__meta">
+                <ul class="order-success__meta-list">
+                    <li class="order-success__meta-item">
+                        <span class="order-success__meta-title"><lang id='PAYMENT_PAY_BILL_L3'>Order number:</lang></span>
+                        <span class="order-success__meta-value">#{BILL_ID}</span>
+                    </li>
+                    <li class="order-success__meta-item">
+                        <span class="order-success__meta-title"><lang id='PAYMENT_PAY_BILL_L4'>Created At:</lang></span>
+                        <span class="order-success__meta-value">{CREATE_DATE}</span>
+                    </li>
+                    <li class="order-success__meta-item">
+                        <span class="order-success__meta-title"><lang id='PAYMENT_PAY_BILL_L5'>Total:</lang></span>
+                        <span class="order-success__meta-value">{AMOUNT} {CRCH}</span>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- [error_in_payment] -->
+<div class="block order-success">
+    <div class="container">
+        <div class="order-success__body">
+            <div class="order-success__header">
+                <div class="order-success__icon">
+                    <img src="/files_public/system/logo.jpg" height="100">
+                </div>
+                <br><br>
+                <h1 class="order-success__title">Error (Code: {ERROR_CODE})</h1>
+                <div class="order-success__subtitle"><lang id="STRIPE_SUCCESS_L2">Наши специалисты уже разбираются в том, что пошло не так. <br>Приносим свои извинения за доставленные неудобства.</lang></div>                    
+            </div>
+            <?php if($BILL_ID): ?>
+                <div class="card order-success__meta">
+                    <ul class="order-success__meta-list">
+                        <li class="order-success__meta-item">
+                            <span class="order-success__meta-title"><lang id='PAYMENT_PAY_BILL_L3'>Order number:</lang></span>
+                            <span class="order-success__meta-value">#{BILL_ID}</span>
+                        </li>
+                        <li class="order-success__meta-item">
+                            <span class="order-success__meta-title"><lang id='PAYMENT_PAY_BILL_L4'>Created At:</lang></span>
+                            <span class="order-success__meta-value">{CREATE_DATE}</span>
+                        </li>
+                        <li class="order-success__meta-item">
+                            <span class="order-success__meta-title"><lang id='PAYMENT_PAY_BILL_L5'>Total:</lang></span>
+                            <span class="order-success__meta-value">{AMOUNT} {CRCH}</span>
+                        </li>
+                    </ul>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+<!-- [-] -->

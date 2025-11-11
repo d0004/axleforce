@@ -1,0 +1,372 @@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+
+<script src="/assets/js/jquery.cookie.js"></script>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Скачать инвойсы</h5>
+                <form action="<?php echo $this->urlFor('admin/download_invoices') ?>" method="POST">
+                    <div class="form-group">
+                        <input type="text" autocomplete="off" class="form-control datepicker mr-2" name="from" placeholder="Дата от">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" autocomplete="off" class="form-control datepicker mr-2" name="to" placeholder="Дата до">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm">Скачать</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Загрузить банковские операции</h5>
+                <form>
+                    <div class="custom-file">
+                        <input type="file" name="file" class="custom-file-input" id="fileUpload" required onchange="uploadBankData($(this).closest('form'))">
+                        <label class="custom-file-label" for="fileUpload">Choose file...</label>
+                    </div>                
+                </form>
+                <hr>
+                <button type="button" class="btn btn-success btn-sm" onclick="showAll()">Показать все операции</button>
+                <button type="button" class="btn btn-primary btn-sm" onclick="$('#manualUpload').toggle()">Загрузить вручную</button>
+                <div style="display: none" id="manualUpload">
+                    <br>
+                    <form onsubmit="manualUpload(this)">
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" autocomplete="off" placeholder="ID" name="id" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control datepicker" autocomplete="off" placeholder="Дата" name="date" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="number" class="form-control" autocomplete="off" placeholder="Сумма" min="0.01" name="amount" required step=".01">
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <textarea class="form-control" name="detail" rows="5" placeholder="Детали" required></textarea>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <textarea class="form-control" name="comment" rows="5" placeholder="Комментарий"></textarea>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success btn-sm">Загрузить</button>
+                    </form>
+                </div>
+                <hr>
+                <div id="operations"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(function() {
+
+        if(!$.cookie('showAllOperations')){
+            $.cookie('showAllOperations', false);
+        }
+        
+        loadOperations();
+
+        $(".datepicker").datepicker({
+            dateFormat: 'yy-mm-dd',
+        });
+    });
+
+    function showAll(){
+        if($.cookie('showAllOperations') == 'true'){
+            $.cookie('showAllOperations', false);
+        } else {
+            $.cookie('showAllOperations', true);
+        }
+        
+        loadOperations();
+    }
+
+    function uploadBankData (form) {
+        event.preventDefault();
+        var formData = new FormData($(form)[0]);
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin/save_bank_data") ?>',
+            type: 'POST',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            enctype: 'multipart/form-data',
+            processData: false,
+            beforeSend: function() {
+                preloader.on();
+            },
+            success: function(data){
+                preloader.off();
+                // if(data.success){
+                //     Swal.fire({
+                //         icon: 'success',
+                //         title: 'Сохранено успешно',
+                //         showConfirmButton: false,
+                //         timer: 1500
+                //     })
+                // } else {
+                //     swal.fire('Error (Code: ' + data.error + ')');
+                // }
+            }
+        });
+    }
+
+    function manualUpload (form) {
+        event.preventDefault();
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin/manual_upload_bank_operation") ?>',
+            type: 'POST',
+            data: $(form).serialize(),
+            beforeSend: function() {
+                preloader.on();
+            },
+            success: function(data){
+                if(data.success){
+                    location.reload();
+                } else {
+                    preloader.off();
+                    swal.fire('Error (Code: ' + data.error + ')');
+                }
+            }
+        });
+    }
+
+    function loadOperations () {
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin/load_operations") ?>',
+            type: 'POST',
+            data: {showAllOperations: $.cookie('showAllOperations')},
+            beforeSend: function() {
+                preloader.on();
+            },
+            success: function(data){
+                preloader.off();
+                if(data.success){
+                    $('#operations').html(data.html);
+                } else {
+                    swal.fire('Error (Code: ' + data.error + ')');
+                }
+            }
+        });
+    }
+
+    function searchBill (form, parsePlace) {
+        event.preventDefault();
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin/search_bill") ?>',
+            type: 'POST',
+            data: $(form).serialize(),
+            beforeSend: function() {
+                preloader.on();
+            },
+            success: function(data){
+                preloader.off();
+                if(data.success){
+                    $(parsePlace).html(data.html);
+                } else {
+                    swal.fire('Error (Code: ' + data.error + ')');
+                }
+            }
+        });
+    }
+
+    function show(data){
+        let str = `<div style="text-align: left">`;
+        $.each(data, function(key, value){
+            if(value){
+                str += `<b>${capitalize(key)}:</b>${value}<br>`;
+            }
+        });
+        str += `</div>`;
+        Swal.fire({html: str, width: 700});
+    }
+
+    function showProducts(data){
+        let header = ``;
+        $.each(data, function(key, value){
+            header += `<tr>`;
+            $.each(value, function(key2, value2){
+                header += `<td><b>${capitalize(key2)}</b></td>`;
+            });
+            header += `</tr>`;
+            return false;
+        });
+
+        let str = `<table class="table table-sm table-bordered"><tbody>${header}`;
+        $.each(data, function(key, value){
+            str += `<tr>`;
+            $.each(value, function(key2, value2){
+                str += `<td>${value2}</td>`;
+            });
+            str += `</tr>`;
+        });
+        str += `</tbody></table>`;
+        Swal.fire({html: str, width: 700});
+    }
+
+    function capitalize(str)
+    {
+        return str[0].toUpperCase() + str.slice(1);
+    }
+
+    function payBill(billId, id, correctAmount) {
+
+        Swal.fire({
+            title: 'Подтвердить?',
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: 'Да',
+            denyButtonText: `Нет`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '<?php echo $this->urlFor("ajax/admin/process_bank_operation") ?>',
+                    type: 'POST',
+                    data: {billId, id, correctAmount},
+                    beforeSend: function() {
+                        preloader.on();
+                    },
+                    success: function(data){
+                        preloader.off();
+                        if(data.success){
+                            location.href = data.url;
+                            // Swal.fire({
+                            //     icon: 'success',
+                            //     title: 'Сохранено успешно',
+                            //     showConfirmButton: false,
+                            //     timer: 1500
+                            // })
+                            // loadOperations();
+                        } else {
+                            swal.fire('Error (Code: ' + data.error + ')');
+                        }
+                    }
+                });
+            } else if (result.isDenied) {
+                swal.close();
+            }
+        })
+
+        
+    }
+
+</script>
+
+<!-- [operation_row] -->
+<div class="operation" style="background-color: {COLOR}; padding: 10px">
+    <table class="table table-bordered table-sm">
+        <tbody>
+            <tr style="font-weight: bold">
+                <td>ID</td>
+                <td>Сумма</td>
+                <td>Дата</td>
+            </tr>
+            <tr>
+                <td>{ID}</td>
+                <td>
+                    {AMOUNT}{CRCH}
+                </td>
+                <td>{DATE}</td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold">Детали</td>
+                <td colspan="2">{DETAIL}</td>
+            </tr>
+            <tr>
+                <td style="font-weight: bold">Комментарий</td>
+                <td colspan="2">{COMMENT}</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <form class="form-inline" onsubmit="searchBill(this, $(this).closest('.operation').find('.billInfo'))">
+                        <input type="text" class="form-control mr-2" name="billId" placeholder="Номер счета" value="<?php echo $BILL_ID ?: ''?>" <?php echo $BILL_ID ? 'readonly' : '' ?>>
+                        <input type="hidden" class="form-control mr-2" name="id" value="{ID}">
+                        <button type="submit" class="btn btn-success">Найти счет</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="billInfo"></div>
+</div>
+<br>
+<!-- [bill_info] -->
+<table class="table table-bordered table-sm">
+    <tbody>
+        <tr style="font-weight: bold">
+            <td>ID</td>
+            <td>Дата создания</td>
+            <td>Оплатить до</td>
+            <td>Сумма</td>
+        </tr>
+        <tr>
+            <td>{BILL_ID}</td>
+            <td>{CREATE_DATE}</td>
+            <td>{EXPIRE_DATE}</td>
+            <td style="font-weight: bold; <?php echo $VALID_AMOUNT ? 'color: green' : 'color: red' ?>">{AMOUNT}{CRCH}</td>
+        </tr>
+        <tr>
+            <td colspan="3">Продукты</td>
+            <td><b>{PRODUCTS_PRICE}</b></td>
+        </tr>
+        <tr>
+            <td colspan="3">Доставка</td>
+            <td><b>{DELIVERY_PRICE}</b></td>
+        </tr>
+        <tr>
+            <td colspan="3">Налог</td>
+            <td><b>{TAX_AMOUNT}</b></td>
+        </tr>
+        <tr>
+            <td><b>UID:</b> {BILL_UID}</td>
+            <td colspan="3">
+                {FNAME} {LNAME}
+                <?php if($IS_COMPANY): ?>
+                    <span class="badge badge-danger">Юр. Лицо</span>
+                <?php endif; ?>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <button type="button" onclick='show({ORDER_JSON})' class="btn btn-primary btn-sm">Данные о заказе</button>
+                <button type="button" onclick='show({DELIVERY_JSON})' class="btn btn-primary btn-sm">Данные о доставке</button>
+                <button type="button" onclick='showProducts({PRODUCT_JSON})' class="btn btn-primary btn-sm">Данные о товарах</button>
+            </td>
+        </tr>
+        <?php if($BILL_STATUS == 0 && $OPERATION_STATUS == 0): ?>
+            <?php if($AMOUNT == $OPERATION_AMOUNT): ?>
+                <tr>
+                    <td colspan="4">
+                        <button type="button" onclick="payBill('{BILL_ID}', '{ID}', 1)" class="btn btn-success btn-sm">Оплатить</button>
+                    </td>
+                </tr>
+            <?php else: ?>
+                <tr>
+                    <td colspan="4">
+                        <button type="button" onclick="payBill('{BILL_ID}', '{ID}', 0)" class="btn btn-danger btn-sm">Оплатить с не правильной суммой</button>
+                    </td>
+                </tr>
+            <?php endif; ?>
+        <?php endif; ?>
+    </tbody>
+</table>
+
+<!-- [not_found] -->
+<div>Not found</div>
+
+<!-- [-] -->

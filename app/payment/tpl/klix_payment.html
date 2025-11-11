@@ -1,0 +1,29 @@
+<div class="card" style="padding: 20px">
+    <button type="button" onclick="makePayment('{BILL_ID}')" class="btn btn-primary btn-xl btn-block"><lang id="PAYMENT_MAKE_PAYMENT">Make payment</lang></button>
+    <br>
+    <a href="javascript:;" onclick="changePaymentMethod('{BILL_ID}', 'bank_transfer')"><lang id='PRODUCTS_CHECKOUT_L33'>Direct bank transfer</lang></a>
+</div>
+
+<script>
+    function makePayment(billId) {
+        preloader.on();
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/payment/klix_make_payment") ?>',
+            data: {billId},
+            type: 'POST',
+            success: function(data){
+                if(data.success){
+                    window.location.href = data.url;
+                } else {
+                    preloader.off();
+                    Swal.fire(
+                        'Error',
+                        'System error (Code: ' + data.error + ')',
+                        'error'
+                    )
+                }
+                console.log(data);
+            }
+        });
+    }
+</script>

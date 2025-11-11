@@ -1,0 +1,266 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Работа с заказами <button type="button" onclick="$('.hiddenRow').toggleClass('hidden')" class="btn btn-sm btn-danger ml-2">Показать скрытые</button></h5>                
+                <table class="table table-sm table-bordered">
+                    <tbody id="result_rows"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .pointer{
+        cursor: pointer;
+    }
+
+    .hiddenRow.hidden{
+        display: none;
+    }
+</style>
+
+<script>
+
+    function getData() {
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin/get_orders") ?>',
+            type: 'POST',
+            data: {},
+            beforeSend: function() {
+                preloader.on();
+            },
+            success: function(data){
+                if(data.success){
+                    preloader.off();
+                    $('#result_rows').html(data.html);
+                } else {
+                    preloader.off();
+                    swal.fire('Error (Code: ' + data.error + ')');
+                }
+            }
+        });
+    }
+
+    $(function() {
+        getData();
+    })
+
+    function show(data){
+        let str = `<div style="text-align: left">`;
+        $.each(data, function(key, value){
+            if(value){
+                str += `<b>${capitalize(key)}:</b>${value}<br>`;
+            }
+        });
+        str += `</div>`;
+        Swal.fire({html: str, width: 700});
+    }
+
+    function showProducts(data){
+        let header = ``;
+        $.each(data, function(key, value){
+            header += `<tr>`;
+            $.each(value, function(key2, value2){
+                header += `<td><b>${capitalize(key2)}</b></td>`;
+            });
+            header += `</tr>`;
+            return false;
+        });
+
+        let str = `<table class="table table-sm table-bordered"><tbody>${header}`;
+        $.each(data, function(key, value){
+            str += `<tr>`;
+            $.each(value, function(key2, value2){
+                str += `<td>${value2}</td>`;
+            });
+            str += `</tr>`;
+        });
+        str += `</tbody></table>`;
+        Swal.fire({html: str, width: 700});
+    }
+
+    function capitalize(str)
+    {
+        return str[0].toUpperCase() + str.slice(1);
+    }
+
+    function adminStatus (orderId, status) {
+
+        let message = '';
+        switch(status){
+            case 1:
+                message = "Спрятать инвойс из списка и из выписки?";
+                break;
+            case 2:
+                message = "Пометить, как требующий внимания заказ?";
+                break;
+            case 3:
+                message = "Заказ готов к доставке? Если продолжить, то пользователю будет отправленно письмо на почту";
+                break;
+        }
+
+        Swal.fire({
+            title: 'Продолжить?',
+            text: message,
+            icon: 'warning',
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: 'Да',
+            denyButtonText: 'Нет',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '<?php echo $this->urlFor("ajax/admin/add_admin_order_status") ?>',
+                    type: 'POST',
+                    data: {orderId, status},
+                    beforeSend: function() {
+                        preloader.on();
+                    },
+                    success: function(data){
+                        if(data.success){
+                            location.reload();
+                        } else {
+                            preloader.off();
+                            swal.fire('Error (Code: ' + data.error + ')');
+                        }
+                    }
+                });
+            }
+        })
+    }
+    
+    function addOmnivaAddress (orderId) {
+        Swal.fire({
+            title: 'Добавить немер отслеживания omniva',
+            input: 'text',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: 'Добавить',
+            denyButtonText: 'Отменить',
+            showLoaderOnConfirm: true,
+            preConfirm: (code) => {
+
+                $.ajax({
+                    url: '<?php echo $this->urlFor("ajax/admin/add_omniva_track_number") ?>',
+                    type: 'POST',
+                    data: {orderId, code},
+                    beforeSend: function() {
+                        preloader.on();
+                    },
+                    success: function(data){
+                        if (!data.success) {
+                            Swal.showValidationMessage(`Request failed: ${data.error}`)
+                        }
+                        return true;
+                    }
+                });
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+            if (result.isConfirmed) {
+                location.reload();
+            }
+        })
+    }
+
+    function lvpCreate(orderId) {
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin/lvp_create") ?>',
+            type: 'POST',
+            data: { orderId },
+            beforeSend: function() {
+                preloader.on();
+            },
+            success: function(data){
+                if(data.success){
+                    location.reload();
+                } else {
+                    preloader.off();
+                    swal.fire('Error (Code: ' + data.error + ')');
+                }
+            }
+        });
+    }
+    
+    // function lvpLabel(parcel) {
+    //     $.ajax({
+    //         url: '<?php echo $this->urlFor("ajax/admin/lvp_label") ?>',
+    //         type: 'POST',
+    //         data: { parcel },
+    //         beforeSend: function() {
+    //             preloader.on();
+    //         },
+    //         success: function(data){
+    //             if(data.success){
+    //                 location.reload();
+    //             } else {
+    //                 preloader.off();
+    //                 swal.fire('Error (Code: ' + data.error + ')');
+    //             }
+    //         }
+    //     });
+    // }
+
+</script>
+
+<!-- [order_row] -->
+<tr class="pointer <?php echo $ADMIN_STATUS == 1 ? 'hiddenRow hidden' : '' ?>" style="background: {COLOR};">
+    <td>No. {BILL_ID}</td>
+    <td onclick='show({NAME_JSON})'>
+        <span class="text-muted" style="font-size: 14px;">{ORDER_CREATE_DATE}</span><br>
+        <span class="text-muted" style="font-size: 12px;">{UID}</span> 
+        <span>{FNAME} {LNAME}</span>
+        <?php if($IS_COMPANY): ?>
+            <span class="badge badge-danger">Юр. Лицо</span>
+        <?php endif; ?>
+        
+    </td>
+    <td style="cursor: text;">
+        <span class="text-muted" style="font-size: 12px;">{ORDER_EMAIL}</span><br>
+        <span class="text-muted" style="font-size: 12px;">{ORDER_PHONE}</span>
+    </td>
+    <td onclick='showProducts({PRODUCT_JSON})'>
+        {AMOUNT}{CRCH} <span class="text-muted">за {ITEM_COUNT} товаров</span>
+    </td>
+    <td onclick='show({DELIVERY_JSON})'>
+        {DELIVERY_TYPE}
+    </td>
+    <td>
+        <?php if($HAS_INVOICE): ?>
+            <a href="<?php echo $this->urlFor('payment/get_invoice_pdf', ['billId' => $BILL_ID]) ?>" target="_blank" class="btn btn-success btn-sm">Скачать инвойс</a>
+        <?php else: ?>
+            <a href="<?php echo $this->urlFor('payment/get_invoice_pdf', ['billId' => $BILL_ID]) ?>" target="_blank" class="btn btn-danger btn-sm">Создать инвойс</a>
+        <?php endif; ?>
+    </td>
+</tr>
+<tr class="<?php echo $ADMIN_STATUS == 1 ? 'hiddenRow hidden' : '' ?>" style="background: {COLOR};">
+    <td colspan="6">
+        <button type="button" onclick="adminStatus('{ORDER_ID}', 1)" class="btn btn-sm btn-danger">Спрятать</button>
+        <?php if($ADMIN_STATUS != 3): ?>
+            <button type="button" onclick="adminStatus('{ORDER_ID}', 2)" class="btn btn-sm btn-warning">Требует внимания</button>
+            <button type="button" onclick="adminStatus('{ORDER_ID}', 3)" class="btn btn-sm btn-success">Готов к доставке</button>
+        <?php endif; ?>
+
+        <?php if($DELIVERY_TYPE_ORIGINAL == "omniva"): ?>
+            <?php if(!$TRACK_CODE): ?>
+                <button type="button" onclick="addOmnivaAddress('{ORDER_ID}')" class="btn btn-sm btn-warning">Добавить omniva номер</button>
+            <?php else: ?>
+                <span style="margin: 0 6px; font-size: 13px;">Omniva: {TRACK_CODE}</span>
+            <?php endif; ?>
+        <?php endif; ?>
+
+
+        <?php if($DELIVERY_TYPE_ORIGINAL == "lvpasts"): ?>
+            <button type="button" onclick="lvpCreate('{ORDER_ID}')" class="btn btn-sm btn-warning">Создать заказ на доставку</button>
+            <?php if($LVP_PARCEL): ?>
+                <a target="_blank" href="<?php echo $this->urlFor('admin/lvp_label', ['parcel' => $LVP_PARCEL]); ?>" class="btn btn-sm btn-warning">Распечатать A4 ({LVP_PARCEL})</a>
+            <?php endif; ?>
+        <?php endif; ?>
+    </td>
+</tr>
+<!-- [-] --> 

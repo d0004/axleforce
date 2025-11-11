@@ -1,0 +1,11 @@
+RewriteEngine on
+
+RewriteCond %{REQUEST_METHOD} !=POST
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !/(lv|ru|en)
+RewriteRule ^(.*) https://axleforce.lv/lv%{REQUEST_URI} [L,R=301]
+
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-l
+RewriteRule ^(.*)$ index.php/$1

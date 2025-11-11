@@ -1,0 +1,299 @@
+<div class="card">
+    <div class="card-body">
+        <b>Список категорий</b>
+        <br><br>
+        
+        <div class="row">
+            <div class="col-sm-4 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        Добавить подкатегорию
+                    </div>
+                    <div class="card-body">
+                        <form class="form" id="addCategory">
+                            <div class="form-group mx-sm-3">
+                                <input type="text" class="form-control mb-2" readonly name="parentId" id="addCategoryParentId" value="0">
+                            </div>
+                            <div class="form-group mx-sm-3">
+                                <input type="text" class="form-control mb-2" disabled name="parentTitle" id="addCategoryParentTitle" value="">
+                            </div>
+                            <div class="form-group mx-sm-3">
+                                <button type="button" class="btn btn-primary form-control" onclick="addSubcategory()">Добавить подкатегорию</button>
+                            </div>
+                        </form> 
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        Краткая информация о категории
+                    </div>
+                    <div class="card-body">
+                        <div id="shortInfo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        Действия с категорией
+                    </div>
+                    <div class="card-body">
+                        <div id="categoryActions"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <br><br>
+        
+    </div>
+</div>
+<br>
+<div class="card">
+    <div class="card-body">
+        <div id="data" class="demo"></div>
+    </div>
+</div>
+
+<br>
+<div class="card">
+    <div class="card-header">Загрузка Excel с продуктами</div>
+    <div class="card-body">
+        <form action="<?php echo $this->urlFor('admin_products/excel_product_upload'); ?>" method="POST" enctype="multipart/form-data">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="file" name="file">
+                <label class="custom-file-label" for="customFile">.xlsx файл с прордуктами</label>
+            </div>
+            <br><br>
+
+            <table class="table table-sm table-bordered">
+                <tbody style="font-size: 10px">
+                    <tr style="background: #ff000030;"><td>1. SKU NEW <span class="badge badge-pill badge-danger">Required</span> - Артикуль новый</td></tr>
+                    <tr style="background: #ff000030;"><td>2. SKU ORIGINAL <span class="badge badge-pill badge-danger">Required</span> - Артикуль оригинальный</td></tr>
+                    <tr><td>3. SKU ADDITIONAL (;) - Дополнительные артикули, разделяются через ;</td></tr>
+                    <tr style="background: #ff000030;"><td>4. PRICE WITHOUT VAT <span class="badge badge-pill badge-danger">Required</span> - Цена без PVN, PVN 21% будет добавлен автоматически</td></tr>
+                    <tr><td>5. DISCOUNT DRICE WITHOUT VAT - Скидочная цена без PVN</td></tr>
+                    <tr style="background: #ff000030;"><td>6. CATEGORIES (;) <span class="badge badge-pill badge-danger">Required</span> - Категории в которые добавить этот продукт, разделяем категории через ;</td></tr>
+                    <tr><td>7. SHORT DESCR (LV) - Короткое описание</td></tr>
+                    <tr><td>8. FULL DESCR (LV) - Полное описание</td></tr>
+                    <tr><td>9. SHORT DESCR (RU) - Короткое описание</td></tr>
+                    <tr><td>10. FULL DESCR (RU) - Полное описание</td></tr>
+                    <tr><td>11. SHORT DESCR (EN) - Короткое описание</td></tr>
+                    <tr><td>12. FULL DESCR (EN) - Полное описание</td></tr>
+                    <tr><td>13. IMAGE LINKS (;) - Ссылки на каринки, разделяем ссылки через ;</td></tr>
+                    <tr><td>14. STOCK - Остаток на складе</td></tr>
+                    <tr><td>15. WEIGHT - Вес одной единицы товара</td></tr>
+                </tbody>
+            </table>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="action" id="action1" value="1" checked>
+                <label class="form-check-label" for="action1">Загрузить только новые товары. Пропустить загрузку картинок.</label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="action" id="action2" value="2">
+                <label class="form-check-label" for="action2">Перезаписать товары если SKU или NEW SKU дублируются. Пропустить загрузку картинок.</label>
+            </div>
+            
+            <br>
+            <div>
+                <button type="submit" class="btn btn-sm btn-success">Загрузить</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<br><br>
+
+<script>
+
+    $('#data').on("select_node.jstree", function (e, data) {
+        $('#addCategoryParentId').val(data.node.id);
+        $('#addCategoryParentTitle').val(data.node.original.textPlain);
+
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin_products/get_category_short_info") ?>',
+            data: {id: data.node.id},
+            type: 'POST',
+            dataTypa: 'JSON',
+            success: function(data){
+                if(data.success){
+                    $('#shortInfo').html(data.html);
+                }
+            }
+        })
+        
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin_products/get_category_actions") ?>',
+            data: {id: data.node.id},
+            type: 'POST',
+            dataTypa: 'JSON',
+            success: function(data){
+                if(data.success){
+                    $('#categoryActions').html(data.html);
+                }
+            }
+        })
+    });
+
+    $('#data').jstree({
+        'core': {
+            'data': {
+                "url": "<?php echo $this->urlFor('ajax/admin_products/get_category_list'); ?>",
+                "type": "POST",
+                'data': function (node) {
+                    return { 'id': node.id };
+                },
+                "success": function (new_data) {
+                    return new_data;
+                }
+            },
+            "check_callback": true,
+        }
+    });
+
+    function addSubcategory()
+    {
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin_products/create_subcategory") ?>',
+            data: $('#addCategory').serialize(),
+            type: 'POST',
+            dataTypa: 'JSON',
+            success: function(data){
+                if(data.success){
+                    location.reload();
+                }
+            }
+        })
+    }
+
+    function deleteCategory(categoryId) {
+        if(!confirm("Вы точно желаете удалить данную категорию?")){
+            return false;
+        }
+
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin_products/delete_category") ?>',
+            data: {categoryId},
+            type: 'POST',
+            success: function(data){
+                if(data.success){
+                    location.reload();
+                } else {
+                    Swal.fire(
+                        'Ошибка',
+                        'Что-то пошло не так! (Код ошибки: ' + data.error + ')',
+                        'error'
+                    )
+                }
+            }
+        });
+    }
+    
+    function changeStatus(categoryId, status) {
+        if(!confirm("Вы точно желаете сменить статус категории?")){
+            return false;
+        }
+
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin_products/change_category_status") ?>',
+            data: {categoryId, status},
+            type: 'POST',
+            success: function(data){
+                if(data.success){
+                    location.reload();
+                } else {
+                    Swal.fire(
+                        'Ошибка',
+                        'Что-то пошло не так! (Код ошибки: ' + data.error + ')',
+                        'error'
+                    )
+                }
+            }
+        });
+    }
+    
+    function toggleShippable(categoryId) {
+        $.ajax({
+            url: '<?php echo $this->urlFor("ajax/admin_products/toggle_shippable") ?>',
+            data: {
+                categoryId
+            },
+            type: 'POST',
+            success: function(data){
+                if(data.success){
+                    location.reload();
+                } else {
+                    Swal.fire(
+                        'Ошибка',
+                        'Что-то пошло не так! (Код ошибки: ' + data.error + ')',
+                        'error'
+                    )
+                }
+            }
+        });
+    }
+
+</script>
+
+<!-- [short_info] -->
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+            <td>ID</td>
+            <td>{CATEGORY_ID}</td>
+        </tr>
+        <tr>
+            <td>ID родителя</td>
+            <td>{PARENT_ID}</td>
+        </tr>
+        <tr>
+            <td>Название</td>
+            <td>{TITLE}</td>
+        </tr>
+        <tr>
+            <td>Статус</td>
+            <td>
+                <?php if($STATUS == '2'): ?>
+                    <button onclick="changeStatus('{CATEGORY_ID}', 0)" type="button" class="btn btn-primary btn-sm">Отключить</button>
+                <?php endif; ?>
+                <?php if($STATUS == '0'): ?>
+                    <button onclick="changeStatus('{CATEGORY_ID}', 2)" type="button" class="btn btn-primary btn-sm">Включить</button>
+                <?php endif; ?>
+            </td>
+        </tr>
+        <tr>
+            <td>Доставка товаров</td>
+            <td>
+                <?php if($SHIPPABLE == '1'): ?>
+                    <button onclick="toggleShippable('{CATEGORY_ID}')" type="button" class="btn btn-danger btn-sm">Отключить</button>
+                    <br>
+                    <br>
+                    <span>Сейчас доставка работает</span>
+                <?php else: ?>
+                    <button onclick="toggleShippable('{CATEGORY_ID}')" type="button" class="btn btn-primary btn-sm">Включить</button>
+                    <br>
+                    <br>
+                    <span>Сейчас только самовывоз</span>
+                <?php endif; ?>
+            </td>
+        </tr>
+        <tr>
+            <td>Товары</td>
+            <td>
+                <a href="<?php echo $this->urlFor('admin_products/category_products', ['categoryId' => $CATEGORY_ID]) ?>" class="btn btn-primary btn-sm">Посмотреть</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- [category_actions] -->
+<div>
+    <a href="<?php echo $this->urlFor('admin_products/edit_category', ['categoryId' => $CATEGORY_ID]); ?>" target="_blank" class="btn btn-primary btn-sm">Редактировать</a>
+    <button onclick="deleteCategory('{CATEGORY_ID}')" type="button" class="btn btn-danger btn-sm">Удалить</button>
+</div>
+<!-- [-] -->

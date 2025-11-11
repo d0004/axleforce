@@ -1,0 +1,27 @@
+<div class="account-nav flex-grow-1">
+    <h4 class="account-nav__title"><lang id='PROFILE_MENU_L1'>Navigation</lang></h4>
+    <ul class="account-nav__list">
+        
+        <li class="account-nav__item ">
+            <a href="<?php echo $this->urlFor('profile/index'); ?>"><lang id='PROFILE_MENU_L2'>Profile</lang></a>
+        </li>
+        <li class="account-nav__item ">
+            <a href="<?php echo $this->urlFor('profile/edit_profile'); ?>"><lang id='PROFILE_MENU_L3'>Edit profile</lang></a>
+        </li>
+
+        <li class="account-nav__item ">
+            <a href="<?php echo $this->urlFor('profile/address'); ?>"><lang id='PROFILE_MENU_L4'>Addresses</lang></a>
+        </li>
+        
+        <li class="account-nav__item ">
+            <a href="<?php echo $this->urlFor('profile/order_history_all'); ?>"><lang id='PROFILE_MENU_L5'>Order History</lang></a>
+        </li>
+        
+        <li class="account-nav__divider" role="presentation"></li>
+        <li class="account-nav__item ">
+            <a href="<?php echo $this->urlFor('profile/logout'); ?>"><lang id='PROFILE_MENU_L6'>Logout</lang></a>
+        </li>
+    </ul>
+</div>
+
+<!-- [-] -->

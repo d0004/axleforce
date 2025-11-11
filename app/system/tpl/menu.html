@@ -1,0 +1,523 @@
+<header class="site__mobile-header">
+    <div class="mobile-header">
+        <div class="container">
+            <div class="mobile-header__body">
+                <button class="mobile-header__menu-button" type="button">
+                    <svg width="18px" height="14px">
+                        <path d="M-0,8L-0,6L18,6L18,8L-0,8ZM-0,-0L18,-0L18,2L-0,2L-0,-0ZM14,14L-0,14L-0,12L14,12L14,14Z" />
+                    </svg>
+                </button>
+                <a class="mobile-header__logo" href="<?php echo $this->urlFor('index') ?>">
+                    <!-- mobile-logo -->
+                    <img src="/assets/img/logo.svg" />
+                    <!-- mobile-logo / end -->
+                </a>
+                <div class="mobile-header__search mobile-search">
+                    <form class="mobile-search__body" onsubmit="searchMobile()">
+                        <input type="text" class="mobile-search__input" id="mobileSearchInput" placeholder="<lang id='SYSTEM_MENU_L5'>Enter Keyword or Part Number</lang>">
+                        
+                        <button type="submit" class="mobile-search__button mobile-search__button--search">
+                            <svg width="20" height="20">
+                                <path d="M19.2,17.8c0,0-0.2,0.5-0.5,0.8c-0.4,0.4-0.9,0.6-0.9,0.6s-0.9,0.7-2.8-1.6c-1.1-1.4-2.2-2.8-3.1-3.9C10.9,14.5,9.5,15,8,15
+c-3.9,0-7-3.1-7-7s3.1-7,7-7s7,3.1,7,7c0,1.5-0.5,2.9-1.3,4c1.1,0.8,2.5,2,4,3.1C20,16.8,19.2,17.8,19.2,17.8z M8,3C5.2,3,3,5.2,3,8
+c0,2.8,2.2,5,5,5c2.8,0,5-2.2,5-5C13,5.2,10.8,3,8,3z" />
+                            </svg>
+                        </button>
+                        <button type="button" class="mobile-search__button mobile-search__button--close">
+                            <svg width="20" height="20">
+                                <path d="M16.7,16.7L16.7,16.7c-0.4,0.4-1,0.4-1.4,0L10,11.4l-5.3,5.3c-0.4,0.4-1,0.4-1.4,0l0,0c-0.4-0.4-0.4-1,0-1.4L8.6,10L3.3,4.7
+c-0.4-0.4-0.4-1,0-1.4l0,0c0.4-0.4,1-0.4,1.4,0L10,8.6l5.3-5.3c0.4-0.4,1-0.4,1.4,0l0,0c0.4,0.4,0.4,1,0,1.4L11.4,10l5.3,5.3
+C17.1,15.7,17.1,16.3,16.7,16.7z" />
+                            </svg>
+                        </button>
+                        <div class="mobile-search__field"></div>
+                    </form>
+                </div>
+                <div class="mobile-header__indicators">
+                    <div class="mobile-indicator mobile-indicator--search d-md-none">
+                        <button type="button" class="mobile-indicator__button">
+                            <span class="mobile-indicator__icon">
+                                <svg width="20" height="20">
+                                    <path d="M19.2,17.8c0,0-0.2,0.5-0.5,0.8c-0.4,0.4-0.9,0.6-0.9,0.6s-0.9,0.7-2.8-1.6c-1.1-1.4-2.2-2.8-3.1-3.9C10.9,14.5,9.5,15,8,15
+c-3.9,0-7-3.1-7-7s3.1-7,7-7s7,3.1,7,7c0,1.5-0.5,2.9-1.3,4c1.1,0.8,2.5,2,4,3.1C20,16.8,19.2,17.8,19.2,17.8z M8,3C5.2,3,3,5.2,3,8
+c0,2.8,2.2,5,5,5c2.8,0,5-2.2,5-5C13,5.2,10.8,3,8,3z" />
+                                </svg>
+                            </span>
+                        </button>
+                    </div>
+                    <?php if($IS_ONLINE): ?>
+                        <div class="mobile-indicator d-none d-md-block">
+                            <a href="<?php echo $this->urlFor('profile/index'); ?>" class="mobile-indicator__button">
+                                <span class="mobile-indicator__icon">
+                                    <svg width="20" height="20">
+                                        <path d="M20,20h-2c0-4.4-3.6-8-8-8s-8,3.6-8,8H0c0-4.2,2.6-7.8,6.3-9.3C4.9,9.6,4,7.9,4,6c0-3.3,2.7-6,6-6s6,2.7,6,6
+    c0,1.9-0.9,3.6-2.3,4.7C17.4,12.2,20,15.8,20,20z M14,6c0-2.2-1.8-4-4-4S6,3.8,6,6s1.8,4,4,4S14,8.2,14,6z" />
+                                    </svg>
+                                </span>
+                            </a>
+                        </div>
+                    <?php else: ?>
+                        <div class="mobile-indicator d-none d-md-block">
+                            <a href="<?php echo $this->urlFor('home/login_page'); ?>" class="mobile-indicator__button">
+                                <span class="mobile-indicator__icon">
+                                    <svg width="20" height="20">
+                                        <path d="M20,20h-2c0-4.4-3.6-8-8-8s-8,3.6-8,8H0c0-4.2,2.6-7.8,6.3-9.3C4.9,9.6,4,7.9,4,6c0-3.3,2.7-6,6-6s6,2.7,6,6
+    c0,1.9-0.9,3.6-2.3,4.7C17.4,12.2,20,15.8,20,20z M14,6c0-2.2-1.8-4-4-4S6,3.8,6,6s1.8,4,4,4S14,8.2,14,6z" />
+                                    </svg>
+                                </span>
+                            </a>
+                        </div>
+                    <?php endif; ?>
+                    
+                    <div class="mobile-indicator">
+                        <a href="<?php echo $this->urlFor('products/cart'); ?>" class="mobile-indicator__button">
+                            <span class="mobile-indicator__icon">
+                                <svg width="20" height="20">
+                                    <circle cx="7" cy="17" r="2" />
+                                    <circle cx="15" cy="17" r="2" />
+                                    <path d="M20,4.4V5l-1.8,6.3c-0.1,0.4-0.5,0.7-1,0.7H6.7c-0.4,0-0.8-0.3-1-0.7L3.3,3.9C3.1,3.3,2.6,3,2.1,3H0.4C0.2,3,0,2.8,0,2.6
+V1.4C0,1.2,0.2,1,0.4,1h2.5c1,0,1.8,0.6,2.1,1.6L5.1,3l2.3,6.8c0,0.1,0.2,0.2,0.3,0.2h8.6c0.1,0,0.3-0.1,0.3-0.2l1.3-4.4
+C17.9,5.2,17.7,5,17.5,5H9.4C9.2,5,9,4.8,9,4.6V3.4C9,3.2,9.2,3,9.4,3h9.2C19.4,3,20,3.6,20,4.4z" />
+                                </svg>
+                                <span class="mobile-indicator__counter mobileCartCount">{CART_ITEM_COUNT}</span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<header class="site__header">
+    <div class="header">
+        <div class="header__megamenu-area megamenu-area"></div>
+        <div class="header__topbar-start-bg"></div>
+        <div class="header__topbar-start">
+            <div class="topbar topbar--spaceship-start">
+                <div class="topbar__item-text headerPhone d-none d-xxl-flex"><lang id='SYSTEM_MENU_L1'>Call Us: +371 25685778</lang></div>
+            </div>
+        </div>
+        <div class="header__topbar-end-bg"></div>
+        <div class="header__topbar-end">
+            <div class="topbar topbar--spaceship-end">
+               
+                <div class="topbar__menu">
+                    <button class="topbar__button topbar__button--has-arrow topbar__menu-button" type="button">
+                        <span class="topbar__button-label"><lang id='SYSTEM_MENU_L2'>Language:</lang></span>
+                        <span class="topbar__button-title uppercase">{CURRENT_LANGUAGE}</span>
+                        <span class="topbar__button-arrow">
+                            <svg width="7px" height="5px">
+                                <path d="M0.280,0.282 C0.645,-0.084 1.238,-0.077 1.596,0.297 L3.504,2.310 L5.413,0.297 C5.770,-0.077 6.363,-0.084 6.728,0.282 C7.080,0.634 7.088,1.203 6.746,1.565 L3.504,5.007 L0.262,1.565 C-0.080,1.203 -0.072,0.634 0.280,0.282 Z" />
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="topbar__menu-body">
+                       {DESKTOP_LANGUAGE_ITEMS}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header__navbar">
+            <div class="header__navbar-departments">
+                <div class="departments">
+                    <button class="departments__button" type="button">
+                        <span class="departments__button-icon"><svg width="16px" height="12px">
+                                <path d="M0,7L0,5L16,5L16,7L0,7ZM0,0L16,0L16,2L0,2L0,0ZM12,12L0,12L0,10L12,10L12,12Z" />
+                            </svg>
+                        </span>
+                        <span class="departments__button-title"><lang id='SYSTEM_MENU_L3'>Category list</lang></span>
+                        <span class="departments__button-arrow"><svg width="9px" height="6px">
+                                <path d="M0.2,0.4c0.4-0.4,1-0.5,1.4-0.1l2.9,3l2.9-3c0.4-0.4,1.1-0.4,1.4,0.1c0.3,0.4,0.3,0.9-0.1,1.3L4.5,6L0.3,1.6C-0.1,1.3-0.1,0.7,0.2,0.4z" />
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="departments__menu">
+                        <div class="departments__arrow"></div>
+                        <div class="departments__body">
+                            <ul class="departments__list">
+                                <li class="departments__list-padding" role="presentation"></li>
+                                {DESKTOP_CATEGORY_MENU_ITEMS}
+                                <li class="departments__list-padding" role="presentation"></li>
+                            </ul>
+                            <div class="departments__menu-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header__navbar-menu">
+                <div class="main-menu">
+                    <ul class="main-menu__list">
+                        {NAVBAR_PAGES}                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="header__logo">
+            <a href="<?php echo $this->urlFor('index'); ?>" class="logo">
+                <div class="logo__slogan">
+                    <lang id='SYSTEM_MENU_L4'>Auto parts for Cars, trucks and motorcycles</lang>
+                </div>
+                <div class="logo__image">
+                    <!-- logo -->
+                    <img src="/assets/img/logo.svg" />
+                    
+                    <!-- logo / end -->
+                </div>
+            </a>
+        </div>
+        <div class="header__search">
+            <div class="search">
+                <form class="search__body" onsubmit="searchDesktop()">
+                    <div class="search__shadow"></div>
+                    <input class="search__input" id="searchInput" type="text" placeholder="<lang id='SYSTEM_MENU_L5'>Enter Keyword or Part Number</lang>">
+                    <button class="search__button search__button--start" disabled type="button">
+                        <span class="search__button-icon"><svg width="20" height="20">
+                                <path d="M6.6,2c2,0,4.8,0,6.8,0c1,0,2.9,0.8,3.6,2.2C17.7,5.7,17.9,7,18.4,7C20,7,20,8,20,8v1h-1v7.5c0,0.8-0.7,1.5-1.5,1.5h-1
+c-0.8,0-1.5-0.7-1.5-1.5V16H5v0.5C5,17.3,4.3,18,3.5,18h-1C1.7,18,1,17.3,1,16.5V16V9H0V8c0,0,0.1-1,1.6-1C2.1,7,2.3,5.7,3,4.2
+C3.7,2.8,5.6,2,6.6,2z M13.3,4H6.7c-0.8,0-1.4,0-2,0.7c-0.5,0.6-0.8,1.5-1,2C3.6,7.1,3.5,7.9,3.7,8C4.5,8.4,6.1,9,10,9
+c4,0,5.4-0.6,6.3-1c0.2-0.1,0.2-0.8,0-1.2c-0.2-0.4-0.5-1.5-1-2C14.7,4,14.1,4,13.3,4z M4,10c-0.4-0.3-1.5-0.5-2,0
+c-0.4,0.4-0.4,1.6,0,2c0.5,0.5,4,0.4,4,0C6,11.2,4.5,10.3,4,10z M14,12c0,0.4,3.5,0.5,4,0c0.4-0.4,0.4-1.6,0-2c-0.5-0.5-1.3-0.3-2,0
+C15.5,10.2,14,11.3,14,12z" />
+                            </svg>
+                        </span>
+                    </button>
+                    <button class="search__button search__button--end" type="submit">
+                        <span class="search__button-icon"><svg width="20" height="20">
+                                <path d="M19.2,17.8c0,0-0.2,0.5-0.5,0.8c-0.4,0.4-0.9,0.6-0.9,0.6s-0.9,0.7-2.8-1.6c-1.1-1.4-2.2-2.8-3.1-3.9C10.9,14.5,9.5,15,8,15
+c-3.9,0-7-3.1-7-7s3.1-7,7-7s7,3.1,7,7c0,1.5-0.5,2.9-1.3,4c1.1,0.8,2.5,2,4,3.1C20,16.8,19.2,17.8,19.2,17.8z M8,3C5.2,3,3,5.2,3,8
+c0,2.8,2.2,5,5,5c2.8,0,5-2.2,5-5C13,5.2,10.8,3,8,3z" />
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="search__box"></div>
+                    <div class="search__decor">
+                        <div class="search__decor-start"></div>
+                        <div class="search__decor-end"></div>
+                    </div>
+                    <div class="search__dropdown search__dropdown--suggestions suggestions" id="searchResult"></div>
+                    
+                </form>
+            </div>
+        </div>
+        <div class="header__indicators">
+
+            <div class="indicator indicator--trigger--click">
+                <a href="javascript:;" class="indicator__button">
+                    <span class="indicator__icon">
+                        <svg width="32" height="32">
+                            <path d="M16,18C9.4,18,4,23.4,4,30H2c0-6.2,4-11.5,9.6-13.3C9.4,15.3,8,12.8,8,10c0-4.4,3.6-8,8-8s8,3.6,8,8c0,2.8-1.5,5.3-3.6,6.7
+C26,18.5,30,23.8,30,30h-2C28,23.4,22.6,18,16,18z M22,10c0-3.3-2.7-6-6-6s-6,2.7-6,6s2.7,6,6,6S22,13.3,22,10z" />
+                        </svg>
+                    </span>
+                    <?php if($IS_ONLINE): ?>
+                        <span class="indicator__title"><lang id='SYSTEM_MENU_L6'>Hello</lang>, {USER_FNAME}</span>
+                    <?php else: ?>
+                        <span class="indicator__title"><lang id='SYSTEM_MENU_L7'>Login, Sign in</lang></span>
+                    <?php endif; ?>
+                    
+                    <span class="indicator__value"><lang id='SYSTEM_MENU_L8'>My Account</lang></span>
+                </a>
+                <div class="indicator__content">
+                    <div class="account-menu">
+                        <?php if(!$IS_ONLINE): ?>
+                            <form class="account-menu__form" id="login_form_header" autocomplete="off">
+
+                                <div class="account-menu__form-title">
+                                    <lang id='SYSTEM_MENU_L9'>Log In to Your Account</lang>
+                                </div>
+                                <div class="form-group">
+                                    <label for="header-signin-email" class="sr-only"><lang id='SYSTEM_MENU_L10'>Email address</lang></label>
+                                    <input id="header-signin-email" autocomplete="none" name="login" type="email" class="form-control form-control-sm" placeholder="<lang id='SYSTEM_MENU_L10'>Email address</lang>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="header-signin-password" class="sr-only"><lang id='SYSTEM_MENU_L11'>Password</lang></label>
+                                    <div class="account-menu__form-forgot">
+                                        <input id="header-signin-password" autocomplete="none" name="password" type="password" class="form-control form-control-sm" placeholder="<lang id='SYSTEM_MENU_L11'>Password</lang>">                                        
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group account-menu__form-button">
+                                    <button type="submit" class="btn btn-primary btn-sm"><lang id='SYSTEM_MENU_L13'>Login</lang></button>
+                                </div>
+                                <div class="form-group account-menu__form-button" style="margin-top: 5px;">
+                                    <a href="<?php echo $this->urlFor('home/login_page'); ?>" class="btn btn-primary btn-sm"><lang id='SYSTEM_MENU_L14'>Create An Account</lang></a>
+                                </div>
+                                <div class="account-menu__form-link">                                    
+                                    <a href="<?php echo $this->urlFor('login_register/forgot_pass'); ?>"><lang id='SYSTEM_MENU_L12'>Forgot?</lang></a>
+                                </div>
+                            </form>
+
+                            <script>
+                                $("#login_form_header").validate({
+                                    submitHandler: function(form) {
+                                        userLoginHeader();
+                                    },
+                                    rules: {
+                                        login: {
+                                            required: true,
+                                        },
+                                        password: {
+                                            minlength: 8,
+                                            password: true,
+                                            required: true,
+                                        },
+                                    },
+                                });
+                            </script>
+                        <?php else: ?>
+                            <div class="account-menu__divider"></div>
+                            <a href="<?php echo $this->urlFor('profile/index'); ?>" class="account-menu__user">
+                                <div class="account-menu__user-avatar">
+                                    <img src="/assets/images/man.png" alt="">
+                                </div>
+                                <div class="account-menu__user-info">
+                                    <div class="account-menu__user-name">{USER_FNAME} {USER_LNAME}</div>
+                                    <div class="account-menu__user-email">{USER_EMAIL}</div>
+                                </div>
+                            </a>
+
+                            <div class="account-menu__user">
+                                <div class="account-menu__user-info">
+                                    <div class="account-menu__user-name">UID: {UID}</div>        
+                                </div>
+                            </div>
+                            
+                            <div class="account-menu__divider"></div>
+                            <ul class="account-menu__links">
+                                
+                                <li><a href="<?php echo $this->urlFor('profile/index'); ?>"><lang id='SYSTEM_MENU_L15'>Profile</lang></a></li>
+                                <li><a href="<?php echo $this->urlFor('profile/edit_profile'); ?>"><lang id='SYSTEM_MENU_L16'>Edit Profile</lang></a></li>
+                                <li><a href="<?php echo $this->urlFor('profile/order_history'); ?>"><lang id='SYSTEM_MENU_L17'>Order History</lang></a></li>
+                                <li><a href="<?php echo $this->urlFor('profile/address'); ?>"><lang id='SYSTEM_MENU_L18'>Addresses</lang></a></li>
+                                
+                            </ul>
+                            <div class="account-menu__divider"></div>
+                            <ul class="account-menu__links">
+                                <li><a href="<?php echo $this->urlFor('profile/logout'); ?>"><lang id='SYSTEM_MENU_L19'>Logout</lang></a></li>
+                            </ul>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+            <div class="indicator indicator--trigger--click">
+                <a href="<?php echo $this->urlFor('products/cart'); ?>" class="indicator__button" id="smallCart">
+                    {SMALL_CART_CONTENT}
+                </a>
+                <div class="indicator__content" id="smallCartDropdown">
+                    <div>
+                        {CART_DROPDOWN_CONTENT}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="mobile-menu">
+    <div class="mobile-menu__backdrop"></div>
+    <div class="mobile-menu__body">
+        <button class="mobile-menu__close" type="button"><svg width="12" height="12">
+                <path d="M10.8,10.8L10.8,10.8c-0.4,0.4-1,0.4-1.4,0L6,7.4l-3.4,3.4c-0.4,0.4-1,0.4-1.4,0l0,0c-0.4-0.4-0.4-1,0-1.4L4.6,6L1.2,2.6
+c-0.4-0.4-0.4-1,0-1.4l0,0c0.4-0.4,1-0.4,1.4,0L6,4.6l3.4-3.4c0.4-0.4,1-0.4,1.4,0l0,0c0.4,0.4,0.4,1,0,1.4L7.4,6l3.4,3.4
+C11.2,9.8,11.2,10.4,10.8,10.8z" />
+            </svg>
+        </button>
+        <div class="mobile-menu__panel">
+            <div class="mobile-menu__panel-header">
+                <div class="mobile-menu__panel-title"><lang id='SYSTEM_MENU_L20'>Menu</lang></div>
+            </div>
+            <div class="mobile-menu__panel-body">
+                <div class="mobile-menu__settings-list">
+                    <div class="mobile-menu__setting" data-mobile-menu-item>
+                        <button class="mobile-menu__setting-button" title="Language" data-mobile-menu-trigger>
+                            <span class="mobile-menu__setting-icon">
+                                <img src="/assets/images/languages/{CURRENT_LANGUAGE}.svg" height="15" alt="">
+                            </span>
+                            <span class="mobile-menu__setting-title uppercase">{CURRENT_LANGUAGE}</span>
+                            <span class="mobile-menu__setting-arrow"><svg width="6px" height="9px">
+                                    <path d="M0.3,7.4l3-2.9l-3-2.9c-0.4-0.3-0.4-0.9,0-1.3l0,0c0.4-0.3,0.9-0.4,1.3,0L6,4.5L1.6,8.7c-0.4,0.4-0.9,0.4-1.3,0l0,0C-0.1,8.4-0.1,7.8,0.3,7.4z" />
+                                </svg>
+                            </span>
+                        </button>
+                        <div class="mobile-menu__setting-panel" data-mobile-menu-panel>
+                            <div class="mobile-menu__panel mobile-menu__panel--hidden">
+                                <div class="mobile-menu__panel-header">
+                                    <button class="mobile-menu__panel-back" type="button">
+                                        <svg width="7" height="11">
+                                            <path d="M6.7,0.3L6.7,0.3c-0.4-0.4-0.9-0.4-1.3,0L0,5.5l5.4,5.2c0.4,0.4,0.9,0.3,1.3,0l0,0c0.4-0.4,0.4-1,0-1.3l-4-3.9l4-3.9C7.1,1.2,7.1,0.6,6.7,0.3z" />
+                                        </svg>
+                                    </button>
+                                    <div class="mobile-menu__panel-title"><lang id='SYSTEM_MENU_L21'>Language</lang></div>
+                                </div>
+                                <div class="mobile-menu__panel-body">
+                                    <ul class="mobile-menu__links">
+                                        {MOBILE_LANGUAGE_ITEM}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="mobile-menu__divider"></div>
+                <div class="mobile-menu__indicators">
+                    <?php if($IS_ONLINE): ?>						
+                        <a class="mobile-menu__indicator" href="<?php echo $this->urlFor('profile/index'); ?>">
+                            <span class="mobile-menu__indicator-icon">
+                                <svg width="22" height="20">
+                                    <path d="M20,20h-2c0-4.4-3.6-8-8-8s-8,3.6-8,8H0c0-4.2,2.6-7.8,6.3-9.3C4.9,9.6,4,7.9,4,6c0-3.3,2.7-6,6-6s6,2.7,6,6
+    c0,1.9-0.9,3.6-2.3,4.7C17.4,12.2,20,15.8,20,20z M14,6c0-2.2-1.8-4-4-4S6,3.8,6,6s1.8,4,4,4S14,8.2,14,6z" />
+                                </svg>
+                            </span>
+                            <span class="mobile-menu__indicator-title"><lang id='SYSTEM_MENU_L22'>Profile</lang></span>
+                        </a>
+						<a class="mobile-menu__indicator" href="<?php echo $this->urlFor('profile/logout'); ?>">
+                            <span class="mobile-menu__indicator-icon">
+                                <svg width="20" height="20" viewBox="0 0 32 32"><defs><style>.cls-1{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style></defs><title/><g id="logout"><line class="cls-1" x1="15.92" x2="28.92" y1="16" y2="16"/><path d="M23.93,25v3h-16V4h16V7h2V3a1,1,0,0,0-1-1h-18a1,1,0,0,0-1,1V29a1,1,0,0,0,1,1h18a1,1,0,0,0,1-1V25Z"/><line class="cls-1" x1="28.92" x2="24.92" y1="16" y2="20"/><line class="cls-1" x1="28.92" x2="24.92" y1="16" y2="12"/><line class="cls-1" x1="24.92" x2="24.92" y1="8.09" y2="6.09"/><line class="cls-1" x1="24.92" x2="24.92" y1="26" y2="24"/></g></svg>
+                            </span>
+                            <span class="mobile-menu__indicator-title"><lang id='SYSTEM_MENU_L19'>Logout</lang></span>
+                        </a>
+                    <?php else: ?>
+						<a class="mobile-menu__indicator" href="<?php echo $this->urlFor('home/login_page'); ?>">
+							<span class="mobile-menu__indicator-icon">
+							   <svg width="20" height="20">
+										<path d="M20,20h-2c0-4.4-3.6-8-8-8s-8,3.6-8,8H0c0-4.2,2.6-7.8,6.3-9.3C4.9,9.6,4,7.9,4,6c0-3.3,2.7-6,6-6s6,2.7,6,6
+		c0,1.9-0.9,3.6-2.3,4.7C17.4,12.2,20,15.8,20,20z M14,6c0-2.2-1.8-4-4-4S6,3.8,6,6s1.8,4,4,4S14,8.2,14,6z" />
+								</svg>
+							</span>
+                            <span class="mobile-menu__indicator-title"><lang id='SYSTEM_MENU_L70'>Login, Sign in</lang></span>
+                        </a>
+					<?php endif; ?>
+                    <a class="mobile-menu__indicator" href="<?php echo $this->urlFor('products/cart'); ?>">
+                        <span class="mobile-menu__indicator-icon">
+                            <svg width="20" height="20">
+                                <circle cx="7" cy="17" r="2" />
+                                <circle cx="15" cy="17" r="2" />
+                                <path d="M20,4.4V5l-1.8,6.3c-0.1,0.4-0.5,0.7-1,0.7H6.7c-0.4,0-0.8-0.3-1-0.7L3.3,3.9C3.1,3.3,2.6,3,2.1,3H0.4C0.2,3,0,2.8,0,2.6
+V1.4C0,1.2,0.2,1,0.4,1h2.5c1,0,1.8,0.6,2.1,1.6L5.1,3l2.3,6.8c0,0.1,0.2,0.2,0.3,0.2h8.6c0.1,0,0.3-0.1,0.3-0.2l1.3-4.4
+C17.9,5.2,17.7,5,17.5,5H9.4C9.2,5,9,4.8,9,4.6V3.4C9,3.2,9.2,3,9.4,3h9.2C19.4,3,20,3.6,20,4.4z" />
+                            </svg>
+                            <span class="mobile-menu__indicator-counter mobileCartCount">{CART_ITEM_COUNT}</span>
+                        </span>
+                        <span class="mobile-menu__indicator-title"><lang id='SYSTEM_MENU_L23'>Cart</lang></span>
+                    </a>
+                    
+                </div>
+                <div class="mobile-menu__divider"></div>
+                <ul class="mobile-menu__links">
+
+                    <li data-mobile-menu-item class="">
+                        <a href="" target="_blank" data-mobile-menu-trigger>
+                            <lang id='SYSTEM_MENU_L24'>Shop</lang>
+                            <svg width="7" height="11">
+                                <path d="M0.3,10.7L0.3,10.7c0.4,0.4,0.9,0.4,1.3,0L7,5.5L1.6,0.3C1.2-0.1,0.7,0,0.3,0.3l0,0c-0.4,0.4-0.4,1,0,1.3l4,3.9l-4,3.9C-0.1,9.8-0.1,10.4,0.3,10.7z" />
+                            </svg>
+                        </a>
+                        {MOBILE_SHOP_MENU}
+                    </li>
+                    
+                    {MOBILE_MENU_ELEMENT}
+
+                </ul>
+                <div class="mobile-menu__spring"></div>
+                <div class="mobile-menu__divider"></div>
+                <a class="mobile-menu__contacts" href="">
+                    <div class="mobile-menu__contacts-subtitle"><lang id='SYSTEM_MENU_L25'>Free call 24/7</lang></div>
+                    <div class="mobile-menu__contacts-title"><lang id='SYSTEM_MENU_L26'>800 060-0730</lang></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- [page_block] -->
+
+<li class="main-menu__item main-menu__item--submenu--menu">
+    <a href="{LINK_TO_PAGE}" class="main-menu__link">
+        {PAGE_NAME}
+    </a>
+</li>
+
+<!-- [dropdown_page_block] -->
+
+<li class="main-menu__item main-menu__item--submenu--menu main-menu__item--has-submenu">
+    <a href="{PARENT_LINK_TO_PAGE}" class="main-menu__link">
+        {PARENT_PAGE_NAME}
+        <svg width="7px" height="5px">
+            <path d="M0.280,0.282 C0.645,-0.084 1.238,-0.077 1.596,0.297 L3.504,2.310 L5.413,0.297 C5.770,-0.077 6.363,-0.084 6.728,0.282 C7.080,0.634 7.088,1.203 6.746,1.565 L3.504,5.007 L0.262,1.565 C-0.080,1.203 -0.072,0.634 0.280,0.282 Z" />
+        </svg>
+    </a>
+    <div class="main-menu__submenu">
+        <ul class="menu">
+            {CHILD_PAGES}
+        </ul>
+    </div>
+</li>
+
+<!-- [child_page_row] -->
+<li class="menu__item">
+    <a href="{LINK_TO_CHILD_PAGE}" class="menu__link">
+        {CHILD_PAGE_NAME}
+    </a>
+</li>
+
+<!-- [desktop_language_item] -->
+<a class="topbar__menu-item" href="{NEW_LANGUAGE_LINK}">
+    <img src="/assets/images/languages/{LANGUAGE_CODE}.svg" height="15" alt="">
+    <span>{LANGUAGE_TITLE}</span>
+</a>
+
+<!-- [mobile_language_item] -->
+<li data-mobile-menu-item>
+    <a href="{NEW_LANGUAGE_LINK}" class="" data-mobile-menu-trigger>
+        <div class="mobile-menu__links-image">
+            <img src="/assets/images/languages/{LANGUAGE_CODE}.svg" height="15" alt="">
+        </div>
+        {LANGUAGE_TITLE}
+    </a>
+</li>
+
+<!-- [mobile_menu_element] -->
+<li data-mobile-menu-item>
+    <a href="{LINK_TO_PAGE}" class="" data-mobile-menu-trigger>
+        {PAGE_NAME}
+    </a>
+</li>
+
+<!-- [mobile_menu_element_with_submenu] -->
+<li data-mobile-menu-item>
+    <a href="{PARENT_LINK_TO_PAGE}" class="" data-mobile-menu-trigger>
+        {PARENT_PAGE_NAME}
+        <svg width="7" height="11">
+            <path d="M0.3,10.7L0.3,10.7c0.4,0.4,0.9,0.4,1.3,0L7,5.5L1.6,0.3C1.2-0.1,0.7,0,0.3,0.3l0,0c-0.4,0.4-0.4,1,0,1.3l4,3.9l-4,3.9C-0.1,9.8-0.1,10.4,0.3,10.7z" />
+        </svg>
+    </a>
+    <div class="mobile-menu__links-panel" data-mobile-menu-panel>
+        <div class="mobile-menu__panel mobile-menu__panel--hidden">
+            <div class="mobile-menu__panel-header">
+                <button class="mobile-menu__panel-back" type="button">
+                    <svg width="7" height="11">
+                        <path d="M6.7,0.3L6.7,0.3c-0.4-0.4-0.9-0.4-1.3,0L0,5.5l5.4,5.2c0.4,0.4,0.9,0.3,1.3,0l0,0c0.4-0.4,0.4-1,0-1.3l-4-3.9l4-3.9C7.1,1.2,7.1,0.6,6.7,0.3z" />
+                    </svg>
+                </button>
+                <div class="mobile-menu__panel-title">{PARENT_PAGE_NAME}</div>
+            </div>
+            <div class="mobile-menu__panel-body">
+                <ul class="mobile-menu__links">
+                    {MOBILE_CHILD_ELEMETS}
+                </ul>
+            </div>
+        </div>
+    </div>
+</li>
+
+<!-- [mobile_child_elements] -->
+<li data-mobile-menu-item>
+    <a href="{LINK_TO_CHILD_PAGE}" class="" data-mobile-menu-trigger>
+        {CHILD_PAGE_NAME}
+    </a>
+</li>
+
+
+<!-- [-] -->

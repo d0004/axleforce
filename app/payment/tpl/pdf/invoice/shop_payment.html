@@ -1,0 +1,293 @@
+<style>
+    *{
+        font-family: freeserif;
+    }
+
+    table{
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+    
+    td {
+        border: none;
+        padding: 4px;
+        
+    }
+    .border td, .border th{
+        border: 1px solid black;
+    }
+    .bb{
+        border-bottom: 1px solid black
+    }
+    .bt{
+        border-top: 1px solid black
+    }
+    .bl{
+        border-left: 1px solid black
+    }
+    .br{
+        border-right: 1px solid black
+    }
+
+    .bold{
+        font-weight: bold;
+    }
+
+    .fs11{
+        font-size: 11px;
+    }
+
+</style>
+
+<page backtop="12mm" backbottom="7mm" backleft="10mm" backright="10mm"> 
+    <page_header> 
+        
+    </page_header> 
+    <page_footer> 
+        
+    </page_footer> 
+
+    <table>
+        <tbody style="text-align: center;">
+            <tr>
+                <td style="width: 100%" style="font-weight: bold; font-size: 20px">
+                    Pavadzīme AFW-{BILL_ID}
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 100%">
+                    Nodokļu rēķins
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 100%" style="font-weight: bold; font-size: 15px">
+                    {DATE}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br><br>
+
+    <table>
+        <tbody>
+            <tr>
+                <td style="width: 17%">Preču nosūtītājs</td>
+                <td style="width: 33%" class="bold br">AxleForce SIA</td>
+                <td style="width: 10%;">Kods</td>
+                <td style="width: 40%;" class="bold">NMR: 40203617666 PVN: LV40203617666</td>
+            </tr>
+            <tr>
+                <td style="width: 17%">Adrese</td>
+                <td style="width: 33%" class="bold br">Kleistu iela 21-94, Rīga, LV-1067</td>
+                <td style="width: 10%" class="bb"></td>
+                <td style="width: 40%" class="bb"></td>
+            </tr>
+            <tr>
+                <td style="width: 17%" class="bb">Norēķinu rekvizīti</td>
+                <td style="width: 33%" class="bold bb br">Revolut Bank UAB</td>
+                <td style="width: 10%;" class="bb">Konts<br>Kods</td>
+                <td style="width: 40%;" class="bold bb">LT32 3250 0180 4188 7846<br>REVOLT21</td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <tbody>
+            <tr>
+                <td style="width: 17%">Preču saņēmējs</td>
+                <td style="width: 33%" class="bold br">{RECEIVER}</td>
+                <td style="width: 10%;">Kods</td>
+                <td style="width: 40%;" class="bold">{RECEIVER_CODE}</td>
+            </tr>
+            <tr>
+                <td style="width: 17%">Adrese</td>
+                <td style="width: 33%" class="bold br">{RECEIVER_ADDRESS}</td>
+                <td style="width: 10%" class="bb"></td>
+                <td style="width: 40%" class="bb"></td>
+            </tr>
+            <tr>
+                <td style="width: 17%" class="bb">Norēķinu rekvizīti</td>
+                <td style="width: 33%" class="bold bb br"></td>
+                <td style="width: 10%;" class="bb">Konts<br>Kods</td>
+                <td style="width: 40%;" class="bold bb"></td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <tbody>
+            <tr>
+                <td style="width: 20%">Preču izsniegšana</td>
+                <td style="width: 80%" class="bold">AxleForce SIA</td>
+            </tr>
+            <tr>
+                <td style="width: 20%" class="bb">Adrese</td>
+                <td style="width: 80%" class="bold bb">Kleistu iela 21-94, Rīga, LV-1067</td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <tbody>
+            <tr>
+                <td style="width: 20%" class="bb">Izsniegšanas vieta</td>
+                <td style="width: 80%" class="bold bb">Spilves iela 8b, Rīga, LV 1055</td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <tbody>
+            <tr>
+                <td style="width: 20%">Preču saņemšana</td>
+                <td style="width: 80%" class="bold">{RECEIVER}</td>
+            </tr>
+            <tr>
+                <td style="width: 20%" class="bb">Adrese</td>
+                <td style="width: 80%" class="bold bb">{RECEIVER_ADDRESS}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <tbody>
+            <tr>
+                <td style="width: 20%" class="bb">Piegades vieta</td>
+                <td style="width: 80%" class="bold bb">{DELIVERY_ADDRESS}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <tbody>
+            <tr>
+                <td style="width: 20%">Preču pārvadātājs</td>
+                <td style="width: 80%" class="bold">{DELIVERY_COMPANY}</td>
+            </tr>
+            <tr>
+                <td style="width: 20%" class="bb">Transports</td>
+                <td style="width: 80%" class="bold bb"></td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <tbody>
+            <tr>
+                <td style="width: 20%" class="bb">Komentārs</td>
+                <td style="width: 80%" class="bold bb">{NOTE}</td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <tbody>
+            <tr>
+                <td style="width: 40%" class="bold">Norēķinu veids</td>
+                <td style="width: 60%" class="bold">Bankas pārskaitījums</td>
+            </tr>
+            <tr>
+                <td style="width: 40%" class="bold">Saimnieciskā darījuma apraksts</td>
+                <td style="width: 60%" class="bold">Preču piegāde, pārvietošana</td>
+            </tr>
+            <tr>
+                <td style="width: 40%" class="bold bb">Specīālās piezīmes</td>
+                <td style="width: 60%" class="bold bb"></td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <tbody>
+            <tr>
+                <td style="width: 25%" class="">Apmaksas termiņš:</td>
+                <td style="width: 25%" class="bold">{PAY_UNTILL}</td>
+                <td style="width: 25%" class="">Līguma numurs:</td>
+                <td style="width: 25%" class="bold"></td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="border">
+        <tbody>
+            <tr class="bold">
+                <td style="width: 10%">Npk</td>
+                <td style="width: 20%">Preču nosaukums</td>
+                <td style="width: 20%">Nomenklatūra</td>
+                <td style="width: 10%">Mērv</td>
+                <td style="width: 10%">Skaits</td>
+                <td style="width: 10%">Cena</td>
+                <td style="width: 10%">Summa</td>
+                <td style="width: 10%">PVN</td>
+            </tr>
+            <tr>
+                {PRODUCT_ROW}
+            </tr>
+            
+        </tbody>
+    </table>
+    <table class="border">
+        <tbody>
+            <tr class="bold fs11">
+                <td style="width: 10%"></td>
+                <td style="width: 20%">Kopsumma</td>
+                <td style="width: 20%"></td>
+                <td style="width: 10%"></td>
+                <td style="width: 10%"></td>
+                <td style="width: 10%"></td>
+                <td style="width: 10%">{BILL_TOTAL_PRICE_WITHOUT_VAT}</td>
+                <td style="width: 10%"></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <br>
+
+    <table>
+        <tbody>
+            <tr>
+                <td style="width: 30%"></td>
+                <td style="width: 50%" class="bold">SUMMA:</td>
+                <td style="width: 20%" class="bold">EUR {BILL_TOTAL_PRICE_WITHOUT_VAT}</td>
+            </tr>
+            <tr>
+                <td style="width: 30%"></td>
+                <td style="width: 50%" class="bold">Pievienotās vērtības nodoklis [LV] (21.00%):</td>
+                <td style="width: 20%" class="bold">EUR {VAT_TOTAL_AMOUNT}</td>
+            </tr>           
+            <tr>
+                <td style="width: 30%"></td>
+                <td style="width: 50%" class="bold">Pavisam apmaksai:</td>
+                <td style="width: 20%" class="bold">EUR {BILL_TOTAL_PRICE_WITH_VAT}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+
+    <table>
+        <tbody>
+            <tr>
+                <td style="width: 100%" class="bold">{WORDS1} EUR un {WORDS2} CENTI</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <br>
+    <br>
+    <br>
+
+    <table>
+        <tbody>
+            <tr>
+                <td style="width: 100%">Rēķins sagatavots elektroniski un derīgs bez paraksta</td>
+            </tr>
+        </tbody>
+    </table>
+</page> 
+
+
+<!-- [product_row] -->
+<tr class="fs11">
+    <td style="width: 10%">{NUMBER}</td>
+    <td style="width: 20%">{PRODUCT_NAME}</td>
+    <td style="width: 20%">{NEW_SKU}</td>
+    <td style="width: 10%">gab.</td>
+    <td style="width: 10%">{QTY}</td>
+    <td style="width: 10%">{AMOUNT}</td>
+    <td style="width: 10%">{TOTAL_AMOUNT}</td>
+    <td style="width: 10%">{VAT}</td>
+</tr>
+<!-- [-] -->

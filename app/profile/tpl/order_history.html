@@ -1,0 +1,199 @@
+
+    <div class="block-space block-space--layout--after-header"></div>
+    <div class="block">
+        <div class="container container--max--xl">
+            <div class="row">
+                <div class="col-12 col-lg-3 d-flex">
+                    {PROFILE_MENU}
+                </div>
+                <div class="col-12 col-lg-9 mt-4 mt-lg-0">
+                    {PAGE_CONTENT}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="block-space block-space--layout--before-footer"></div>
+
+<!-- [list] -->
+<div class="card">
+    <div class="card-header">
+        <h5><lang id='PROFILE_ORDER_HISTORY_L1'>Order History</lang></h5>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-table">
+        <div class="table-responsive-sm">
+            <table>
+                <thead>
+                    <tr>
+                        <th><lang id='PROFILE_ORDER_HISTORY_L2'>Order</lang></th>
+                        <th><lang id='PROFILE_ORDER_HISTORY_L3'>Date</lang></th>
+                        <th><lang id='PROFILE_ORDER_HISTORY_L4'>Total</lang></th>
+                        <th><lang id='PROFILE_ORDER_HISTORY_L5'>Status</lang></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {ORDER_ROW}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-divider"></div>
+</div>
+
+<!-- [detail] -->
+
+<div class="card">
+    <div class="order-header">
+        <div class="order-header__actions">
+            <a href="<?php echo $this->urlFor('profile/order_history_all'); ?>" class="btn btn-xs btn-secondary"><lang id='PROFILE_ORDER_HISTORY_L6'>Back to list</lang></a>
+        </div>
+        <h5 class="order-header__title"><lang id='PROFILE_ORDER_HISTORY_L7'>Order</lang> #{ORDER_ID}</h5>
+        <div class="order-header__subtitle">
+            <lang id='PROFILE_ORDER_HISTORY_L8'>Created at</lang>: <mark>{CREATE_DATE}</mark><br>
+            <lang id='PROFILE_ORDER_HISTORY_L9'>Order status</lang>: <mark>{ORDER_STATUS_TPL}</mark><br>
+            <?php if($ORDER_STATUS == 2): ?>
+                <lang id='PROFILE_ORDER_HISTORY_L91'>Invoice</lang>: <mark>
+                    <a href="<?php echo $this->urlFor('payment/get_invoice_pdf', ['billId' => $BILL_ID]) ?>">
+                        <lang id='PROFILE_ORDER_HISTORY_L92'>Download</lang>
+                    </a>
+                </mark>
+            <?php endif; ?>
+        </div>
+
+        <?php if($BILL_STATUS == 0): ?>
+            <br>
+            <div class="paymentExpireInformer">
+                <div><lang id="PAYMENT_EXPIRE_INFORMER_L1">Please make your payment untill</lang> <b>{EXPIRE_DATE}</b></div>
+                <div><lang id="PAYMENT_EXPIRE_INFORMER_L2">If we will not receive your payment before this date, order will be automatically canceled</lang></div>
+            </div>
+        <?php endif; ?>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-table">
+        <div class="table-responsive-sm">
+            <table>
+                <thead>
+                    <tr>
+                        <th><lang id='PROFILE_ORDER_HISTORY_L10'>Product</lang></th>
+                        <th><lang id='PROFILE_ORDER_HISTORY_L11'>Total</lang></th>
+                    </tr>
+                </thead>
+                <tbody class="card-table__body card-table__body--merge-rows">
+                    {PRODUCT_ROW}
+                </tbody>
+                <tbody class="card-table__body card-table__body--merge-rows">
+                    <tr>
+                        <th><lang id='PROFILE_ORDER_HISTORY_L12'>Subtotal</lang></th>
+                        <td>{CRCH} {ORDER_TOTAL_AMOUNT}</td>
+                    </tr>
+                    <tr>
+                        <th><lang id='PROFILE_ORDER_HISTORY_L13'>Shipping</lang></th>
+                        <td>{CRCH} {ORDER_DELIVERY_PRICE}</td>
+                    </tr>
+                    <tr>
+                        <th><lang id='PROFILE_ORDER_HISTORY_L14'>Tax</lang></th>
+                        <td>{CRCH} {ORDER_TAX}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th><lang id='PROFILE_ORDER_HISTORY_L15'>Total</lang></th>
+                        <td>{CRCH} {BILL_TOTAL_AMOUNT}</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div style="margin-top: 20px">
+    {PAYMENT_FORM}
+</div>
+
+<div class="order-success__addresses">
+    <div class="order-success__address card address-card">
+        <div class="address-card__badge tag-badge tag-badge--theme">
+            <lang id='PAYMENT_PAY_BILL_L13'>Billing Details</lang>
+        </div>
+        <div class="address-card__body">
+            <div class="address-card__name">{ORDER_NAME} {ORDER_SURNAME}</div>
+            
+            <?php if($ORDER_COMPANY_VAT): ?>
+                <div class="address-card__row">
+                    <div class="address-card__row-title"><lang id='PAYMENT_PAY_BILL_L14'>Company VAT</lang></div>
+                    <div class="address-card__row-content">{ORDER_COMPANY_VAT}</div>
+                </div>
+            <?php endif; ?>
+            <?php if($ORDER_COMPANY_NAME): ?>
+                <div class="address-card__row">
+                    <div class="address-card__row-title"><lang id='PAYMENT_PAY_BILL_L15'>Company Name</lang></div>
+                    <div class="address-card__row-content">{ORDER_COMPANY_NAME}</div>
+                </div>
+            <?php endif; ?>
+            <?php if($ORDER_COMPANY_ADDRESS): ?>
+                <div class="address-card__row">
+                    <div class="address-card__row-title"><lang id='PAYMENT_PAY_BILL_L16'>Company Address</lang></div>
+                    <div class="address-card__row-content">{ORDER_COMPANY_ADDRESS}</div>
+                </div>
+            <?php endif; ?>
+
+            <div class="address-card__row">
+                <div class="address-card__row-title"><lang id='PAYMENT_PAY_BILL_L17'>Phone Number</lang></div>
+                <div class="address-card__row-content">{ORDER_PHONE}</div>
+            </div>
+            <div class="address-card__row">
+                <div class="address-card__row-title"><lang id='PAYMENT_PAY_BILL_L18'>Email Address</lang></div>
+                <div class="address-card__row-content">{ORDER_EMAIL}</div>
+            </div>
+            
+            <?php if($ORDER_NOTES): ?>
+                <div class="address-card__row">
+                    <div class="address-card__row-title"><lang id='PAYMENT_PAY_BILL_L19'>Notes</lang></div>
+                    <div class="address-card__row-content">{ORDER_NOTES}</div>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+    
+</div>
+
+<div class="order-success__addresses">
+    <div class="order-success__address card address-card">
+        <div class="address-card__badge tag-badge tag-badge--theme">
+            <lang id='PAYMENT_PAY_BILL_L20'>Shipping information</lang>
+        </div>
+        <div class="address-card__body">
+            {DELIVERY_HTML}
+            
+        </div>
+    </div>
+    
+</div>
+
+<!-- [order_row] -->
+<tr>
+    <td>
+        <a href="<?php echo $this->urlFor('profile/order_history', ['orderId' => $ORDER_ID]); ?>">#{ORDER_ID}</a>
+    </td>
+    <td>{CREATE_DATE}</td>
+    <td>{TOTAL_ORDER_AMOUNT}{CRCH}</td>
+    <td>{ORDER_STATUS_TPL}</td>
+    <td>
+        <a class="btn btn-primary btn-sm" href="<?php echo $this->urlFor('profile/order_history', ['orderId' => $ORDER_ID]); ?>"><lang id='PROFILE_ORDER_HISTORY_L24'>View</lang></a>
+    </td>
+</tr>
+
+<!-- [product_row] -->
+<tr>
+    <td>{TITLE} × {QTY}</td>
+    <td>{CRCH} {TOTAL_AMOUNT}</td>
+</tr>
+
+<!-- [order_status_0] -->
+<lang id="ORDER_STATUS_0">Waiting payment</lang>
+<!-- [order_status_2] -->
+<lang id="ORDER_STATUS_2">Paid</lang>
+<!-- [order_status_9] -->
+<lang id="ORDER_STATUS_9">Canceled</lang>
+<!-- [-] -->

@@ -1,0 +1,13 @@
+{
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.14",
+        "spipu/html2pdf": "^5.2",
+        "gumlet/php-image-resize": "^2.0",
+		"stripe/stripe-php": "^7.87.0",
+		"slim/slim":"4.*",
+		"guzzlehttp/guzzle":"^7.0",
+		"pecee/simple-router": "4.3.7.2",
+		"kwn/number-to-words": "^1.13",
+        "phpmailer/phpmailer": "^6.5"
+    }
+}

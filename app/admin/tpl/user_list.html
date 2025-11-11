@@ -1,0 +1,104 @@
+<div class="row">
+    <div class="col-sm-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Сделать юр. лицом</h5>
+                <hr>
+                <form class="form-inline" onsubmit="makeAsLegal(this)">
+                    <input type="text" required style="width: 100%;" class="form-control" placeholder="UID" name="uid">
+                    <input type="text" required style="width: 100%;" class="form-control mt-2" placeholder="VAT" name="vat">
+                    <input type="text" required style="width: 100%;" class="form-control mt-2" placeholder="Название компании" name="companyName">
+                    <input type="text" required style="width: 100%;" class="form-control mt-2" placeholder="Адрес компании" name="companyAddress">
+                    <button type="submit" style="width: 100%;" class="btn btn-primary mt-2">Сделать</a>
+                </form>
+
+                <script>
+                    function makeAsLegal(form) {
+                        event.preventDefault();
+                        $.ajax({
+                            url: '<?php echo $this->urlFor("ajax/admin/make_as_legal") ?>',
+                            type: 'POST',
+                            data: $(form).serialize(),
+                            beforeSend: function() {
+                                preloader.on();
+                            },
+                            success: function(data){
+                                if(data.success){
+                                    location.reload();
+                                } else {
+                                    preloader.off();
+                                    swal.fire('Error (Code: ' + data.error + ')');
+                                }
+                            }
+                        });
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-9">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Список пользователей</h5>
+                <hr>
+                <table class="table table-bordered table-sm">
+                    <tbody>
+                        <tr style="font-weight: bold;">
+                            <td>UID</td>
+                            <td>Информация о пользователи</td>
+                            <td>Счета</td>
+                            <td>Счета</td>
+                            <td>Деньги</td>
+                            <td>Почта</td>
+                        </tr>
+                        {USER_ROW}
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- [user_row] -->
+<tr style='background: {BG_COLOR};'>
+    <td>
+        <form action="<?php echo $this->urlFor('login_register/admin_go') ?>" method="POST">
+            <input type="hidden" name="uid" value="{UID}">
+            <input type="hidden" name="route" value="{CURRENT_ROUTE}">
+            <span style="cursor: pointer;" onclick="$(this).closest('form').submit()">
+                <a href="javascript:;">{UID}</a>
+            </span>
+        </form>
+        <span class="text-muted" style="font-size: 12px;">{CREATE_DATE}</span>
+    </td>
+    <td>
+        {FNAME} {LNAME}
+        <?php if($IS_COMPANY): ?>
+            <span class="badge badge-danger">Юр. Лицо</span><br>
+            <span class="text-muted" style="font-size: 11px;">{VAT_NUMBER} {COMPANY_NAME}</span><br>
+            <span class="text-muted" style="font-size: 11px;">{COMPANY_ADDRESS}</span>
+        <?php endif; ?>
+    </td>
+    <td>
+        <span class="text-muted" style="font-size: 12px;">Создано: {BILL_COUNT}</span><br>
+        <span class="text-muted" style="font-size: 12px;">Оплачено: {BILL_COUNT_PAID}</span>
+    </td>
+    <td>
+        <span class="text-muted" style="font-size: 12px;">Активно: {ACTIVE_BILL}</span>
+    </td>
+    <td>
+        <span class="text-muted" style="font-size: 12px;">Ожидается: {WAITING_AMOUNT}{CRCH}</span><br>
+        <span class="text-muted" style="font-size: 12px;">Оплачено: {TOTAL_AMOUNT}{CRCH}</span>
+    </td>
+    <td>
+        <span class="text-muted" style="font-size: 12px;">{EMAIL}</span>
+        <?php if($EMAIL_VALIDATED): ?>
+            <br><span class="badge badge-success">Подтверждено</span>
+        <?php endif; ?>
+        <?php if($UNSUBSCRIBED): ?>
+            <br><span class="badge badge-danger">Отписался от почты</span>
+        <?php endif; ?>
+    </td>
+</tr>
+<!-- [-] -->

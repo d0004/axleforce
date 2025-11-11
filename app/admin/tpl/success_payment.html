@@ -1,0 +1,26 @@
+<br>
+<br>
+<div class="mt-5" style="text-align: center;">
+    <h4>Заказ успешно подтвержден</h4>
+    <p>Видно только администраторам. Желательно не закрывать страницу секунд 10.</p>
+
+    <a href="<?php echo $this->urlFor('admin/invoices_and_bank_operations') ?>" class="btn btn-danger mt-3">Назад к банковским операциям</a>
+</div>
+
+<?php if($HAS_GTM_ITEMS): ?>
+    <script>
+        dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+        dataLayer.push({
+            event: "purchase",
+            ecommerce: {
+                transaction_id: "{GTM_BILL}",
+                affiliation: "Truckmaster",
+                value: "{GTM_PRODUCT_PRICE}",
+                tax: "{GTM_TAX}",
+                shipping: "{GTM_DELIVERY_PRICE}",
+                currency: "EUR",
+                items: {GTM_ITEMS}
+            }
+        });
+    </script>
+<?php endif; ?>

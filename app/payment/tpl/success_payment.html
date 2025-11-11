@@ -1,0 +1,54 @@
+<div class="block-space block-space--layout--divider-xl"></div>
+
+<div class="block">
+    <div class="container container--max--xl">
+        <div class="faq__section">
+            {PAGE_CONTENT}
+        </div>
+    </div>
+</div>
+
+<div class="block-space block-space--layout--divider-nl"></div>
+{NEW_SLIDER}
+
+<div class="block-space block-space--layout--divider-nl"></div>
+{FEATURED_SLIDER}
+
+<div class="block-space block-space--layout--divider-nl"></div>
+
+<!-- [success_payment] -->
+
+<div class="block order-success">
+    <div class="container">
+        <div class="order-success__body">
+            <div class="order-success__header">
+                <div class="order-success__icon">
+                    <img src="/files_public/system/logo.jpg" height="80">
+                </div>
+                <h1 class="order-success__title"><lang id='PAYMENT_SUCCESS_1001'>Спасибо</lang></h1>
+                <div class="order-success__subtitle"><lang id='PAYMENT_SUCCESS_1002'>Заказ оплачен успешно</lang></div>                    
+            </div>
+           
+        </div>
+    </div>
+</div>
+
+<?php if($HAS_GTM_ITEMS): ?>
+    <script>
+        dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+        dataLayer.push({
+            event: "purchase",
+            ecommerce: {
+                transaction_id: "{GTM_BILL}",
+                affiliation: "Truckmaster",
+                value: "{GTM_PRODUCT_PRICE}",
+                tax: "{GTM_TAX}",
+                shipping: "{GTM_DELIVERY_PRICE}",
+                currency: "EUR",
+                items: {GTM_ITEMS}
+            }
+        });
+    </script>
+<?php endif; ?>
+
+<!-- [-] -->
