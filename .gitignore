@@ -1,3 +1,4 @@
 vendor
 files_private
 server/files_public
+app/payment/_config.php
